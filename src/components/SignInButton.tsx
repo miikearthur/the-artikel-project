@@ -1,35 +1,25 @@
-import { getCurrentUser, signInWithRedirect, signOut, type AuthUser } from "aws-amplify/auth";
-import { Hub } from "aws-amplify/utils";
+import { fetchUserAttributes, signInWithRedirect, signOut } from "aws-amplify/auth";
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import { isAmplifyConfigured } from "../logic/amplifyConfig";
+import { useAuthUser } from "../logic/useAuthUser";
 import { colors } from "../theme";
 
 export function SignInButton() {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [checked, setChecked] = useState(false);
+  const { user, checked } = useAuthUser();
+  const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isAmplifyConfigured) {
-      setChecked(true);
+    if (!user) {
+      setEmail(null);
       return;
     }
-
-    getCurrentUser()
-      .then(setUser)
-      .catch(() => setUser(null))
-      .finally(() => setChecked(true));
-
-    const unsubscribe = Hub.listen("auth", ({ payload }) => {
-      if (payload.event === "signedIn") {
-        getCurrentUser().then(setUser).catch(() => setUser(null));
-      }
-      if (payload.event === "signedOut") {
-        setUser(null);
-      }
-    });
-    return unsubscribe;
-  }, []);
+    // signInDetails.loginId isn't populated for external IdPs like Google —
+    // the real email lives in the user's Cognito attributes instead.
+    fetchUserAttributes()
+      .then((attrs) => setEmail(attrs.email ?? null))
+      .catch(() => setEmail(null));
+  }, [user]);
 
   // Not deployed yet, or still checking the current session — render nothing
   // rather than flash a button that can't work yet.
@@ -38,7 +28,7 @@ export function SignInButton() {
   if (user) {
     return (
       <Pressable onPress={() => signOut()} style={styles.link}>
-        <Text style={styles.linkText}>{user.signInDetails?.loginId ?? user.username} · Abmelden</Text>
+        <Text style={styles.linkText}>{email ?? user.username} · Abmelden</Text>
       </Pressable>
     );
   }

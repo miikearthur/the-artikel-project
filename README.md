@@ -57,3 +57,25 @@ Amplify app, pointed at **this** repo, with its own subdomain. Steps:
    is live.
 
 Every push to `main` redeploys automatically, same as the main site.
+
+## To-do
+
+- [ ] option to disable sound
+- [ ] fill in A2-C2 word lists
+- [ ] spaced-repetition quiz mode (prioritize words that aren't mastered yet)
+- [ ] daily streak / stats page
+- [ ] PWA install support (add to home screen)
+- [ ] actually publish the native app
+- [ ] light/dark theme toggle
+- [ ] different question types (type the word, match translation to word)
+- [ ] fix top/bottom white bar on mobile
+- [ ] language selector: German only, or English & German
+- [ ] infinite mode (no 10-question limit)
+- [ ] progress bar during the round (not just the "1/10" text)
+- [ ] show word count on level select (e.g. "A1 · 500 Wörter")
+- [ ] remember last-picked categories locally
+- [ ] keyboard shortcuts on web (1/2/3 or D/I/S to answer)
+- [ ] custom app icon/favicon (still using Expo's default)
+- [ ] show which category you're playing during the quiz
+- [ ] loading indicator while progress syncs after sign-in
+- [ ] perfect-round celebration (animation/confetti on 10/10)

@@ -5,12 +5,26 @@ import { LevelSelect } from "../src/components/LevelSelect";
 import { QuizView } from "../src/components/QuizView";
 import { ResultsView } from "../src/components/ResultsView";
 import { SignInButton } from "../src/components/SignInButton";
-import { GermanNoun, Level, NOUNS_BY_LEVEL, nounsForCategories } from "../src/data/germanNouns";
+import { Article, GermanNoun, Level, NOUNS_BY_LEVEL, nounsForCategories } from "../src/data/germanNouns";
 import { useQuiz } from "../src/logic/useQuiz";
+import { useWordProgressSync } from "../src/logic/useWordProgressSync";
 import { colors } from "../src/theme";
 
-function Quiz({ nouns, onBack }: { nouns: GermanNoun[]; onBack: () => void }) {
+function Quiz({
+  nouns,
+  onBack,
+  recordAnswer,
+}: {
+  nouns: GermanNoun[];
+  onBack: () => void;
+  recordAnswer: (wordId: string, correct: boolean) => void;
+}) {
   const quiz = useQuiz(nouns);
+
+  const handleSelect = (article: Article) => {
+    recordAnswer(quiz.currentNoun.id, article === quiz.currentNoun.article);
+    quiz.submitAnswer(article);
+  };
 
   return (
     <>
@@ -29,7 +43,7 @@ function Quiz({ nouns, onBack }: { nouns: GermanNoun[]; onBack: () => void }) {
           score={quiz.score}
           isAnswered={quiz.isAnswered}
           selectedArticle={quiz.selectedArticle}
-          onSelect={quiz.submitAnswer}
+          onSelect={handleSelect}
           onNext={quiz.advance}
         />
       )}
@@ -40,6 +54,7 @@ function Quiz({ nouns, onBack }: { nouns: GermanNoun[]; onBack: () => void }) {
 export default function Index() {
   const [level, setLevel] = useState<Level | null>(null);
   const [pool, setPool] = useState<GermanNoun[] | null>(null);
+  const { recordAnswer, masteredIds } = useWordProgressSync();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -53,12 +68,13 @@ export default function Index() {
         ) : pool === null ? (
           <CategorySelect
             level={level}
+            masteredIds={masteredIds}
             onBack={() => setLevel(null)}
             onStartAll={() => setPool(NOUNS_BY_LEVEL[level])}
             onStartSelected={(categories) => setPool(nounsForCategories(level, categories))}
           />
         ) : (
-          <Quiz nouns={pool} onBack={() => setPool(null)} />
+          <Quiz nouns={pool} onBack={() => setPool(null)} recordAnswer={recordAnswer} />
         )}
       </View>
     </SafeAreaView>

@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { categoriesForLevel, Level } from "../data/germanNouns";
+import { categoriesForLevel, Level, NOUNS_BY_LEVEL } from "../data/germanNouns";
 import { colors } from "../theme";
 
 interface Props {
   level: Level;
+  masteredIds?: Set<string>;
   onBack: () => void;
   onStartAll: () => void;
   onStartSelected: (categories: string[]) => void;
 }
 
-export function CategorySelect({ level, onBack, onStartAll, onStartSelected }: Props) {
+export function CategorySelect({ level, masteredIds, onBack, onStartAll, onStartSelected }: Props) {
   const categories = categoriesForLevel(level);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  // Only bother computing/showing per-category counts once there's
+  // something worth showing — most players aren't signed in, and an
+  // always-empty "0/14" on every chip would just be noise.
+  const masteredCounts = useMemo(() => {
+    if (!masteredIds || masteredIds.size === 0) return null;
+    const counts = new Map<string, { mastered: number; total: number }>();
+    for (const noun of NOUNS_BY_LEVEL[level]) {
+      const entry = counts.get(noun.category) ?? { mastered: 0, total: 0 };
+      entry.total += 1;
+      if (masteredIds.has(noun.id)) entry.mastered += 1;
+      counts.set(noun.category, entry);
+    }
+    return counts;
+  }, [level, masteredIds]);
 
   const toggle = (category: string) => {
     setSelected((prev) => {
@@ -59,6 +75,7 @@ export function CategorySelect({ level, onBack, onStartAll, onStartSelected }: P
       <ScrollView style={styles.scroll} contentContainerStyle={styles.grid}>
         {categories.map((category) => {
           const isSelected = selected.has(category);
+          const counts = masteredCounts?.get(category);
           return (
             <Pressable
               key={category}
@@ -68,6 +85,11 @@ export function CategorySelect({ level, onBack, onStartAll, onStartSelected }: P
               <Text style={[styles.chipText, isSelected ? styles.chipTextSelected : styles.chipTextUnselected]}>
                 {category}
               </Text>
+              {counts && (
+                <Text style={styles.chipBadge}>
+                  {counts.mastered}/{counts.total} gelernt
+                </Text>
+              )}
             </Pressable>
           );
         })}
@@ -160,6 +182,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 10,
     paddingHorizontal: 14,
+    alignItems: "center",
+    gap: 2,
   },
   chipUnselected: {
     borderColor: colors.border,
@@ -180,6 +204,11 @@ const styles = StyleSheet.create({
   },
   chipTextSelected: {
     color: colors.text,
+  },
+  chipBadge: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: colors.das,
   },
   startButton: {
     backgroundColor: colors.das,
