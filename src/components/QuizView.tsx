@@ -44,7 +44,7 @@ export function QuizView({
         <Text style={styles.progressText}>
           {questionNumber} / {QUESTIONS_PER_ROUND}
         </Text>
-        <Text style={styles.progressText}>Score: {score}</Text>
+        <Text style={styles.progressText}>Punkte: {score}</Text>
       </View>
 
       <View style={styles.card}>
@@ -67,11 +67,11 @@ export function QuizView({
       {isAnswered && (
         <View style={styles.feedbackArea}>
           <Text style={[styles.feedbackText, { color: wasCorrect ? colors.correct : colors.incorrect }]}>
-            {wasCorrect ? "Richtig!" : `Not quite — it's ${correctArticle} ${word}`}
+            {wasCorrect ? "Richtig!" : `Falsch! Richtig ist: ${correctArticle} ${word}`}
           </Text>
           <Pressable style={styles.nextButton} onPress={onNext}>
             <Text style={styles.nextButtonText}>
-              {questionNumber >= QUESTIONS_PER_ROUND ? "See results" : "Next"}
+              {questionNumber >= QUESTIONS_PER_ROUND ? "Ergebnis" : "Weiter"}
             </Text>
           </Pressable>
         </View>

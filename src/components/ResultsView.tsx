@@ -9,10 +9,10 @@ interface Props {
 
 function message(score: number): string {
   const ratio = score / QUESTIONS_PER_ROUND;
-  if (ratio === 1) return "Perfekt! You know your articles cold.";
-  if (ratio >= 0.7) return "Sehr gut! Just a few slip-ups.";
-  if (ratio >= 0.4) return "Solid start — keep drilling.";
-  return "Articles are tough. Run it back!";
+  if (ratio === 1) return "Perfekt! Du kennst alle Artikel.";
+  if (ratio >= 0.7) return "Sehr gut! Fast perfekt.";
+  if (ratio >= 0.4) return "Guter Start! Übe weiter.";
+  return "Das war schwer. Versuch es noch einmal!";
 }
 
 export function ResultsView({ score, onRestart }: Props) {
@@ -23,7 +23,7 @@ export function ResultsView({ score, onRestart }: Props) {
       </Text>
       <Text style={styles.message}>{message(score)}</Text>
       <Pressable style={styles.button} onPress={onRestart}>
-        <Text style={styles.buttonText}>Play again</Text>
+        <Text style={styles.buttonText}>Nochmal spielen</Text>
       </Pressable>
     </View>
   );

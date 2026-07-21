@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { Article, GERMAN_NOUNS, GermanNoun } from "../data/germanNouns";
+import { Article, GermanNoun } from "../data/germanNouns";
 
 export const QUESTIONS_PER_ROUND = 10;
 
@@ -15,8 +15,8 @@ interface QuizState {
   isRoundComplete: boolean;
 }
 
-function freshRound(): { state: QuizState; pool: GermanNoun[] } {
-  const first = pickRandom(GERMAN_NOUNS);
+function freshRound(nouns: GermanNoun[]): { state: QuizState; pool: GermanNoun[] } {
+  const first = pickRandom(nouns);
   return {
     state: {
       currentNoun: first,
@@ -25,12 +25,12 @@ function freshRound(): { state: QuizState; pool: GermanNoun[] } {
       selectedArticle: null,
       isRoundComplete: false,
     },
-    pool: GERMAN_NOUNS.filter((n) => n.id !== first.id),
+    pool: nouns.filter((n) => n.id !== first.id),
   };
 }
 
-export function useQuiz() {
-  const initial = useRef(freshRound());
+export function useQuiz(nouns: GermanNoun[]) {
+  const initial = useRef(freshRound(nouns));
   const pool = useRef(initial.current.pool);
   const [state, setState] = useState<QuizState>(initial.current.state);
 
@@ -58,7 +58,7 @@ export function useQuiz() {
         return { ...prev, isRoundComplete: true };
       }
       if (pool.current.length === 0) {
-        pool.current = GERMAN_NOUNS.filter((n) => n.id !== prev.currentNoun.id);
+        pool.current = nouns.filter((n) => n.id !== prev.currentNoun.id);
       }
       const next = pickRandom(pool.current);
       pool.current = pool.current.filter((n) => n.id !== next.id);
@@ -69,13 +69,13 @@ export function useQuiz() {
         currentNoun: next,
       };
     });
-  }, []);
+  }, [nouns]);
 
   const restart = useCallback(() => {
-    const round = freshRound();
+    const round = freshRound(nouns);
     pool.current = round.pool;
     setState(round.state);
-  }, []);
+  }, [nouns]);
 
   return { ...state, isAnswered, submitAnswer, advance, restart };
 }
