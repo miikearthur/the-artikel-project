@@ -29,8 +29,11 @@ explaining *why*, not *what*).
   installed as a dev dependency for scripted checks; write throwaway scripts in the session
   scratchpad, not in the repo. Screenshot and look at visual changes.
 - Check mobile widths (~390px) as well as desktop — this is a phone-first game.
-- Run the dev server in the background so it survives across turns; check it's still up
-  before pointing Miguel at it.
+- **The dev server must always be available for Miguel to test, without him having to ask.**
+  Start it (background, `npm run web`, default port) at the beginning of any session touching
+  this app if it isn't already running, and re-check/restart it after any change that could
+  have killed it — don't wait to be asked. Verify with `curl` before assuming it's up; don't
+  claim something is testable without checking first.
 - If native (iOS/Android) work is added later, keep it behind the same Expo Router
   screens — don't fork the UI per platform unless a screen genuinely needs it.
 

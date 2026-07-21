@@ -5,11 +5,12 @@ import { colors } from "../theme";
 
 interface Props {
   level: Level;
+  onBack: () => void;
   onStartAll: () => void;
   onStartSelected: (categories: string[]) => void;
 }
 
-export function CategorySelect({ level, onStartAll, onStartSelected }: Props) {
+export function CategorySelect({ level, onBack, onStartAll, onStartSelected }: Props) {
   const categories = categoriesForLevel(level);
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
@@ -27,6 +28,10 @@ export function CategorySelect({ level, onStartAll, onStartSelected }: Props) {
 
   return (
     <View style={styles.container}>
+      <Pressable style={styles.backButton} onPress={onBack}>
+        <Text style={styles.backButtonText}>‹ Zurück</Text>
+      </Pressable>
+
       <Pressable style={styles.allButton} onPress={onStartAll}>
         <Text style={styles.allButtonText}>Alle Kategorien</Text>
       </Pressable>
@@ -87,6 +92,16 @@ const styles = StyleSheet.create({
     maxWidth: 560,
     alignItems: "center",
     gap: 16,
+  },
+  backButton: {
+    alignSelf: "flex-start",
+    paddingVertical: 4,
+    paddingHorizontal: 4,
+  },
+  backButtonText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: colors.textMuted,
   },
   allButton: {
     borderWidth: 2,

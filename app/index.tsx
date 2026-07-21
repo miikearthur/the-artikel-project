@@ -8,13 +8,13 @@ import { GermanNoun, Level, NOUNS_BY_LEVEL, nounsForCategories } from "../src/da
 import { useQuiz } from "../src/logic/useQuiz";
 import { colors } from "../src/theme";
 
-function Quiz({ nouns, onChangeLevel }: { nouns: GermanNoun[]; onChangeLevel: () => void }) {
+function Quiz({ nouns, onBack }: { nouns: GermanNoun[]; onBack: () => void }) {
   const quiz = useQuiz(nouns);
 
   return (
     <>
-      <Pressable onPress={onChangeLevel}>
-        <Text style={styles.changeLevel}>Level & Kategorien ändern</Text>
+      <Pressable onPress={onBack}>
+        <Text style={styles.changeLevel}>‹ Zurück</Text>
       </Pressable>
 
       {quiz.isRoundComplete ? (
@@ -40,11 +40,6 @@ export default function Index() {
   const [level, setLevel] = useState<Level | null>(null);
   const [pool, setPool] = useState<GermanNoun[] | null>(null);
 
-  const reset = () => {
-    setLevel(null);
-    setPool(null);
-  };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -56,11 +51,12 @@ export default function Index() {
         ) : pool === null ? (
           <CategorySelect
             level={level}
+            onBack={() => setLevel(null)}
             onStartAll={() => setPool(NOUNS_BY_LEVEL[level])}
             onStartSelected={(categories) => setPool(nounsForCategories(level, categories))}
           />
         ) : (
-          <Quiz nouns={pool} onChangeLevel={reset} />
+          <Quiz nouns={pool} onBack={() => setPool(null)} />
         )}
       </View>
     </SafeAreaView>

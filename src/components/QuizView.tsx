@@ -1,5 +1,9 @@
+import * as Speech from "expo-speech";
+import { useEffect } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Article } from "../data/germanNouns";
+import { isSpeechSupported } from "../logic/speechSupport";
+import { useKeepAudioWarm } from "../logic/useKeepAudioWarm";
 import { QUESTIONS_PER_ROUND } from "../logic/useQuiz";
 import { colors } from "../theme";
 import { ArticleButton } from "./ArticleButton";
@@ -38,6 +42,40 @@ export function QuizView({
 
   const wasCorrect = isAnswered && selectedArticle === correctArticle;
 
+  // Firefox has a persistent click-on-every-word bug in its speech engine
+  // that nothing on the app side can work around, so pronunciation is
+  // disabled outright there rather than shipping a broken feature.
+  const speechSupported = isSpeechSupported();
+
+  useKeepAudioWarm(speechSupported);
+
+  // Speak just the bare noun, never "der/die/das + noun" — saying the article
+  // out loud before the player answers would give away the quiz.
+  //
+  // The leading ", " is deliberate: some browsers produce an audible click
+  // as the speech engine cold-starts right at the first spoken syllable. A
+  // brief silent pause up front gives the engine a moment to spin up before
+  // any audible word content begins, so the click (if any) lands in the
+  // pause instead of on the word.
+  const speakWord = () => {
+    if (!speechSupported) return;
+    Speech.speak(`, ${word}`, { language: "de-DE" });
+  };
+
+  useEffect(() => {
+    speakWord();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [word]);
+
+  // Only stop speech when leaving the quiz screen entirely — calling
+  // stop() before every speak() (e.g. in the effect above) causes an
+  // audible click as the speech engine cancels and immediately restarts.
+  useEffect(() => {
+    return () => {
+      Speech.stop();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.progressRow}>
@@ -48,7 +86,14 @@ export function QuizView({
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.word}>{word}</Text>
+        <View style={styles.wordRow}>
+          <Text style={styles.word}>{word}</Text>
+          {speechSupported && (
+            <Pressable onPress={speakWord} style={styles.speakerButton} hitSlop={8}>
+              <Text style={styles.speakerIcon}>🔊</Text>
+            </Pressable>
+          )}
+        </View>
         {isAnswered && <Text style={styles.translation}>{translation}</Text>}
       </View>
 
@@ -103,11 +148,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 8,
   },
+  wordRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
   word: {
     fontSize: 36,
     fontWeight: "800",
     color: colors.text,
     textAlign: "center",
+  },
+  speakerButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.surfaceAlt,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  speakerIcon: {
+    fontSize: 16,
   },
   translation: {
     fontSize: 16,
