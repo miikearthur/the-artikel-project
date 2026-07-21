@@ -4,6 +4,7 @@ import { CategorySelect } from "../src/components/CategorySelect";
 import { LevelSelect } from "../src/components/LevelSelect";
 import { QuizView } from "../src/components/QuizView";
 import { ResultsView } from "../src/components/ResultsView";
+import { SignInButton } from "../src/components/SignInButton";
 import { GermanNoun, Level, NOUNS_BY_LEVEL, nounsForCategories } from "../src/data/germanNouns";
 import { useQuiz } from "../src/logic/useQuiz";
 import { colors } from "../src/theme";
@@ -45,6 +46,7 @@ export default function Index() {
       <View style={styles.container}>
         <Text style={styles.title}>Artikel</Text>
         <Text style={styles.subtitle}>der · die · das</Text>
+        <SignInButton />
 
         {level === null ? (
           <LevelSelect onSelect={setLevel} />

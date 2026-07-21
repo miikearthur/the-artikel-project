@@ -1,6 +1,13 @@
-# Tells AWS Amplify how to build this Expo (web) app.
-# Amplify reads this file automatically from the repo.
+# Tells AWS Amplify how to build and deploy this app: a Gen 2 backend
+# (Cognito + Google sign-in, AppSync/DynamoDB for word progress) plus the
+# Expo web static export. Amplify reads this file automatically from the repo.
 version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - npm ci
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
