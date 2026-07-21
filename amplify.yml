@@ -6,13 +6,27 @@ backend:
   phases:
     build:
       commands:
-        - npm ci
+        # `npm ci` would be preferred, but @aws-amplify/data-construct and
+        # @aws-amplify/graphql-api-construct currently ship internally
+        # inconsistent bundledDependencies (nested @opentelemetry/* and zod
+        # versions that don't satisfy each other's exact peer requirements).
+        # `overrides` can't reach into bundledDependencies by design, so
+        # there's no fix on our side — `npm install` resolves it fine (with
+        # warnings, not errors) where `npm ci`'s stricter check fails.
+        - npm install
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        # `npm ci` would be preferred, but @aws-amplify/data-construct and
+        # @aws-amplify/graphql-api-construct currently ship internally
+        # inconsistent bundledDependencies (nested @opentelemetry/* and zod
+        # versions that don't satisfy each other's exact peer requirements).
+        # `overrides` can't reach into bundledDependencies by design, so
+        # there's no fix on our side — `npm install` resolves it fine (with
+        # warnings, not errors) where `npm ci`'s stricter check fails.
+        - npm install
     build:
       commands:
         - npm run build:web
