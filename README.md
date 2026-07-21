@@ -61,7 +61,7 @@ Every push to `main` redeploys automatically, same as the main site.
 ## To-do
 
 - [ ] option to disable sound
-- [ ] fill in A2-C2 word lists
+- [ ] fill in B1-C2 word lists (A2 done — 1000 words, A1's 500 + 500 new)
 - [ ] spaced-repetition quiz mode (prioritize words that aren't mastered yet)
 - [ ] daily streak / stats page
 - [ ] PWA install support (add to home screen)
@@ -72,7 +72,7 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] language selector: German only, or English & German
 - [ ] infinite mode (no 10-question limit)
 - [ ] progress bar during the round (not just the "1/10" text)
-- [ ] show word count on level select (e.g. "A1 · 500 Wörter")
+- [x] show word count on level select (e.g. "A1 · 500 Wörter")
 - [ ] remember last-picked categories locally
 - [ ] keyboard shortcuts on web (1/2/3 or D/I/S to answer)
 - [ ] custom app icon/favicon (still using Expo's default)

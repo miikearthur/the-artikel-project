@@ -27,7 +27,11 @@ export function LevelSelect({ onSelect }: Props) {
               <Text style={[styles.buttonText, !available && styles.buttonTextDisabled]}>
                 {level.toUpperCase()}
               </Text>
-              {!available && <Text style={styles.comingSoon}>bald</Text>}
+              {available ? (
+                <Text style={styles.wordCount}>{NOUNS_BY_LEVEL[level].length} Wörter</Text>
+              ) : (
+                <Text style={styles.comingSoon}>bald</Text>
+              )}
             </Pressable>
           );
         })}
@@ -80,6 +84,10 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
   },
   comingSoon: {
+    fontSize: 11,
+    color: colors.textMuted,
+  },
+  wordCount: {
     fontSize: 11,
     color: colors.textMuted,
   },
