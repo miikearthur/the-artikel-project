@@ -79,3 +79,4 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] show which category you're playing during the quiz
 - [ ] loading indicator while progress syncs after sign-in
 - [ ] perfect-round celebration (animation/confetti on 10/10)
+- [ ] a way to check overall progress — mastered words/categories section
