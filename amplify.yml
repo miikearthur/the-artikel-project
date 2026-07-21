@@ -1,0 +1,19 @@
+# Tells AWS Amplify how to build this Expo (web) app.
+# Amplify reads this file automatically from the repo.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build:web
+  artifacts:
+    # `expo export --platform web` puts the static site into the "dist" folder
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
