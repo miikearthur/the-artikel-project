@@ -14,8 +14,7 @@ export interface GermanNoun {
 // A1 word list: everyday, concrete, high-frequency nouns a true beginner
 // meets first. Grouped by topic so the app can offer category filters.
 const a1Words: Omit<GermanNoun, "id">[] = [
-
-  // Familie & Personen
+// Familie & Personen
   { word: "Mann", article: "der", translation: "man", category: "Familie & Personen" },
   { word: "Frau", article: "die", translation: "woman", category: "Familie & Personen" },
   { word: "Kind", article: "das", translation: "child", category: "Familie & Personen" },
@@ -609,9 +608,7 @@ const a1Words: Omit<GermanNoun, "id">[] = [
 // A2 adds 500 new elementary-level nouns on top of everything from A1 —
 // the A2 pool is all of A1 (as review) plus these, 1000 words total.
 const a2NewWords: Omit<GermanNoun, "id">[] = [
-
-
-  // Familie & Beziehungen
+// Familie & Beziehungen
   { word: "Ehemann", article: "der", translation: "husband", category: "Familie & Beziehungen" },
   { word: "Ehefrau", article: "die", translation: "wife", category: "Familie & Beziehungen" },
   { word: "Partner", article: "der", translation: "partner (male)", category: "Familie & Beziehungen" },
@@ -1218,10 +1215,1278 @@ const a2NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Mülltrennung", article: "die", translation: "waste separation", category: "Reinigung & Ordnung" },
 ];
 
+// B1 adds 1000 new intermediate-level nouns on top of everything from A2 —
+// the B1 pool is all of A1+A2 (as review) plus these, 2000 words total.
+const b1NewWords: Omit<GermanNoun, "id">[] = [
+
+
+  // Wissenschaftliche Berufe
+  { word: "Wissenschaftler", article: "der", translation: "scientist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Wissenschaftlerin", article: "die", translation: "scientist (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Forscher", article: "der", translation: "researcher (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Forscherin", article: "die", translation: "researcher (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Biologe", article: "der", translation: "biologist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Biologin", article: "die", translation: "biologist (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Chemiker", article: "der", translation: "chemist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Chemikerin", article: "die", translation: "chemist (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Physiker", article: "der", translation: "physicist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Physikerin", article: "die", translation: "physicist (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Astronom", article: "der", translation: "astronomer (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Astronomin", article: "die", translation: "astronomer (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Geologe", article: "der", translation: "geologist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Geologin", article: "die", translation: "geologist (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Historiker", article: "der", translation: "historian (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Historikerin", article: "die", translation: "historian (female)", category: "Wissenschaftliche Berufe" },
+  { word: "Psychologe", article: "der", translation: "psychologist (male)", category: "Wissenschaftliche Berufe" },
+  { word: "Psychologin", article: "die", translation: "psychologist (female)", category: "Wissenschaftliche Berufe" },
+
+  // Weitere Berufe
+  { word: "Architekt", article: "der", translation: "architect (male)", category: "Weitere Berufe" },
+  { word: "Architektin", article: "die", translation: "architect (female)", category: "Weitere Berufe" },
+  { word: "Designer", article: "der", translation: "designer (male)", category: "Weitere Berufe" },
+  { word: "Designerin", article: "die", translation: "designer (female)", category: "Weitere Berufe" },
+  { word: "Regisseur", article: "der", translation: "director (film, male)", category: "Weitere Berufe" },
+  { word: "Regisseurin", article: "die", translation: "director (film, female)", category: "Weitere Berufe" },
+  { word: "Produzent", article: "der", translation: "producer (male)", category: "Weitere Berufe" },
+  { word: "Produzentin", article: "die", translation: "producer (female)", category: "Weitere Berufe" },
+  { word: "Redakteur", article: "der", translation: "editor (male)", category: "Weitere Berufe" },
+  { word: "Redakteurin", article: "die", translation: "editor (female)", category: "Weitere Berufe" },
+  { word: "Moderator", article: "der", translation: "host/presenter (male)", category: "Weitere Berufe" },
+  { word: "Moderatorin", article: "die", translation: "host/presenter (female)", category: "Weitere Berufe" },
+  { word: "Diplomat", article: "der", translation: "diplomat (male)", category: "Weitere Berufe" },
+  { word: "Diplomatin", article: "die", translation: "diplomat (female)", category: "Weitere Berufe" },
+  { word: "Unternehmer", article: "der", translation: "entrepreneur (male)", category: "Weitere Berufe" },
+  { word: "Unternehmerin", article: "die", translation: "entrepreneur (female)", category: "Weitere Berufe" },
+
+  // Führung & Management
+  { word: "Manager", article: "der", translation: "manager (male)", category: "Führung & Management" },
+  { word: "Managerin", article: "die", translation: "manager (female)", category: "Führung & Management" },
+  { word: "Direktor", article: "der", translation: "director (male)", category: "Führung & Management" },
+  { word: "Direktorin", article: "die", translation: "director (female)", category: "Führung & Management" },
+  { word: "Vorstand", article: "der", translation: "executive board", category: "Führung & Management" },
+  { word: "Geschäftsführer", article: "der", translation: "CEO (male)", category: "Führung & Management" },
+  { word: "Geschäftsführerin", article: "die", translation: "CEO (female)", category: "Führung & Management" },
+  { word: "Berater", article: "der", translation: "consultant (male)", category: "Führung & Management" },
+  { word: "Beraterin", article: "die", translation: "consultant (female)", category: "Führung & Management" },
+  { word: "Analyst", article: "der", translation: "analyst (male)", category: "Führung & Management" },
+  { word: "Analystin", article: "die", translation: "analyst (female)", category: "Führung & Management" },
+  { word: "Investor", article: "der", translation: "investor (male)", category: "Führung & Management" },
+  { word: "Investorin", article: "die", translation: "investor (female)", category: "Führung & Management" },
+  { word: "Aktionär", article: "der", translation: "shareholder", category: "Führung & Management" },
+
+  // Wissenschaft & Forschung
+  { word: "Theorie", article: "die", translation: "theory", category: "Wissenschaft & Forschung" },
+  { word: "Hypothese", article: "die", translation: "hypothesis", category: "Wissenschaft & Forschung" },
+  { word: "Studie", article: "die", translation: "study", category: "Wissenschaft & Forschung" },
+  { word: "Ergebnis", article: "das", translation: "result", category: "Wissenschaft & Forschung" },
+  { word: "Statistik", article: "die", translation: "statistics", category: "Wissenschaft & Forschung" },
+  { word: "Labor", article: "das", translation: "laboratory", category: "Wissenschaft & Forschung" },
+  { word: "Mikroskop", article: "das", translation: "microscope", category: "Wissenschaft & Forschung" },
+  { word: "Molekül", article: "das", translation: "molecule", category: "Wissenschaft & Forschung" },
+  { word: "Atom", article: "das", translation: "atom", category: "Wissenschaft & Forschung" },
+  { word: "Zelle", article: "die", translation: "cell (biology)", category: "Wissenschaft & Forschung" },
+  { word: "Gen", article: "das", translation: "gene", category: "Wissenschaft & Forschung" },
+  { word: "Element", article: "das", translation: "element", category: "Wissenschaft & Forschung" },
+  { word: "Reaktion", article: "die", translation: "reaction", category: "Wissenschaft & Forschung" },
+  { word: "Substanz", article: "die", translation: "substance", category: "Wissenschaft & Forschung" },
+  { word: "Beweis", article: "der", translation: "proof/evidence", category: "Wissenschaft & Forschung" },
+
+  // Psychologie & Verhalten
+  { word: "Bewusstsein", article: "das", translation: "consciousness", category: "Psychologie & Verhalten" },
+  { word: "Wahrnehmung", article: "die", translation: "perception", category: "Psychologie & Verhalten" },
+  { word: "Erinnerung", article: "die", translation: "memory (a memory)", category: "Psychologie & Verhalten" },
+  { word: "Gedächtnis", article: "das", translation: "memory (faculty)", category: "Psychologie & Verhalten" },
+  { word: "Konzentration", article: "die", translation: "concentration", category: "Psychologie & Verhalten" },
+  { word: "Aufmerksamkeit", article: "die", translation: "attention", category: "Psychologie & Verhalten" },
+  { word: "Intuition", article: "die", translation: "intuition", category: "Psychologie & Verhalten" },
+  { word: "Instinkt", article: "der", translation: "instinct", category: "Psychologie & Verhalten" },
+  { word: "Verhalten", article: "das", translation: "behavior", category: "Psychologie & Verhalten" },
+  { word: "Gewohnheit", article: "die", translation: "habit", category: "Psychologie & Verhalten" },
+  { word: "Persönlichkeitsstörung", article: "die", translation: "personality disorder", category: "Psychologie & Verhalten" },
+  { word: "Stimmung", article: "die", translation: "mood", category: "Psychologie & Verhalten" },
+  { word: "Beratung", article: "die", translation: "counseling", category: "Psychologie & Verhalten" },
+
+  // Gesellschaft & soziale Themen
+  { word: "Ungleichheit", article: "die", translation: "inequality", category: "Gesellschaft & soziale Themen" },
+  { word: "Armut", article: "die", translation: "poverty", category: "Gesellschaft & soziale Themen" },
+  { word: "Reichtum", article: "der", translation: "wealth", category: "Gesellschaft & soziale Themen" },
+  { word: "Wohlstand", article: "der", translation: "prosperity", category: "Gesellschaft & soziale Themen" },
+  { word: "Diskriminierung", article: "die", translation: "discrimination", category: "Gesellschaft & soziale Themen" },
+  { word: "Vorurteil", article: "das", translation: "prejudice", category: "Gesellschaft & soziale Themen" },
+  { word: "Toleranz", article: "die", translation: "tolerance", category: "Gesellschaft & soziale Themen" },
+  { word: "Respekt", article: "der", translation: "respect", category: "Gesellschaft & soziale Themen" },
+  { word: "Solidarität", article: "die", translation: "solidarity", category: "Gesellschaft & soziale Themen" },
+  { word: "Integration", article: "die", translation: "integration", category: "Gesellschaft & soziale Themen" },
+  { word: "Minderheit", article: "die", translation: "minority", category: "Gesellschaft & soziale Themen" },
+  { word: "Mehrheit", article: "die", translation: "majority", category: "Gesellschaft & soziale Themen" },
+  { word: "Gleichberechtigung", article: "die", translation: "equal rights", category: "Gesellschaft & soziale Themen" },
+  { word: "Norm", article: "die", translation: "norm", category: "Gesellschaft & soziale Themen" },
+
+  // Wirtschaft (vertieft)
+  { word: "Aktie", article: "die", translation: "stock/share", category: "Wirtschaft (vertieft)" },
+  { word: "Börse", article: "die", translation: "stock exchange", category: "Wirtschaft (vertieft)" },
+  { word: "Umsatz", article: "der", translation: "revenue", category: "Wirtschaft (vertieft)" },
+  { word: "Etat", article: "der", translation: "budget", category: "Wirtschaft (vertieft)" },
+  { word: "Finanzierung", article: "die", translation: "financing", category: "Wirtschaft (vertieft)" },
+  { word: "Marketing", article: "das", translation: "marketing", category: "Wirtschaft (vertieft)" },
+  { word: "Zielgruppe", article: "die", translation: "target audience", category: "Wirtschaft (vertieft)" },
+  { word: "Konkurrenz", article: "die", translation: "competition (business)", category: "Wirtschaft (vertieft)" },
+  { word: "Monopol", article: "das", translation: "monopoly", category: "Wirtschaft (vertieft)" },
+  { word: "Globalisierung", article: "die", translation: "globalization", category: "Wirtschaft (vertieft)" },
+  { word: "Lieferkette", article: "die", translation: "supply chain", category: "Wirtschaft (vertieft)" },
+  { word: "Marktanteil", article: "der", translation: "market share", category: "Wirtschaft (vertieft)" },
+  { word: "Fusion", article: "die", translation: "merger", category: "Wirtschaft (vertieft)" },
+  { word: "Filiale", article: "die", translation: "branch (business)", category: "Wirtschaft (vertieft)" },
+
+  // Finanzen (vertieft)
+  { word: "Inflation", article: "die", translation: "inflation", category: "Finanzen (vertieft)" },
+  { word: "Rezession", article: "die", translation: "recession", category: "Finanzen (vertieft)" },
+  { word: "Konjunktur", article: "die", translation: "economic cycle", category: "Finanzen (vertieft)" },
+  { word: "Schuld", article: "die", translation: "debt", category: "Finanzen (vertieft)" },
+  { word: "Schuldner", article: "der", translation: "debtor", category: "Finanzen (vertieft)" },
+  { word: "Vermögen", article: "das", translation: "wealth/assets", category: "Finanzen (vertieft)" },
+  { word: "Investition", article: "die", translation: "investment", category: "Finanzen (vertieft)" },
+  { word: "Rendite", article: "die", translation: "return (on investment)", category: "Finanzen (vertieft)" },
+  { word: "Risiko", article: "das", translation: "risk", category: "Finanzen (vertieft)" },
+  { word: "Absicherung", article: "die", translation: "hedge/protection", category: "Finanzen (vertieft)" },
+  { word: "Spekulation", article: "die", translation: "speculation", category: "Finanzen (vertieft)" },
+  { word: "Haushalt", article: "der", translation: "budget (household/state)", category: "Finanzen (vertieft)" },
+  { word: "Subvention", article: "die", translation: "subsidy", category: "Finanzen (vertieft)" },
+
+  // Umwelt & Klima (vertieft)
+  { word: "Treibhauseffekt", article: "der", translation: "greenhouse effect", category: "Umwelt & Klima (vertieft)" },
+  { word: "Emission", article: "die", translation: "emission", category: "Umwelt & Klima (vertieft)" },
+  { word: "Artenvielfalt", article: "die", translation: "biodiversity", category: "Umwelt & Klima (vertieft)" },
+  { word: "Naturschutz", article: "der", translation: "nature conservation", category: "Umwelt & Klima (vertieft)" },
+  { word: "Nationalpark", article: "der", translation: "national park", category: "Umwelt & Klima (vertieft)" },
+  { word: "Mülldeponie", article: "die", translation: "landfill", category: "Umwelt & Klima (vertieft)" },
+  { word: "Plastikmüll", article: "der", translation: "plastic waste", category: "Umwelt & Klima (vertieft)" },
+  { word: "Abgas", article: "das", translation: "exhaust fumes", category: "Umwelt & Klima (vertieft)" },
+  { word: "Ozonschicht", article: "die", translation: "ozone layer", category: "Umwelt & Klima (vertieft)" },
+  { word: "Erderwärmung", article: "die", translation: "global warming", category: "Umwelt & Klima (vertieft)" },
+  { word: "Nachhaltigkeit", article: "die", translation: "sustainability", category: "Umwelt & Klima (vertieft)" },
+  { word: "Umweltschützer", article: "der", translation: "environmentalist", category: "Umwelt & Klima (vertieft)" },
+
+  // Erneuerbare Energien
+  { word: "Windkraft", article: "die", translation: "wind power", category: "Erneuerbare Energien" },
+  { word: "Wasserkraft", article: "die", translation: "hydropower", category: "Erneuerbare Energien" },
+  { word: "Solaranlage", article: "die", translation: "solar panel system", category: "Erneuerbare Energien" },
+  { word: "Kernenergie", article: "die", translation: "nuclear energy", category: "Erneuerbare Energien" },
+  { word: "Kraftwerk", article: "das", translation: "power plant", category: "Erneuerbare Energien" },
+  { word: "Stromnetz", article: "das", translation: "power grid", category: "Erneuerbare Energien" },
+  { word: "Batteriespeicher", article: "der", translation: "battery storage", category: "Erneuerbare Energien" },
+  { word: "Windrad", article: "das", translation: "wind turbine", category: "Erneuerbare Energien" },
+  { word: "Rohstoff", article: "der", translation: "raw material", category: "Erneuerbare Energien" },
+  { word: "Verbrauch", article: "der", translation: "consumption", category: "Erneuerbare Energien" },
+
+  // Politik & Staat (vertieft)
+  { word: "Verfassung", article: "die", translation: "constitution", category: "Politik & Staat (vertieft)" },
+  { word: "Parlament", article: "das", translation: "parliament", category: "Politik & Staat (vertieft)" },
+  { word: "Opposition", article: "die", translation: "opposition", category: "Politik & Staat (vertieft)" },
+  { word: "Koalition", article: "die", translation: "coalition", category: "Politik & Staat (vertieft)" },
+  { word: "Diktatur", article: "die", translation: "dictatorship", category: "Politik & Staat (vertieft)" },
+  { word: "Demokratie", article: "die", translation: "democracy", category: "Politik & Staat (vertieft)" },
+  { word: "Monarchie", article: "die", translation: "monarchy", category: "Politik & Staat (vertieft)" },
+  { word: "Republik", article: "die", translation: "republic", category: "Politik & Staat (vertieft)" },
+  { word: "Bürokratie", article: "die", translation: "bureaucracy", category: "Politik & Staat (vertieft)" },
+  { word: "Korruption", article: "die", translation: "corruption", category: "Politik & Staat (vertieft)" },
+  { word: "Skandal", article: "der", translation: "scandal", category: "Politik & Staat (vertieft)" },
+  { word: "Reform", article: "die", translation: "reform", category: "Politik & Staat (vertieft)" },
+  { word: "Revolution", article: "die", translation: "revolution", category: "Politik & Staat (vertieft)" },
+  { word: "Bündnis", article: "das", translation: "alliance", category: "Politik & Staat (vertieft)" },
+  { word: "Abstimmung", article: "die", translation: "vote/voting", category: "Politik & Staat (vertieft)" },
+
+  // Recht & Justiz (vertieft)
+  { word: "Rechtsanwalt", article: "der", translation: "lawyer/attorney", category: "Recht & Justiz (vertieft)" },
+  { word: "Klage", article: "die", translation: "lawsuit", category: "Recht & Justiz (vertieft)" },
+  { word: "Urteil", article: "das", translation: "verdict", category: "Recht & Justiz (vertieft)" },
+  { word: "Beweismittel", article: "das", translation: "evidence (legal)", category: "Recht & Justiz (vertieft)" },
+  { word: "Zeuge", article: "der", translation: "witness", category: "Recht & Justiz (vertieft)" },
+  { word: "Verdächtige", article: "der", translation: "suspect", category: "Recht & Justiz (vertieft)" },
+  { word: "Gefängnis", article: "das", translation: "prison", category: "Recht & Justiz (vertieft)" },
+  { word: "Verbrechen", article: "das", translation: "crime", category: "Recht & Justiz (vertieft)" },
+  { word: "Diebstahl", article: "der", translation: "theft", category: "Recht & Justiz (vertieft)" },
+  { word: "Betrug", article: "der", translation: "fraud", category: "Recht & Justiz (vertieft)" },
+  { word: "Gerechtigkeit", article: "die", translation: "justice", category: "Recht & Justiz (vertieft)" },
+  { word: "Menschenrecht", article: "das", translation: "human right", category: "Recht & Justiz (vertieft)" },
+
+  // Medien (vertieft)
+  { word: "Berichterstattung", article: "die", translation: "news coverage", category: "Medien (vertieft)" },
+  { word: "Zensur", article: "die", translation: "censorship", category: "Medien (vertieft)" },
+  { word: "Meinungsfreiheit", article: "die", translation: "freedom of speech", category: "Medien (vertieft)" },
+  { word: "Pressefreiheit", article: "die", translation: "freedom of the press", category: "Medien (vertieft)" },
+  { word: "Auflage", article: "die", translation: "circulation (press)", category: "Medien (vertieft)" },
+  { word: "Zuschauer", article: "der", translation: "viewer", category: "Medien (vertieft)" },
+  { word: "Zuhörer", article: "der", translation: "listener", category: "Medien (vertieft)" },
+  { word: "Algorithmus", article: "der", translation: "algorithm", category: "Medien (vertieft)" },
+  { word: "Plattform", article: "die", translation: "platform", category: "Medien (vertieft)" },
+  { word: "Öffentlichkeit", article: "die", translation: "the public", category: "Medien (vertieft)" },
+  { word: "Manipulation", article: "die", translation: "manipulation", category: "Medien (vertieft)" },
+
+  // Gesundheit (vertieft)
+  { word: "Symptom", article: "das", translation: "symptom", category: "Gesundheit (vertieft)" },
+  { word: "Behandlung", article: "die", translation: "treatment", category: "Gesundheit (vertieft)" },
+  { word: "Operation", article: "die", translation: "surgery", category: "Gesundheit (vertieft)" },
+  { word: "Chirurg", article: "der", translation: "surgeon", category: "Gesundheit (vertieft)" },
+  { word: "Narkose", article: "die", translation: "anesthesia", category: "Gesundheit (vertieft)" },
+  { word: "Prävention", article: "die", translation: "prevention", category: "Gesundheit (vertieft)" },
+  { word: "Epidemie", article: "die", translation: "epidemic", category: "Gesundheit (vertieft)" },
+  { word: "Virus", article: "das", translation: "virus", category: "Gesundheit (vertieft)" },
+  { word: "Bakterie", article: "die", translation: "bacterium", category: "Gesundheit (vertieft)" },
+  { word: "Infektion", article: "die", translation: "infection", category: "Gesundheit (vertieft)" },
+  { word: "Immunsystem", article: "das", translation: "immune system", category: "Gesundheit (vertieft)" },
+  { word: "Impfstoff", article: "der", translation: "vaccine", category: "Gesundheit (vertieft)" },
+  { word: "Allergie", article: "die", translation: "allergy", category: "Gesundheit (vertieft)" },
+  { word: "Diät", article: "die", translation: "diet", category: "Gesundheit (vertieft)" },
+
+  // Bildung (vertieft)
+  { word: "Lehrplan", article: "der", translation: "curriculum", category: "Bildung (vertieft)" },
+  { word: "Unterricht", article: "der", translation: "instruction/class", category: "Bildung (vertieft)" },
+  { word: "Bildungssystem", article: "das", translation: "education system", category: "Bildung (vertieft)" },
+  { word: "Abschluss", article: "der", translation: "graduation/degree", category: "Bildung (vertieft)" },
+  { word: "Diplom", article: "das", translation: "diploma", category: "Bildung (vertieft)" },
+  { word: "Stipendium", article: "das", translation: "scholarship", category: "Bildung (vertieft)" },
+  { word: "Austauschprogramm", article: "das", translation: "exchange program", category: "Bildung (vertieft)" },
+  { word: "Seminar", article: "das", translation: "seminar", category: "Bildung (vertieft)" },
+  { word: "Doktorarbeit", article: "die", translation: "doctoral thesis", category: "Bildung (vertieft)" },
+  { word: "Fakultät", article: "die", translation: "faculty/department", category: "Bildung (vertieft)" },
+  { word: "Campus", article: "der", translation: "campus", category: "Bildung (vertieft)" },
+  { word: "Weiterbildung", article: "die", translation: "continuing education", category: "Bildung (vertieft)" },
+
+  // Philosophie & Ethik
+  { word: "Existenz", article: "die", translation: "existence", category: "Philosophie & Ethik" },
+  { word: "Sinn", article: "der", translation: "meaning/purpose", category: "Philosophie & Ethik" },
+  { word: "Wert", article: "der", translation: "value", category: "Philosophie & Ethik" },
+  { word: "Moral", article: "die", translation: "morality", category: "Philosophie & Ethik" },
+  { word: "Ethik", article: "die", translation: "ethics", category: "Philosophie & Ethik" },
+  { word: "Freiheit", article: "die", translation: "freedom", category: "Philosophie & Ethik" },
+  { word: "Gleichheit", article: "die", translation: "equality", category: "Philosophie & Ethik" },
+  { word: "Wahrheit", article: "die", translation: "truth", category: "Philosophie & Ethik" },
+  { word: "Realität", article: "die", translation: "reality", category: "Philosophie & Ethik" },
+  { word: "Illusion", article: "die", translation: "illusion", category: "Philosophie & Ethik" },
+  { word: "Identität", article: "die", translation: "identity", category: "Philosophie & Ethik" },
+  { word: "Individuum", article: "das", translation: "individual", category: "Philosophie & Ethik" },
+  { word: "Verantwortungsbewusstsein", article: "das", translation: "sense of responsibility", category: "Philosophie & Ethik" },
+
+  // Kunst & Literatur (vertieft)
+  { word: "Stil", article: "der", translation: "style", category: "Kunst & Literatur (vertieft)" },
+  { word: "Epoche", article: "die", translation: "era/epoch", category: "Kunst & Literatur (vertieft)" },
+  { word: "Genre", article: "das", translation: "genre", category: "Kunst & Literatur (vertieft)" },
+  { word: "Interpretation", article: "die", translation: "interpretation", category: "Kunst & Literatur (vertieft)" },
+  { word: "Symbolik", article: "die", translation: "symbolism", category: "Kunst & Literatur (vertieft)" },
+  { word: "Metapher", article: "die", translation: "metaphor", category: "Kunst & Literatur (vertieft)" },
+  { word: "Erzähler", article: "der", translation: "narrator", category: "Kunst & Literatur (vertieft)" },
+  { word: "Perspektive", article: "die", translation: "perspective", category: "Kunst & Literatur (vertieft)" },
+  { word: "Handlung", article: "die", translation: "plot", category: "Kunst & Literatur (vertieft)" },
+  { word: "Figur", article: "die", translation: "character (fiction)", category: "Kunst & Literatur (vertieft)" },
+  { word: "Kapitel", article: "das", translation: "chapter", category: "Kunst & Literatur (vertieft)" },
+  { word: "Verlag", article: "der", translation: "publishing house", category: "Kunst & Literatur (vertieft)" },
+
+  // Sport (vertieft)
+  { word: "Ausdauer", article: "die", translation: "endurance", category: "Sport (vertieft)" },
+  { word: "Kondition", article: "die", translation: "physical fitness", category: "Sport (vertieft)" },
+  { word: "Verletzung", article: "die", translation: "injury", category: "Sport (vertieft)" },
+  { word: "Doping", article: "das", translation: "doping", category: "Sport (vertieft)" },
+  { word: "Schiedsrichter", article: "der", translation: "referee", category: "Sport (vertieft)" },
+  { word: "Publikum", article: "das", translation: "audience/crowd", category: "Sport (vertieft)" },
+  { word: "Tabelle", article: "die", translation: "standings/table", category: "Sport (vertieft)" },
+  { word: "Aufstieg", article: "der", translation: "promotion (league)", category: "Sport (vertieft)" },
+  { word: "Abstieg", article: "der", translation: "relegation", category: "Sport (vertieft)" },
+  { word: "Halbfinale", article: "das", translation: "semifinal", category: "Sport (vertieft)" },
+  { word: "Endspiel", article: "das", translation: "final (match)", category: "Sport (vertieft)" },
+
+  // Technologie (vertieft)
+  { word: "Datenbank", article: "die", translation: "database", category: "Technologie (vertieft)" },
+  { word: "Netzwerk", article: "das", translation: "network", category: "Technologie (vertieft)" },
+  { word: "Verschlüsselung", article: "die", translation: "encryption", category: "Technologie (vertieft)" },
+  { word: "Innovation", article: "die", translation: "innovation", category: "Technologie (vertieft)" },
+  { word: "Erfindung", article: "die", translation: "invention", category: "Technologie (vertieft)" },
+  { word: "Patent", article: "das", translation: "patent", category: "Technologie (vertieft)" },
+  { word: "Roboter", article: "der", translation: "robot", category: "Technologie (vertieft)" },
+  { word: "Automatisierung", article: "die", translation: "automation", category: "Technologie (vertieft)" },
+  { word: "Simulation", article: "die", translation: "simulation", category: "Technologie (vertieft)" },
+  { word: "Schnittstelle", article: "die", translation: "interface", category: "Technologie (vertieft)" },
+  { word: "Cloud", article: "die", translation: "cloud (computing)", category: "Technologie (vertieft)" },
+
+  // Naturkatastrophen & Phänomene
+  { word: "Tsunami", article: "der", translation: "tsunami", category: "Naturkatastrophen & Phänomene" },
+  { word: "Wirbelsturm", article: "der", translation: "hurricane/cyclone", category: "Naturkatastrophen & Phänomene" },
+  { word: "Tornado", article: "der", translation: "tornado", category: "Naturkatastrophen & Phänomene" },
+  { word: "Lawine", article: "die", translation: "avalanche", category: "Naturkatastrophen & Phänomene" },
+  { word: "Erdrutsch", article: "der", translation: "landslide", category: "Naturkatastrophen & Phänomene" },
+  { word: "Überschwemmung", article: "die", translation: "flood", category: "Naturkatastrophen & Phänomene" },
+  { word: "Waldbrand", article: "der", translation: "wildfire", category: "Naturkatastrophen & Phänomene" },
+  { word: "Naturkatastrophe", article: "die", translation: "natural disaster", category: "Naturkatastrophen & Phänomene" },
+  { word: "Beben", article: "das", translation: "tremor/quake", category: "Naturkatastrophen & Phänomene" },
+  { word: "Katastrophe", article: "die", translation: "catastrophe", category: "Naturkatastrophen & Phänomene" },
+
+  // Migration & Integration
+  { word: "Auswanderung", article: "die", translation: "emigration", category: "Migration & Integration" },
+  { word: "Einwanderung", article: "die", translation: "immigration", category: "Migration & Integration" },
+  { word: "Flüchtling", article: "der", translation: "refugee", category: "Migration & Integration" },
+  { word: "Asyl", article: "das", translation: "asylum", category: "Migration & Integration" },
+  { word: "Kulturschock", article: "der", translation: "culture shock", category: "Migration & Integration" },
+  { word: "Herkunft", article: "die", translation: "origin/background", category: "Migration & Integration" },
+  { word: "Heimat", article: "die", translation: "homeland", category: "Migration & Integration" },
+  { word: "Staatsangehörigkeit", article: "die", translation: "citizenship", category: "Migration & Integration" },
+  { word: "Aufenthaltsgenehmigung", article: "die", translation: "residence permit", category: "Migration & Integration" },
+  { word: "Vielfalt", article: "die", translation: "diversity", category: "Migration & Integration" },
+
+  // Lebensphasen
+  { word: "Kindheit", article: "die", translation: "childhood", category: "Lebensphasen" },
+  { word: "Pubertät", article: "die", translation: "puberty", category: "Lebensphasen" },
+  { word: "Erwachsenenalter", article: "das", translation: "adulthood", category: "Lebensphasen" },
+  { word: "Lebensphase", article: "die", translation: "stage of life", category: "Lebensphasen" },
+  { word: "Erbe", article: "das", translation: "inheritance/legacy", category: "Lebensphasen" },
+  { word: "Nachlass", article: "der", translation: "estate (inheritance)", category: "Lebensphasen" },
+  { word: "Ruhestand", article: "der", translation: "retirement", category: "Lebensphasen" },
+  { word: "Meilenstein", article: "der", translation: "milestone", category: "Lebensphasen" },
+  { word: "Wendepunkt", article: "der", translation: "turning point", category: "Lebensphasen" },
+
+  // Karriere & Arbeitsleben (vertieft)
+  { word: "Karriere", article: "die", translation: "career", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Kündigung", article: "die", translation: "termination/resignation", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Entlassung", article: "die", translation: "layoff", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Beförderung", article: "die", translation: "promotion (job)", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Homeoffice", article: "das", translation: "working from home", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Überstunde", article: "die", translation: "overtime", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Praktikum", article: "das", translation: "internship", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Praktikant", article: "der", translation: "intern (male)", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Fachkraft", article: "die", translation: "skilled worker", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Arbeitsmarkt", article: "der", translation: "job market", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Arbeitslosigkeit", article: "die", translation: "unemployment", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Gewerkschaft", article: "die", translation: "labor union", category: "Karriere & Arbeitsleben (vertieft)" },
+  { word: "Streik", article: "der", translation: "strike (labor)", category: "Karriere & Arbeitsleben (vertieft)" },
+
+  // Kommunikation & Rhetorik
+  { word: "Rhetorik", article: "die", translation: "rhetoric", category: "Kommunikation & Rhetorik" },
+  { word: "Debatte", article: "die", translation: "debate", category: "Kommunikation & Rhetorik" },
+  { word: "Argument", article: "das", translation: "argument", category: "Kommunikation & Rhetorik" },
+  { word: "Gegenargument", article: "das", translation: "counterargument", category: "Kommunikation & Rhetorik" },
+  { word: "Standpunkt", article: "der", translation: "standpoint", category: "Kommunikation & Rhetorik" },
+  { word: "Überzeugung", article: "die", translation: "conviction", category: "Kommunikation & Rhetorik" },
+  { word: "Widerspruch", article: "der", translation: "contradiction", category: "Kommunikation & Rhetorik" },
+  { word: "Zusammenfassung", article: "die", translation: "summary", category: "Kommunikation & Rhetorik" },
+  { word: "Vortrag", article: "der", translation: "presentation/lecture", category: "Kommunikation & Rhetorik" },
+
+  // Konsum & Gesellschaft
+  { word: "Konsum", article: "der", translation: "consumption", category: "Konsum & Gesellschaft" },
+  { word: "Konsument", article: "der", translation: "consumer", category: "Konsum & Gesellschaft" },
+  { word: "Verbraucherschutz", article: "der", translation: "consumer protection", category: "Konsum & Gesellschaft" },
+  { word: "Werbekampagne", article: "die", translation: "advertising campaign", category: "Konsum & Gesellschaft" },
+  { word: "Trend", article: "der", translation: "trend", category: "Konsum & Gesellschaft" },
+  { word: "Lebensstandard", article: "der", translation: "standard of living", category: "Konsum & Gesellschaft" },
+  { word: "Lebensstil", article: "der", translation: "lifestyle", category: "Konsum & Gesellschaft" },
+  { word: "Statussymbol", article: "das", translation: "status symbol", category: "Konsum & Gesellschaft" },
+  { word: "Massenproduktion", article: "die", translation: "mass production", category: "Konsum & Gesellschaft" },
+
+  // Geschichte
+  { word: "Jahrhundert", article: "das", translation: "century", category: "Geschichte" },
+  { word: "Jahrzehnt", article: "das", translation: "decade", category: "Geschichte" },
+  { word: "Zeitalter", article: "das", translation: "age/era", category: "Geschichte" },
+  { word: "Herrscher", article: "der", translation: "ruler", category: "Geschichte" },
+  { word: "Reich", article: "das", translation: "empire", category: "Geschichte" },
+  { word: "Kolonie", article: "die", translation: "colony", category: "Geschichte" },
+  { word: "Unabhängigkeit", article: "die", translation: "independence", category: "Geschichte" },
+  { word: "Denkmal", article: "das", translation: "monument", category: "Geschichte" },
+  { word: "Ruine", article: "die", translation: "ruin", category: "Geschichte" },
+  { word: "Ausgrabung", article: "die", translation: "excavation", category: "Geschichte" },
+  { word: "Überlieferung", article: "die", translation: "tradition/legacy (historical)", category: "Geschichte" },
+  { word: "Vorfahre", article: "der", translation: "ancestor", category: "Geschichte" },
+  { word: "Nachfahre", article: "der", translation: "descendant", category: "Geschichte" },
+
+  // Religion & Glauben
+  { word: "Glaube", article: "der", translation: "faith/belief", category: "Religion & Glauben" },
+  { word: "Gott", article: "der", translation: "god", category: "Religion & Glauben" },
+  { word: "Gebet", article: "das", translation: "prayer", category: "Religion & Glauben" },
+  { word: "Gottesdienst", article: "der", translation: "church service", category: "Religion & Glauben" },
+  { word: "Seele", article: "die", translation: "soul", category: "Religion & Glauben" },
+  { word: "Ritual", article: "das", translation: "ritual", category: "Religion & Glauben" },
+  { word: "Pilger", article: "der", translation: "pilgrim", category: "Religion & Glauben" },
+  { word: "Kloster", article: "das", translation: "monastery", category: "Religion & Glauben" },
+  { word: "Priester", article: "der", translation: "priest", category: "Religion & Glauben" },
+  { word: "Gemeinde", article: "die", translation: "congregation/parish", category: "Religion & Glauben" },
+
+  // Architektur & Bauwesen
+  { word: "Architektur", article: "die", translation: "architecture", category: "Architektur & Bauwesen" },
+  { word: "Baustelle", article: "die", translation: "construction site", category: "Architektur & Bauwesen" },
+  { word: "Fundament", article: "das", translation: "foundation", category: "Architektur & Bauwesen" },
+  { word: "Gerüst", article: "das", translation: "scaffolding", category: "Architektur & Bauwesen" },
+  { word: "Bauplan", article: "der", translation: "building plan", category: "Architektur & Bauwesen" },
+  { word: "Wolkenkratzer", article: "der", translation: "skyscraper", category: "Architektur & Bauwesen" },
+  { word: "Fassade", article: "die", translation: "facade", category: "Architektur & Bauwesen" },
+  { word: "Konstruktion", article: "die", translation: "construction", category: "Architektur & Bauwesen" },
+  { word: "Renovierung", article: "die", translation: "renovation", category: "Architektur & Bauwesen" },
+  { word: "Abriss", article: "der", translation: "demolition", category: "Architektur & Bauwesen" },
+
+  // Landwirtschaft & Ernährung (vertieft)
+  { word: "Anbau", article: "der", translation: "cultivation", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Dünger", article: "der", translation: "fertilizer", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Pestizid", article: "das", translation: "pesticide", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Bio-Lebensmittel", article: "das", translation: "organic food", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Gentechnik", article: "die", translation: "genetic engineering", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Nährstoff", article: "der", translation: "nutrient", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Vitamin", article: "das", translation: "vitamin", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Ballaststoff", article: "der", translation: "dietary fiber", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Kalorie", article: "die", translation: "calorie", category: "Landwirtschaft & Ernährung (vertieft)" },
+  { word: "Mangelernährung", article: "die", translation: "malnutrition", category: "Landwirtschaft & Ernährung (vertieft)" },
+
+  // Verkehr & Mobilität (vertieft)
+  { word: "Mobilität", article: "die", translation: "mobility", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Verkehrsmittel", article: "das", translation: "means of transport", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Elektroauto", article: "das", translation: "electric car", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Ladestation", article: "die", translation: "charging station", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Fahrgast", article: "der", translation: "passenger", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Fahrplan", article: "der", translation: "timetable/schedule", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Anschluss", article: "der", translation: "connection (transport)", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Infrastruktur", article: "die", translation: "infrastructure", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Verkehrsschild", article: "das", translation: "traffic sign", category: "Verkehr & Mobilität (vertieft)" },
+  { word: "Umleitung", article: "die", translation: "detour", category: "Verkehr & Mobilität (vertieft)" },
+
+  // Tourismus (vertieft)
+  { word: "Massentourismus", article: "der", translation: "mass tourism", category: "Tourismus (vertieft)" },
+  { word: "Nachhaltiger Tourismus", article: "der", translation: "sustainable tourism", category: "Tourismus (vertieft)" },
+  { word: "Unterkunft", article: "die", translation: "accommodation", category: "Tourismus (vertieft)" },
+  { word: "Reiseveranstalter", article: "der", translation: "tour operator", category: "Tourismus (vertieft)" },
+  { word: "Reiseziel", article: "das", translation: "destination", category: "Tourismus (vertieft)" },
+  { word: "Rundreise", article: "die", translation: "round trip/tour", category: "Tourismus (vertieft)" },
+  { word: "Gastfreundschaft", article: "die", translation: "hospitality", category: "Tourismus (vertieft)" },
+  { word: "Einheimische", article: "der", translation: "local (person)", category: "Tourismus (vertieft)" },
+
+  // Familie & Erziehung (vertieft)
+  { word: "Erziehung", article: "die", translation: "upbringing", category: "Familie & Erziehung (vertieft)" },
+  { word: "Vorbild", article: "das", translation: "role model", category: "Familie & Erziehung (vertieft)" },
+  { word: "Fürsorge", article: "die", translation: "care/nurturing", category: "Familie & Erziehung (vertieft)" },
+  { word: "Disziplin", article: "die", translation: "discipline", category: "Familie & Erziehung (vertieft)" },
+  { word: "Generationenkonflikt", article: "der", translation: "generation gap conflict", category: "Familie & Erziehung (vertieft)" },
+  { word: "Kinderbetreuung", article: "die", translation: "childcare", category: "Familie & Erziehung (vertieft)" },
+  { word: "Erziehungsberechtigte", article: "der", translation: "legal guardian", category: "Familie & Erziehung (vertieft)" },
+  { word: "Adoption", article: "die", translation: "adoption", category: "Familie & Erziehung (vertieft)" },
+
+  // Persönliche Entwicklung
+  { word: "Selbstverwirklichung", article: "die", translation: "self-actualization", category: "Persönliche Entwicklung" },
+  { word: "Selbstvertrauen", article: "das", translation: "self-confidence", category: "Persönliche Entwicklung" },
+  { word: "Ziel", article: "das", translation: "goal", category: "Persönliche Entwicklung" },
+  { word: "Erfolg", article: "der", translation: "success", category: "Persönliche Entwicklung" },
+  { word: "Misserfolg", article: "der", translation: "failure", category: "Persönliche Entwicklung" },
+  { word: "Herausforderung", article: "die", translation: "challenge", category: "Persönliche Entwicklung" },
+  { word: "Fortschritt", article: "der", translation: "progress", category: "Persönliche Entwicklung" },
+  { word: "Rückschlag", article: "der", translation: "setback", category: "Persönliche Entwicklung" },
+  { word: "Priorität", article: "die", translation: "priority", category: "Persönliche Entwicklung" },
+  { word: "Gleichgewicht", article: "das", translation: "balance", category: "Persönliche Entwicklung" },
+
+  // Kriminalität & Sicherheit
+  { word: "Kriminalität", article: "die", translation: "crime (general)", category: "Kriminalität & Sicherheit" },
+  { word: "Täter", article: "der", translation: "perpetrator", category: "Kriminalität & Sicherheit" },
+  { word: "Opfer", article: "das", translation: "victim", category: "Kriminalität & Sicherheit" },
+  { word: "Überwachung", article: "die", translation: "surveillance", category: "Kriminalität & Sicherheit" },
+  { word: "Alarmanlage", article: "die", translation: "alarm system", category: "Kriminalität & Sicherheit" },
+  { word: "Einbruch", article: "der", translation: "break-in", category: "Kriminalität & Sicherheit" },
+  { word: "Sicherheitsdienst", article: "der", translation: "security service", category: "Kriminalität & Sicherheit" },
+  { word: "Ermittlung", article: "die", translation: "investigation", category: "Kriminalität & Sicherheit" },
+  { word: "Festnahme", article: "die", translation: "arrest", category: "Kriminalität & Sicherheit" },
+
+  // Sprache & Linguistik
+  { word: "Grammatik", article: "die", translation: "grammar", category: "Sprache & Linguistik" },
+  { word: "Wortschatz", article: "der", translation: "vocabulary", category: "Sprache & Linguistik" },
+  { word: "Aussprache", article: "die", translation: "pronunciation", category: "Sprache & Linguistik" },
+  { word: "Redewendung", article: "die", translation: "idiom/expression", category: "Sprache & Linguistik" },
+  { word: "Muttersprachler", article: "der", translation: "native speaker", category: "Sprache & Linguistik" },
+  { word: "Satzbau", article: "der", translation: "sentence structure", category: "Sprache & Linguistik" },
+  { word: "Sprachkurs", article: "der", translation: "language course", category: "Sprache & Linguistik" },
+  { word: "Sprichwort", article: "das", translation: "proverb", category: "Sprache & Linguistik" },
+
+  // Mathematik & Logik
+  { word: "Gleichung", article: "die", translation: "equation", category: "Mathematik & Logik" },
+  { word: "Formel", article: "die", translation: "formula", category: "Mathematik & Logik" },
+  { word: "Berechnung", article: "die", translation: "calculation", category: "Mathematik & Logik" },
+  { word: "Wahrscheinlichkeit", article: "die", translation: "probability", category: "Mathematik & Logik" },
+  { word: "Durchschnitt", article: "der", translation: "average", category: "Mathematik & Logik" },
+  { word: "Diagramm", article: "das", translation: "diagram/chart", category: "Mathematik & Logik" },
+  { word: "Logik", article: "die", translation: "logic", category: "Mathematik & Logik" },
+  { word: "Muster", article: "das", translation: "pattern", category: "Mathematik & Logik" },
+
+  // Astronomie & Weltall
+  { word: "Weltall", article: "das", translation: "outer space", category: "Astronomie & Weltall" },
+  { word: "Planet", article: "der", translation: "planet", category: "Astronomie & Weltall" },
+  { word: "Stern", article: "der", translation: "star", category: "Astronomie & Weltall" },
+  { word: "Galaxie", article: "die", translation: "galaxy", category: "Astronomie & Weltall" },
+  { word: "Satellit", article: "der", translation: "satellite", category: "Astronomie & Weltall" },
+  { word: "Rakete", article: "die", translation: "rocket", category: "Astronomie & Weltall" },
+  { word: "Umlaufbahn", article: "die", translation: "orbit", category: "Astronomie & Weltall" },
+  { word: "Sonnensystem", article: "das", translation: "solar system", category: "Astronomie & Weltall" },
+  { word: "Schwerkraft", article: "die", translation: "gravity", category: "Astronomie & Weltall" },
+  { word: "Astronaut", article: "der", translation: "astronaut", category: "Astronomie & Weltall" },
+
+  // Geologie & Erde
+  { word: "Erdkruste", article: "die", translation: "earth's crust", category: "Geologie & Erde" },
+  { word: "Kontinentalplatte", article: "die", translation: "tectonic plate", category: "Geologie & Erde" },
+  { word: "Mineral", article: "das", translation: "mineral", category: "Geologie & Erde" },
+  { word: "Fossil", article: "das", translation: "fossil", category: "Geologie & Erde" },
+  { word: "Sediment", article: "das", translation: "sediment", category: "Geologie & Erde" },
+  { word: "Magma", article: "das", translation: "magma", category: "Geologie & Erde" },
+  { word: "Erosion", article: "die", translation: "erosion", category: "Geologie & Erde" },
+  { word: "Gestein", article: "das", translation: "rock (geology)", category: "Geologie & Erde" },
+
+  // Chemie & Physik (Begriffe)
+  { word: "Energiequelle", article: "die", translation: "energy source", category: "Chemie & Physik (Begriffe)" },
+  { word: "Temperatur", article: "die", translation: "temperature", category: "Chemie & Physik (Begriffe)" },
+  { word: "Druck", article: "der", translation: "pressure", category: "Chemie & Physik (Begriffe)" },
+  { word: "Magnet", article: "der", translation: "magnet", category: "Chemie & Physik (Begriffe)" },
+  { word: "Strahlung", article: "die", translation: "radiation", category: "Chemie & Physik (Begriffe)" },
+  { word: "Elektrizität", article: "die", translation: "electricity", category: "Chemie & Physik (Begriffe)" },
+  { word: "Widerstand", article: "der", translation: "resistance", category: "Chemie & Physik (Begriffe)" },
+
+  // Biologie & Ökosystem
+  { word: "Ökosystem", article: "das", translation: "ecosystem", category: "Biologie & Ökosystem" },
+  { word: "Lebensraum", article: "der", translation: "habitat", category: "Biologie & Ökosystem" },
+  { word: "Nahrungskette", article: "die", translation: "food chain", category: "Biologie & Ökosystem" },
+  { word: "Fortpflanzung", article: "die", translation: "reproduction", category: "Biologie & Ökosystem" },
+  { word: "Evolution", article: "die", translation: "evolution", category: "Biologie & Ökosystem" },
+  { word: "Aussterben", article: "das", translation: "extinction", category: "Biologie & Ökosystem" },
+  { word: "Population", article: "die", translation: "population (biology)", category: "Biologie & Ökosystem" },
+  { word: "Organismus", article: "der", translation: "organism", category: "Biologie & Ökosystem" },
+
+  // Tiere (vertieft)
+  { word: "Raubtier", article: "das", translation: "predator", category: "Tiere (vertieft)" },
+  { word: "Beute", article: "die", translation: "prey", category: "Tiere (vertieft)" },
+  { word: "Herde", article: "die", translation: "herd", category: "Tiere (vertieft)" },
+  { word: "Rudel", article: "das", translation: "pack (wolves)", category: "Tiere (vertieft)" },
+  { word: "Nest", article: "das", translation: "nest", category: "Tiere (vertieft)" },
+  { word: "Zugvogel", article: "der", translation: "migratory bird", category: "Tiere (vertieft)" },
+  { word: "Fell", article: "das", translation: "fur/coat (animal)", category: "Tiere (vertieft)" },
+
+  // Wetter & Klimaphänomene (vertieft)
+  { word: "Klimazone", article: "die", translation: "climate zone", category: "Wetter & Klimaphänomene (vertieft)" },
+  { word: "Jahreszeit", article: "die", translation: "season", category: "Wetter & Klimaphänomene (vertieft)" },
+  { word: "Niederschlag", article: "der", translation: "precipitation", category: "Wetter & Klimaphänomene (vertieft)" },
+  { word: "Luftdruck", article: "der", translation: "air pressure", category: "Wetter & Klimaphänomene (vertieft)" },
+  { word: "Vorhersage", article: "die", translation: "forecast", category: "Wetter & Klimaphänomene (vertieft)" },
+  { word: "Extremwetter", article: "das", translation: "extreme weather", category: "Wetter & Klimaphänomene (vertieft)" },
+
+  // Stadtplanung & Infrastruktur
+  { word: "Stadtplanung", article: "die", translation: "urban planning", category: "Stadtplanung & Infrastruktur" },
+  { word: "Wohnviertel", article: "das", translation: "residential area", category: "Stadtplanung & Infrastruktur" },
+  { word: "Industriegebiet", article: "das", translation: "industrial area", category: "Stadtplanung & Infrastruktur" },
+  { word: "Fußgängerzone", article: "die", translation: "pedestrian zone", category: "Stadtplanung & Infrastruktur" },
+  { word: "Grünfläche", article: "die", translation: "green space", category: "Stadtplanung & Infrastruktur" },
+  { word: "Vorort", article: "der", translation: "suburb", category: "Stadtplanung & Infrastruktur" },
+  { word: "Ballungsgebiet", article: "das", translation: "metropolitan area", category: "Stadtplanung & Infrastruktur" },
+
+  // Digitalisierung & Gesellschaft
+  { word: "Digitalisierung", article: "die", translation: "digitalization", category: "Digitalisierung & Gesellschaft" },
+  { word: "Datenschutz", article: "der", translation: "data privacy", category: "Digitalisierung & Gesellschaft" },
+  { word: "Onlinehandel", article: "der", translation: "online retail", category: "Digitalisierung & Gesellschaft" },
+  { word: "Homeschooling", article: "das", translation: "homeschooling", category: "Digitalisierung & Gesellschaft" },
+  { word: "Bildschirmzeit", article: "die", translation: "screen time", category: "Digitalisierung & Gesellschaft" },
+  { word: "Abhängigkeit", article: "die", translation: "dependency/addiction", category: "Digitalisierung & Gesellschaft" },
+  { word: "Anonymität", article: "die", translation: "anonymity", category: "Digitalisierung & Gesellschaft" },
+
+  // Ernährung & Diät
+  { word: "Vollwertkost", article: "die", translation: "whole food diet", category: "Ernährung & Diät" },
+  { word: "Fastenzeit", article: "die", translation: "fasting period", category: "Ernährung & Diät" },
+  { word: "Nahrungsergänzungsmittel", article: "das", translation: "dietary supplement", category: "Ernährung & Diät" },
+  { word: "Unverträglichkeit", article: "die", translation: "intolerance (food)", category: "Ernährung & Diät" },
+  { word: "Verdauung", article: "die", translation: "digestion", category: "Ernährung & Diät" },
+  { word: "Stoffwechsel", article: "der", translation: "metabolism", category: "Ernährung & Diät" },
+
+  // Mode & Design
+  { word: "Modetrend", article: "der", translation: "fashion trend", category: "Mode & Design" },
+  { word: "Kollektion", article: "die", translation: "collection (fashion)", category: "Mode & Design" },
+  { word: "Laufsteg", article: "der", translation: "runway/catwalk", category: "Mode & Design" },
+  { word: "Stoffmuster", article: "das", translation: "fabric pattern", category: "Mode & Design" },
+  { word: "Accessoire", article: "das", translation: "accessory", category: "Mode & Design" },
+  { word: "Schnittmuster", article: "das", translation: "sewing pattern", category: "Mode & Design" },
+
+  // Handwerk
+  { word: "Handwerker", article: "der", translation: "craftsman", category: "Handwerk" },
+  { word: "Werkstatt", article: "die", translation: "workshop", category: "Handwerk" },
+  { word: "Lehrling", article: "der", translation: "apprentice", category: "Handwerk" },
+  { word: "Zunft", article: "die", translation: "guild", category: "Handwerk" },
+  { word: "Meisterbrief", article: "der", translation: "master craftsman certificate", category: "Handwerk" },
+  { word: "Rohmaterial", article: "das", translation: "raw material", category: "Handwerk" },
+
+  // Freizeit & Unterhaltung (vertieft)
+  { word: "Unterhaltung", article: "die", translation: "entertainment", category: "Freizeit & Unterhaltung (vertieft)" },
+  { word: "Vergnügungspark", article: "der", translation: "amusement park", category: "Freizeit & Unterhaltung (vertieft)" },
+  { word: "Festival", article: "das", translation: "festival", category: "Freizeit & Unterhaltung (vertieft)" },
+  { word: "Vorstellung", article: "die", translation: "performance/show", category: "Freizeit & Unterhaltung (vertieft)" },
+  { word: "Zuschauerraum", article: "der", translation: "auditorium", category: "Freizeit & Unterhaltung (vertieft)" },
+  { word: "Eintrittskarte", article: "die", translation: "admission ticket", category: "Freizeit & Unterhaltung (vertieft)" },
+
+  // Beziehungen & Emotionen (vertieft)
+  { word: "Bindung", article: "die", translation: "bond/attachment", category: "Beziehungen & Emotionen (vertieft)" },
+  { word: "Nähe", article: "die", translation: "closeness", category: "Beziehungen & Emotionen (vertieft)" },
+  { word: "Distanz", article: "die", translation: "distance (emotional)", category: "Beziehungen & Emotionen (vertieft)" },
+  { word: "Loyalität", article: "die", translation: "loyalty", category: "Beziehungen & Emotionen (vertieft)" },
+  { word: "Verrat", article: "der", translation: "betrayal", category: "Beziehungen & Emotionen (vertieft)" },
+  { word: "Versöhnung", article: "die", translation: "reconciliation", category: "Beziehungen & Emotionen (vertieft)" },
+
+  // Werte & Normen
+  { word: "Pflicht", article: "die", translation: "duty", category: "Werte & Normen" },
+  { word: "Recht", article: "das", translation: "right (entitlement)", category: "Werte & Normen" },
+  { word: "Tugend", article: "die", translation: "virtue", category: "Werte & Normen" },
+  { word: "Prinzip", article: "das", translation: "principle", category: "Werte & Normen" },
+  { word: "Konvention", article: "die", translation: "convention", category: "Werte & Normen" },
+  { word: "Tabu", article: "das", translation: "taboo", category: "Werte & Normen" },
+
+  // Verwaltung & Bürokratie (vertieft)
+  { word: "Behörde", article: "die", translation: "authority/agency", category: "Verwaltung & Bürokratie (vertieft)" },
+  { word: "Zuständigkeit", article: "die", translation: "jurisdiction/responsibility", category: "Verwaltung & Bürokratie (vertieft)" },
+  { word: "Vorschrift", article: "die", translation: "regulation", category: "Verwaltung & Bürokratie (vertieft)" },
+  { word: "Richtlinie", article: "die", translation: "guideline", category: "Verwaltung & Bürokratie (vertieft)" },
+  { word: "Verordnung", article: "die", translation: "ordinance", category: "Verwaltung & Bürokratie (vertieft)" },
+  { word: "Bescheid", article: "der", translation: "official notice", category: "Verwaltung & Bürokratie (vertieft)" },
+
+  // Internationale Beziehungen
+  { word: "Vereinbarung", article: "die", translation: "agreement", category: "Internationale Beziehungen" },
+  { word: "Abkommen", article: "das", translation: "treaty/accord", category: "Internationale Beziehungen" },
+  { word: "Verhandlung", article: "die", translation: "negotiation", category: "Internationale Beziehungen" },
+  { word: "Botschaft", article: "die", translation: "embassy", category: "Internationale Beziehungen" },
+  { word: "Botschafter", article: "der", translation: "ambassador", category: "Internationale Beziehungen" },
+  { word: "Gipfeltreffen", article: "das", translation: "summit meeting", category: "Internationale Beziehungen" },
+  { word: "Sanktion", article: "die", translation: "sanction", category: "Internationale Beziehungen" },
+
+  // Wirtschaftssektoren
+  { word: "Dienstleistung", article: "die", translation: "service (economic)", category: "Wirtschaftssektoren" },
+  { word: "Landwirtschaft", article: "die", translation: "agriculture (sector)", category: "Wirtschaftssektoren" },
+  { word: "Bergbau", article: "der", translation: "mining", category: "Wirtschaftssektoren" },
+  { word: "Bauindustrie", article: "die", translation: "construction industry", category: "Wirtschaftssektoren" },
+  { word: "Gastgewerbe", article: "das", translation: "hospitality industry", category: "Wirtschaftssektoren" },
+  { word: "Einzelhandel", article: "der", translation: "retail", category: "Wirtschaftssektoren" },
+  { word: "Großhandel", article: "der", translation: "wholesale", category: "Wirtschaftssektoren" },
+
+  // Arbeitswelt der Zukunft
+  { word: "Fachkräftemangel", article: "der", translation: "skilled labor shortage", category: "Arbeitswelt der Zukunft" },
+  { word: "Flexibilität", article: "die", translation: "flexibility", category: "Arbeitswelt der Zukunft" },
+  { word: "Umschulung", article: "die", translation: "retraining", category: "Arbeitswelt der Zukunft" },
+  { word: "Digitalkompetenz", article: "die", translation: "digital literacy", category: "Arbeitswelt der Zukunft" },
+  { word: "Automatisierungsgrad", article: "der", translation: "degree of automation", category: "Arbeitswelt der Zukunft" },
+  { word: "Nebenjob", article: "der", translation: "side job", category: "Arbeitswelt der Zukunft" },
+
+  // Konflikte & Diplomatie
+  { word: "Krise", article: "die", translation: "crisis", category: "Konflikte & Diplomatie" },
+  { word: "Spannung", article: "die", translation: "tension", category: "Konflikte & Diplomatie" },
+  { word: "Vermittlung", article: "die", translation: "mediation", category: "Konflikte & Diplomatie" },
+  { word: "Waffenstillstand", article: "der", translation: "ceasefire", category: "Konflikte & Diplomatie" },
+  { word: "Bedrohung", article: "die", translation: "threat", category: "Konflikte & Diplomatie" },
+  { word: "Sicherheit", article: "die", translation: "security", category: "Konflikte & Diplomatie" },
+
+  // Zeitgeist & Werte im Wandel
+  { word: "Zeitgeist", article: "der", translation: "spirit of the times", category: "Zeitgeist & Werte im Wandel" },
+  { word: "Wandel", article: "der", translation: "change/transformation", category: "Zeitgeist & Werte im Wandel" },
+  { word: "Umbruch", article: "der", translation: "upheaval", category: "Zeitgeist & Werte im Wandel" },
+  { word: "Bewegung", article: "die", translation: "movement (social)", category: "Zeitgeist & Werte im Wandel" },
+  { word: "Anhänger", article: "der", translation: "follower/supporter", category: "Zeitgeist & Werte im Wandel" },
+  { word: "Gegner", article: "der", translation: "opponent", category: "Zeitgeist & Werte im Wandel" },
+
+  // Alltag & Routinen (vertieft)
+  { word: "Routine", article: "die", translation: "routine", category: "Alltag & Routinen (vertieft)" },
+  { word: "Tagesablauf", article: "der", translation: "daily routine", category: "Alltag & Routinen (vertieft)" },
+  { word: "Freizeitgestaltung", article: "die", translation: "leisure activities", category: "Alltag & Routinen (vertieft)" },
+  { word: "Erholung", article: "die", translation: "recovery/relaxation", category: "Alltag & Routinen (vertieft)" },
+  { word: "Belastung", article: "die", translation: "strain/burden", category: "Alltag & Routinen (vertieft)" },
+
+  // Kommunikationsmittel (vertieft)
+  { word: "Videokonferenz", article: "die", translation: "video conference", category: "Kommunikationsmittel (vertieft)" },
+  { word: "Kommunikationsmittel", article: "das", translation: "means of communication", category: "Kommunikationsmittel (vertieft)" },
+  { word: "Signal", article: "das", translation: "signal", category: "Kommunikationsmittel (vertieft)" },
+  { word: "Übertragung", article: "die", translation: "transmission/broadcast", category: "Kommunikationsmittel (vertieft)" },
+  { word: "Empfang", article: "der", translation: "reception (signal)", category: "Kommunikationsmittel (vertieft)" },
+
+  // Konsumgüter & Produktion
+  { word: "Konsumgut", article: "das", translation: "consumer good", category: "Konsumgüter & Produktion" },
+  { word: "Halbfertigprodukt", article: "das", translation: "semi-finished product", category: "Konsumgüter & Produktion" },
+  { word: "Qualitätskontrolle", article: "die", translation: "quality control", category: "Konsumgüter & Produktion" },
+  { word: "Herstellung", article: "die", translation: "manufacturing", category: "Konsumgüter & Produktion" },
+  { word: "Ausschuss", article: "der", translation: "reject/scrap (production)", category: "Konsumgüter & Produktion" },
+
+  // Vertrieb & Verkauf
+  { word: "Vertrieb", article: "der", translation: "sales/distribution", category: "Vertrieb & Verkauf" },
+  { word: "Verkaufsleiter", article: "der", translation: "sales manager", category: "Vertrieb & Verkauf" },
+  { word: "Provision", article: "die", translation: "commission", category: "Vertrieb & Verkauf" },
+  { word: "Verhandlungsgeschick", article: "das", translation: "negotiation skill", category: "Vertrieb & Verkauf" },
+  { word: "Kundenstamm", article: "der", translation: "customer base", category: "Vertrieb & Verkauf" },
+  { word: "Absatz", article: "der", translation: "sales volume", category: "Vertrieb & Verkauf" },
+  { word: "Verkaufsstrategie", article: "die", translation: "sales strategy", category: "Vertrieb & Verkauf" },
+  { word: "Vertriebsweg", article: "der", translation: "distribution channel", category: "Vertrieb & Verkauf" },
+
+  // Personalwesen
+  { word: "Personalabteilung", article: "die", translation: "HR department", category: "Personalwesen" },
+  { word: "Personalmangel", article: "der", translation: "staff shortage", category: "Personalwesen" },
+  { word: "Vorstellungsgespräch", article: "das", translation: "job interview", category: "Personalwesen" },
+  { word: "Probezeit", article: "die", translation: "probationary period", category: "Personalwesen" },
+  { word: "Mitarbeitergespräch", article: "das", translation: "employee review", category: "Personalwesen" },
+  { word: "Personalentwicklung", article: "die", translation: "staff development", category: "Personalwesen" },
+  { word: "Fluktuation", article: "die", translation: "staff turnover", category: "Personalwesen" },
+  { word: "Betriebsklima", article: "das", translation: "workplace atmosphere", category: "Personalwesen" },
+
+  // Projekt- & Qualitätsmanagement
+  { word: "Projektleiter", article: "der", translation: "project manager", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Zeitplan", article: "der", translation: "schedule/timeline", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Zwischenziel", article: "das", translation: "interim goal", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Zielvorgabe", article: "die", translation: "target/goal setting", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Qualitätsstandard", article: "der", translation: "quality standard", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Prozessoptimierung", article: "die", translation: "process optimization", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Risikoanalyse", article: "die", translation: "risk analysis", category: "Projekt- & Qualitätsmanagement" },
+  { word: "Feedbackrunde", article: "die", translation: "feedback round", category: "Projekt- & Qualitätsmanagement" },
+
+  // Logistik & Lagerhaltung
+  { word: "Lager", article: "das", translation: "warehouse", category: "Logistik & Lagerhaltung" },
+  { word: "Bestand", article: "der", translation: "inventory/stock", category: "Logistik & Lagerhaltung" },
+  { word: "Versand", article: "der", translation: "shipping", category: "Logistik & Lagerhaltung" },
+  { word: "Spedition", article: "die", translation: "freight company", category: "Logistik & Lagerhaltung" },
+  { word: "Frachtkosten", article: "die", translation: "freight costs", category: "Logistik & Lagerhaltung" },
+  { word: "Zoll", article: "der", translation: "customs", category: "Logistik & Lagerhaltung" },
+  { word: "Containerhafen", article: "der", translation: "container port", category: "Logistik & Lagerhaltung" },
+  { word: "Lieferzeit", article: "die", translation: "delivery time", category: "Logistik & Lagerhaltung" },
+
+  // Steuern & Abgaben (mehr)
+  { word: "Einkommensteuer", article: "die", translation: "income tax", category: "Steuern & Abgaben (mehr)" },
+  { word: "Mehrwertsteuer", article: "die", translation: "value-added tax", category: "Steuern & Abgaben (mehr)" },
+  { word: "Steuererklärung", article: "die", translation: "tax return", category: "Steuern & Abgaben (mehr)" },
+  { word: "Steuersatz", article: "der", translation: "tax rate", category: "Steuern & Abgaben (mehr)" },
+  { word: "Freibetrag", article: "der", translation: "tax-free allowance", category: "Steuern & Abgaben (mehr)" },
+  { word: "Steuerhinterziehung", article: "die", translation: "tax evasion", category: "Steuern & Abgaben (mehr)" },
+  { word: "Finanzamt", article: "das", translation: "tax office", category: "Steuern & Abgaben (mehr)" },
+
+  // Versicherungen (mehr)
+  { word: "Haftpflichtversicherung", article: "die", translation: "liability insurance", category: "Versicherungen (mehr)" },
+  { word: "Krankenversicherung", article: "die", translation: "health insurance", category: "Versicherungen (mehr)" },
+  { word: "Lebensversicherung", article: "die", translation: "life insurance", category: "Versicherungen (mehr)" },
+  { word: "Versicherungsprämie", article: "die", translation: "insurance premium", category: "Versicherungen (mehr)" },
+  { word: "Schadensfall", article: "der", translation: "insurance claim/incident", category: "Versicherungen (mehr)" },
+  { word: "Selbstbeteiligung", article: "die", translation: "deductible", category: "Versicherungen (mehr)" },
+  { word: "Versicherungspolice", article: "die", translation: "insurance policy", category: "Versicherungen (mehr)" },
+
+  // Immobilien
+  { word: "Immobilie", article: "die", translation: "real estate/property", category: "Immobilien" },
+  { word: "Makler", article: "der", translation: "real estate agent", category: "Immobilien" },
+  { word: "Grundstück", article: "das", translation: "plot of land", category: "Immobilien" },
+  { word: "Eigentümer", article: "der", translation: "owner (property)", category: "Immobilien" },
+  { word: "Kaufpreis", article: "der", translation: "purchase price", category: "Immobilien" },
+  { word: "Nebenkosten", article: "die", translation: "additional costs (rent)", category: "Immobilien" },
+  { word: "Wohnfläche", article: "die", translation: "living space", category: "Immobilien" },
+  { word: "Grundbuch", article: "das", translation: "land register", category: "Immobilien" },
+
+  // Elektrizität im Haushalt
+  { word: "Stromausfall", article: "der", translation: "power outage", category: "Elektrizität im Haushalt" },
+  { word: "Stromrechnung", article: "die", translation: "electricity bill", category: "Elektrizität im Haushalt" },
+  { word: "Sicherung", article: "die", translation: "fuse", category: "Elektrizität im Haushalt" },
+  { word: "Stromanbieter", article: "der", translation: "electricity provider", category: "Elektrizität im Haushalt" },
+  { word: "Stromverbrauch", article: "der", translation: "power consumption", category: "Elektrizität im Haushalt" },
+  { word: "Zähler", article: "der", translation: "meter (utility)", category: "Elektrizität im Haushalt" },
+
+  // Wasser- & Abfallwirtschaft
+  { word: "Trinkwasser", article: "das", translation: "drinking water", category: "Wasser- & Abfallwirtschaft" },
+  { word: "Abwasser", article: "das", translation: "wastewater", category: "Wasser- & Abfallwirtschaft" },
+  { word: "Kläranlage", article: "die", translation: "sewage treatment plant", category: "Wasser- & Abfallwirtschaft" },
+  { word: "Wasserknappheit", article: "die", translation: "water scarcity", category: "Wasser- & Abfallwirtschaft" },
+  { word: "Kompost", article: "der", translation: "compost", category: "Wasser- & Abfallwirtschaft" },
+  { word: "Sondermüll", article: "der", translation: "hazardous waste", category: "Wasser- & Abfallwirtschaft" },
+
+  // Gesundheitswesen
+  { word: "Gesundheitswesen", article: "das", translation: "healthcare system", category: "Gesundheitswesen" },
+  { word: "Krankenkasse", article: "die", translation: "health insurance fund", category: "Gesundheitswesen" },
+  { word: "Hausarzt", article: "der", translation: "general practitioner", category: "Gesundheitswesen" },
+  { word: "Facharzt", article: "der", translation: "specialist (doctor)", category: "Gesundheitswesen" },
+  { word: "Wartezimmer", article: "das", translation: "waiting room", category: "Gesundheitswesen" },
+  { word: "Sprechstunde", article: "die", translation: "office hours (doctor)", category: "Gesundheitswesen" },
+  { word: "Rezeption", article: "die", translation: "reception desk", category: "Gesundheitswesen" },
+
+  // Pflege & Betreuung
+  { word: "Pflegekraft", article: "die", translation: "caregiver", category: "Pflege & Betreuung" },
+  { word: "Altenheim", article: "das", translation: "nursing home", category: "Pflege & Betreuung" },
+  { word: "Pflegebedürftigkeit", article: "die", translation: "need for care", category: "Pflege & Betreuung" },
+  { word: "Behinderung", article: "die", translation: "disability", category: "Pflege & Betreuung" },
+  { word: "Barrierefreiheit", article: "die", translation: "accessibility", category: "Pflege & Betreuung" },
+  { word: "Rollstuhl", article: "der", translation: "wheelchair", category: "Pflege & Betreuung" },
+
+  // Psychische Gesundheit
+  { word: "Depression", article: "die", translation: "depression", category: "Psychische Gesundheit" },
+  { word: "Burnout", article: "das", translation: "burnout", category: "Psychische Gesundheit" },
+  { word: "Achtsamkeit", article: "die", translation: "mindfulness", category: "Psychische Gesundheit" },
+  { word: "Entspannung", article: "die", translation: "relaxation", category: "Psychische Gesundheit" },
+  { word: "Selbsthilfegruppe", article: "die", translation: "self-help group", category: "Psychische Gesundheit" },
+  { word: "Psychotherapie", article: "die", translation: "psychotherapy", category: "Psychische Gesundheit" },
+
+  // Sportarten (weitere)
+  { word: "Kampfsport", article: "der", translation: "martial arts", category: "Sportarten (weitere)" },
+  { word: "Skifahren", article: "das", translation: "skiing", category: "Sportarten (weitere)" },
+  { word: "Snowboarden", article: "das", translation: "snowboarding", category: "Sportarten (weitere)" },
+  { word: "Segeln", article: "das", translation: "sailing", category: "Sportarten (weitere)" },
+  { word: "Klettern", article: "das", translation: "climbing", category: "Sportarten (weitere)" },
+  { word: "Surfen", article: "das", translation: "surfing", category: "Sportarten (weitere)" },
+  { word: "Turnen", article: "das", translation: "gymnastics", category: "Sportarten (weitere)" },
+  { word: "Leichtathletik", article: "die", translation: "track and field", category: "Sportarten (weitere)" },
+
+  // Spiele & Unterhaltung
+  { word: "Brettspiel", article: "das", translation: "board game", category: "Spiele & Unterhaltung" },
+  { word: "Videospiel", article: "das", translation: "video game", category: "Spiele & Unterhaltung" },
+  { word: "Spielkonsole", article: "die", translation: "game console", category: "Spiele & Unterhaltung" },
+  { word: "Strategiespiel", article: "das", translation: "strategy game", category: "Spiele & Unterhaltung" },
+  { word: "Spielregel", article: "die", translation: "game rule", category: "Spiele & Unterhaltung" },
+  { word: "Highscore", article: "der", translation: "high score", category: "Spiele & Unterhaltung" },
+
+  // Film & Theater (Berufe)
+  { word: "Drehbuch", article: "das", translation: "screenplay", category: "Film & Theater (Berufe)" },
+  { word: "Kameramann", article: "der", translation: "cameraman", category: "Film & Theater (Berufe)" },
+  { word: "Bühnenbild", article: "das", translation: "stage set", category: "Film & Theater (Berufe)" },
+  { word: "Kostüm", article: "das", translation: "costume", category: "Film & Theater (Berufe)" },
+  { word: "Vorführung", article: "die", translation: "screening/performance", category: "Film & Theater (Berufe)" },
+  { word: "Premiere", article: "die", translation: "premiere", category: "Film & Theater (Berufe)" },
+  { word: "Kritiker", article: "der", translation: "critic", category: "Film & Theater (Berufe)" },
+
+  // Verlagswesen & Journalismus
+  { word: "Verleger", article: "der", translation: "publisher (person)", category: "Verlagswesen & Journalismus" },
+  { word: "Herausgeber", article: "der", translation: "editor-in-chief", category: "Verlagswesen & Journalismus" },
+  { word: "Artikel", article: "der", translation: "article", category: "Verlagswesen & Journalismus" },
+  { word: "Kolumne", article: "die", translation: "column (writing)", category: "Verlagswesen & Journalismus" },
+  { word: "Leitartikel", article: "der", translation: "editorial", category: "Verlagswesen & Journalismus" },
+  { word: "Quelle", article: "die", translation: "source (journalism)", category: "Verlagswesen & Journalismus" },
+  { word: "Recherche", article: "die", translation: "research (journalistic)", category: "Verlagswesen & Journalismus" },
+
+  // Eventmanagement & Feiern
+  { word: "Veranstalter", article: "der", translation: "event organizer", category: "Eventmanagement & Feiern" },
+  { word: "Veranstaltungsort", article: "der", translation: "venue", category: "Eventmanagement & Feiern" },
+  { word: "Gästeliste", article: "die", translation: "guest list", category: "Eventmanagement & Feiern" },
+  { word: "Trauung", article: "die", translation: "wedding ceremony", category: "Eventmanagement & Feiern" },
+  { word: "Brautpaar", article: "das", translation: "bride and groom", category: "Eventmanagement & Feiern" },
+  { word: "Trauerfeier", article: "die", translation: "funeral service", category: "Eventmanagement & Feiern" },
+  { word: "Beileid", article: "das", translation: "condolences", category: "Eventmanagement & Feiern" },
+
+  // Schönheit & Kosmetik
+  { word: "Kosmetik", article: "die", translation: "cosmetics", category: "Schönheit & Kosmetik" },
+  { word: "Schönheitssalon", article: "der", translation: "beauty salon", category: "Schönheit & Kosmetik" },
+  { word: "Tätowierung", article: "die", translation: "tattoo", category: "Schönheit & Kosmetik" },
+  { word: "Piercing", article: "das", translation: "piercing", category: "Schönheit & Kosmetik" },
+  { word: "Maniküre", article: "die", translation: "manicure", category: "Schönheit & Kosmetik" },
+  { word: "Hautpflege", article: "die", translation: "skincare", category: "Schönheit & Kosmetik" },
+
+  // Tierschutz & Haustiere (vertieft)
+  { word: "Tierschutz", article: "der", translation: "animal welfare", category: "Tierschutz & Haustiere (vertieft)" },
+  { word: "Tierheim", article: "das", translation: "animal shelter", category: "Tierschutz & Haustiere (vertieft)" },
+  { word: "Tierarzt", article: "der", translation: "veterinarian", category: "Tierschutz & Haustiere (vertieft)" },
+  { word: "Tierquälerei", article: "die", translation: "animal cruelty", category: "Tierschutz & Haustiere (vertieft)" },
+  { word: "Artenschutz", article: "der", translation: "species protection", category: "Tierschutz & Haustiere (vertieft)" },
+  { word: "Haustierhaltung", article: "die", translation: "pet ownership", category: "Tierschutz & Haustiere (vertieft)" },
+
+  // Gartenarbeit (vertieft)
+  { word: "Gärtnerei", article: "die", translation: "nursery (plants)", category: "Gartenarbeit (vertieft)" },
+  { word: "Gießkanne", article: "die", translation: "watering can", category: "Gartenarbeit (vertieft)" },
+  { word: "Rasenmäher", article: "der", translation: "lawn mower", category: "Gartenarbeit (vertieft)" },
+  { word: "Gartenschere", article: "die", translation: "garden shears", category: "Gartenarbeit (vertieft)" },
+  { word: "Blumenbeet", article: "das", translation: "flower bed", category: "Gartenarbeit (vertieft)" },
+  { word: "Gewächshaus", article: "das", translation: "greenhouse", category: "Gartenarbeit (vertieft)" },
+
+  // Innenarchitektur & Design
+  { word: "Innenarchitekt", article: "der", translation: "interior designer", category: "Innenarchitektur & Design" },
+  { word: "Raumgestaltung", article: "die", translation: "room design", category: "Innenarchitektur & Design" },
+  { word: "Farbschema", article: "das", translation: "color scheme", category: "Innenarchitektur & Design" },
+  { word: "Beleuchtung", article: "die", translation: "lighting", category: "Innenarchitektur & Design" },
+  { word: "Stilrichtung", article: "die", translation: "design style", category: "Innenarchitektur & Design" },
+
+  // Ehrenamt & Engagement
+  { word: "Ehrenamt", article: "das", translation: "volunteer work", category: "Ehrenamt & Engagement" },
+  { word: "Freiwillige", article: "der", translation: "volunteer (person)", category: "Ehrenamt & Engagement" },
+  { word: "Spende", article: "die", translation: "donation", category: "Ehrenamt & Engagement" },
+  { word: "Spendenaktion", article: "die", translation: "fundraising campaign", category: "Ehrenamt & Engagement" },
+  { word: "Hilfsorganisation", article: "die", translation: "aid organization", category: "Ehrenamt & Engagement" },
+  { word: "Gemeinnützigkeit", article: "die", translation: "charitable status", category: "Ehrenamt & Engagement" },
+
+  // Katastrophenhilfe & Entwicklung
+  { word: "Katastrophenhilfe", article: "die", translation: "disaster relief", category: "Katastrophenhilfe & Entwicklung" },
+  { word: "Entwicklungshilfe", article: "die", translation: "development aid", category: "Katastrophenhilfe & Entwicklung" },
+  { word: "Notunterkunft", article: "die", translation: "emergency shelter", category: "Katastrophenhilfe & Entwicklung" },
+  { word: "Hungersnot", article: "die", translation: "famine", category: "Katastrophenhilfe & Entwicklung" },
+  { word: "Wiederaufbau", article: "der", translation: "reconstruction", category: "Katastrophenhilfe & Entwicklung" },
+
+  // Konsumkritik & Minimalismus
+  { word: "Überkonsum", article: "der", translation: "overconsumption", category: "Konsumkritik & Minimalismus" },
+  { word: "Minimalismus", article: "der", translation: "minimalism", category: "Konsumkritik & Minimalismus" },
+  { word: "Verschwendung", article: "die", translation: "waste/wastefulness", category: "Konsumkritik & Minimalismus" },
+  { word: "Second-Hand-Laden", article: "der", translation: "secondhand shop", category: "Konsumkritik & Minimalismus" },
+  { word: "Tauschbörse", article: "die", translation: "swap exchange", category: "Konsumkritik & Minimalismus" },
+  { word: "Reparaturwerkstatt", article: "die", translation: "repair shop", category: "Konsumkritik & Minimalismus" },
+
+  // Maschinenbau & Fahrzeugtechnik
+  { word: "Motor", article: "der", translation: "engine/motor", category: "Maschinenbau & Fahrzeugtechnik" },
+  { word: "Getriebe", article: "das", translation: "gearbox/transmission", category: "Maschinenbau & Fahrzeugtechnik" },
+  { word: "Bremse", article: "die", translation: "brake", category: "Maschinenbau & Fahrzeugtechnik" },
+  { word: "Werkzeugmaschine", article: "die", translation: "machine tool", category: "Maschinenbau & Fahrzeugtechnik" },
+  { word: "Antrieb", article: "der", translation: "drive/propulsion", category: "Maschinenbau & Fahrzeugtechnik" },
+  { word: "Bauteil", article: "das", translation: "component/part", category: "Maschinenbau & Fahrzeugtechnik" },
+
+  // Schifffahrt & Luftfahrt
+  { word: "Schifffahrt", article: "die", translation: "shipping/navigation", category: "Schifffahrt & Luftfahrt" },
+  { word: "Kapitän", article: "der", translation: "captain", category: "Schifffahrt & Luftfahrt" },
+  { word: "Besatzung", article: "die", translation: "crew", category: "Schifffahrt & Luftfahrt" },
+  { word: "Hafenanlage", article: "die", translation: "port facility", category: "Schifffahrt & Luftfahrt" },
+  { word: "Cockpit", article: "das", translation: "cockpit", category: "Schifffahrt & Luftfahrt" },
+  { word: "Landebahn", article: "die", translation: "runway", category: "Schifffahrt & Luftfahrt" },
+  { word: "Turbine", article: "die", translation: "turbine", category: "Schifffahrt & Luftfahrt" },
+
+  // Meteorologie & Ozeanographie
+  { word: "Meteorologe", article: "der", translation: "meteorologist", category: "Meteorologie & Ozeanographie" },
+  { word: "Wetterstation", article: "die", translation: "weather station", category: "Meteorologie & Ozeanographie" },
+  { word: "Strömung", article: "die", translation: "current (ocean)", category: "Meteorologie & Ozeanographie" },
+  { word: "Gezeiten", article: "die", translation: "tides", category: "Meteorologie & Ozeanographie" },
+  { word: "Meeresspiegel", article: "der", translation: "sea level", category: "Meteorologie & Ozeanographie" },
+  { word: "Tiefsee", article: "die", translation: "deep sea", category: "Meteorologie & Ozeanographie" },
+
+  // Paläontologie & Anthropologie
+  { word: "Dinosaurier", article: "der", translation: "dinosaur", category: "Paläontologie & Anthropologie" },
+  { word: "Urmensch", article: "der", translation: "early human", category: "Paläontologie & Anthropologie" },
+  { word: "Steinzeit", article: "die", translation: "stone age", category: "Paläontologie & Anthropologie" },
+  { word: "Höhlenmalerei", article: "die", translation: "cave painting", category: "Paläontologie & Anthropologie" },
+  { word: "Artefakt", article: "das", translation: "artifact", category: "Paläontologie & Anthropologie" },
+  { word: "Stamm", article: "der", translation: "tribe", category: "Paläontologie & Anthropologie" },
+
+  // Soziologie & Statistik
+  { word: "Sozialstruktur", article: "die", translation: "social structure", category: "Soziologie & Statistik" },
+  { word: "Umfrage", article: "die", translation: "survey/poll", category: "Soziologie & Statistik" },
+  { word: "Stichprobe", article: "die", translation: "sample (statistics)", category: "Soziologie & Statistik" },
+  { word: "Rückgang", article: "der", translation: "decline (statistical)", category: "Soziologie & Statistik" },
+  { word: "Kennzahl", article: "die", translation: "key metric", category: "Soziologie & Statistik" },
+  { word: "Marktforschung", article: "die", translation: "market research", category: "Soziologie & Statistik" },
+
+  // Unternehmensgründung
+  { word: "Existenzgründung", article: "die", translation: "business startup", category: "Unternehmensgründung" },
+  { word: "Geschäftsidee", article: "die", translation: "business idea", category: "Unternehmensgründung" },
+  { word: "Geschäftsplan", article: "der", translation: "business plan", category: "Unternehmensgründung" },
+  { word: "Startkapital", article: "das", translation: "startup capital", category: "Unternehmensgründung" },
+  { word: "Gründer", article: "der", translation: "founder", category: "Unternehmensgründung" },
+  { word: "Risikokapital", article: "das", translation: "venture capital", category: "Unternehmensgründung" },
+  { word: "Insolvenz", article: "die", translation: "insolvency", category: "Unternehmensgründung" },
+
+  // Digitale Wirtschaft
+  { word: "Onlineshop", article: "der", translation: "online shop", category: "Digitale Wirtschaft" },
+  { word: "Kryptowährung", article: "die", translation: "cryptocurrency", category: "Digitale Wirtschaft" },
+  { word: "Lieferdienst", article: "der", translation: "delivery service", category: "Digitale Wirtschaft" },
+  { word: "Homeoffice-Regelung", article: "die", translation: "remote-work policy", category: "Digitale Wirtschaft" },
+  { word: "Plattformwirtschaft", article: "die", translation: "platform economy", category: "Digitale Wirtschaft" },
+  { word: "Nutzerkonto", article: "das", translation: "user account", category: "Digitale Wirtschaft" },
+
+  // Elektronik & Bauteile
+  { word: "Schaltkreis", article: "der", translation: "circuit", category: "Elektronik & Bauteile" },
+  { word: "Halbleiter", article: "der", translation: "semiconductor", category: "Elektronik & Bauteile" },
+  { word: "Prozessor", article: "der", translation: "processor", category: "Elektronik & Bauteile" },
+  { word: "Speicherchip", article: "der", translation: "memory chip", category: "Elektronik & Bauteile" },
+  { word: "Stromkreis", article: "der", translation: "electrical circuit", category: "Elektronik & Bauteile" },
+  { word: "Leiterplatte", article: "die", translation: "circuit board", category: "Elektronik & Bauteile" },
+
+  // Trauer & Lebensende
+  { word: "Trauer", article: "die", translation: "grief", category: "Trauer & Lebensende" },
+  { word: "Verlust", article: "der", translation: "loss", category: "Trauer & Lebensende" },
+  { word: "Beerdigung", article: "die", translation: "burial/funeral", category: "Trauer & Lebensende" },
+  { word: "Friedhof", article: "der", translation: "cemetery", category: "Trauer & Lebensende" },
+  { word: "Testament", article: "das", translation: "will (legal)", category: "Trauer & Lebensende" },
+  { word: "Sterblichkeit", article: "die", translation: "mortality", category: "Trauer & Lebensende" },
+
+  // Freundschaft & soziales Netzwerk
+  { word: "Bekanntschaft", article: "die", translation: "acquaintance", category: "Freundschaft & soziales Netzwerk" },
+  { word: "Clique", article: "die", translation: "clique/group of friends", category: "Freundschaft & soziales Netzwerk" },
+  { word: "Vertraute", article: "der", translation: "confidant", category: "Freundschaft & soziales Netzwerk" },
+  { word: "Zusammenhalt", article: "der", translation: "cohesion/solidarity", category: "Freundschaft & soziales Netzwerk" },
+  { word: "Kontaktkreis", article: "der", translation: "circle of contacts", category: "Freundschaft & soziales Netzwerk" },
+
+  // Erinnerungskultur & Denkmalschutz
+  { word: "Erinnerungskultur", article: "die", translation: "culture of remembrance", category: "Erinnerungskultur & Denkmalschutz" },
+  { word: "Denkmalschutz", article: "der", translation: "historic preservation", category: "Erinnerungskultur & Denkmalschutz" },
+  { word: "Weltkulturerbe", article: "das", translation: "world heritage site", category: "Erinnerungskultur & Denkmalschutz" },
+  { word: "Gedenkstätte", article: "die", translation: "memorial site", category: "Erinnerungskultur & Denkmalschutz" },
+  { word: "Jahrestag", article: "der", translation: "anniversary (event)", category: "Erinnerungskultur & Denkmalschutz" },
+
+  // Vereine & Zivilgesellschaft
+  { word: "Verein", article: "der", translation: "club/association", category: "Vereine & Zivilgesellschaft" },
+  { word: "Mitgliedschaft", article: "die", translation: "membership", category: "Vereine & Zivilgesellschaft" },
+  { word: "Vorsitzende", article: "der", translation: "chairperson", category: "Vereine & Zivilgesellschaft" },
+  { word: "Satzung", article: "die", translation: "bylaws/statutes", category: "Vereine & Zivilgesellschaft" },
+  { word: "Bürgerinitiative", article: "die", translation: "citizens' initiative", category: "Vereine & Zivilgesellschaft" },
+
+  // Wahlkampf & Kampagnen
+  { word: "Wahlkampf", article: "der", translation: "election campaign", category: "Wahlkampf & Kampagnen" },
+  { word: "Kandidat", article: "der", translation: "candidate", category: "Wahlkampf & Kampagnen" },
+  { word: "Wahlversprechen", article: "das", translation: "campaign promise", category: "Wahlkampf & Kampagnen" },
+  { word: "Wahlbeteiligung", article: "die", translation: "voter turnout", category: "Wahlkampf & Kampagnen" },
+  { word: "Umfragewert", article: "der", translation: "poll rating", category: "Wahlkampf & Kampagnen" },
+  { word: "Stimmzettel", article: "der", translation: "ballot", category: "Wahlkampf & Kampagnen" },
+
+  // Cybersicherheit & Datenschutz
+  { word: "Cyberkriminalität", article: "die", translation: "cybercrime", category: "Cybersicherheit & Datenschutz" },
+  { word: "Hacker", article: "der", translation: "hacker", category: "Cybersicherheit & Datenschutz" },
+  { word: "Firewall", article: "die", translation: "firewall", category: "Cybersicherheit & Datenschutz" },
+  { word: "Sicherheitslücke", article: "die", translation: "security vulnerability", category: "Cybersicherheit & Datenschutz" },
+  { word: "Identitätsdiebstahl", article: "der", translation: "identity theft", category: "Cybersicherheit & Datenschutz" },
+  { word: "Datenleck", article: "das", translation: "data leak", category: "Cybersicherheit & Datenschutz" },
+
+  // Menschliche Sinne & Wahrnehmung
+  { word: "Sehvermögen", article: "das", translation: "eyesight", category: "Menschliche Sinne & Wahrnehmung" },
+  { word: "Gehör", article: "das", translation: "hearing (sense)", category: "Menschliche Sinne & Wahrnehmung" },
+  { word: "Geschmackssinn", article: "der", translation: "sense of taste", category: "Menschliche Sinne & Wahrnehmung" },
+  { word: "Geruchssinn", article: "der", translation: "sense of smell", category: "Menschliche Sinne & Wahrnehmung" },
+  { word: "Tastsinn", article: "der", translation: "sense of touch", category: "Menschliche Sinne & Wahrnehmung" },
+  { word: "Sinnesorgan", article: "das", translation: "sensory organ", category: "Menschliche Sinne & Wahrnehmung" },
+
+  // Emotionale Intelligenz & Konfliktlösung
+  { word: "Empathie", article: "die", translation: "empathy", category: "Emotionale Intelligenz & Konfliktlösung" },
+  { word: "Selbstreflexion", article: "die", translation: "self-reflection", category: "Emotionale Intelligenz & Konfliktlösung" },
+  { word: "Konfliktfähigkeit", article: "die", translation: "ability to handle conflict", category: "Emotionale Intelligenz & Konfliktlösung" },
+  { word: "Zivilcourage", article: "die", translation: "moral courage", category: "Emotionale Intelligenz & Konfliktlösung" },
+  { word: "Selbstkontrolle", article: "die", translation: "self-control", category: "Emotionale Intelligenz & Konfliktlösung" },
+
+  // Alternative Medizin & Wellness
+  { word: "Naturheilkunde", article: "die", translation: "natural medicine", category: "Alternative Medizin & Wellness" },
+  { word: "Akupunktur", article: "die", translation: "acupuncture", category: "Alternative Medizin & Wellness" },
+  { word: "Homöopathie", article: "die", translation: "homeopathy", category: "Alternative Medizin & Wellness" },
+  { word: "Massage", article: "die", translation: "massage", category: "Alternative Medizin & Wellness" },
+  { word: "Wellnessurlaub", article: "der", translation: "wellness vacation", category: "Alternative Medizin & Wellness" },
+  { word: "Tiefenentspannung", article: "die", translation: "deep relaxation", category: "Alternative Medizin & Wellness" },
+
+  // Coworking & moderne Arbeitsformen
+  { word: "Coworking-Space", article: "der", translation: "coworking space", category: "Coworking & moderne Arbeitsformen" },
+  { word: "Digitalnomade", article: "der", translation: "digital nomad", category: "Coworking & moderne Arbeitsformen" },
+  { word: "Freelancer", article: "der", translation: "freelancer", category: "Coworking & moderne Arbeitsformen" },
+  { word: "Gleitzeit", article: "die", translation: "flextime", category: "Coworking & moderne Arbeitsformen" },
+  { word: "Teilzeit", article: "die", translation: "part-time work", category: "Coworking & moderne Arbeitsformen" },
+  { word: "Vollzeit", article: "die", translation: "full-time work", category: "Coworking & moderne Arbeitsformen" },
+
+  // Franchise & Handel
+  { word: "Franchise", article: "das", translation: "franchise", category: "Franchise & Handel" },
+  { word: "Filialleiter", article: "der", translation: "branch manager", category: "Franchise & Handel" },
+  { word: "Großhändler", article: "der", translation: "wholesaler", category: "Franchise & Handel" },
+  { word: "Einzelhändler", article: "der", translation: "retailer", category: "Franchise & Handel" },
+  { word: "Handelsspanne", article: "die", translation: "profit margin (retail)", category: "Franchise & Handel" },
+
+  // Wein & Genuss
+  { word: "Weinberg", article: "der", translation: "vineyard", category: "Wein & Genuss" },
+  { word: "Winzer", article: "der", translation: "winemaker", category: "Wein & Genuss" },
+  { word: "Verkostung", article: "die", translation: "tasting", category: "Wein & Genuss" },
+  { word: "Jahrgang", article: "der", translation: "vintage (wine)", category: "Wein & Genuss" },
+  { word: "Aroma", article: "das", translation: "aroma", category: "Wein & Genuss" },
+  { word: "Brauerei", article: "die", translation: "brewery", category: "Wein & Genuss" },
+
+  // Bäckerei & Konditorei (vertieft)
+  { word: "Teig", article: "der", translation: "dough", category: "Bäckerei & Konditorei (vertieft)" },
+  { word: "Hefe", article: "die", translation: "yeast", category: "Bäckerei & Konditorei (vertieft)" },
+  { word: "Backform", article: "die", translation: "baking pan", category: "Bäckerei & Konditorei (vertieft)" },
+  { word: "Glasur", article: "die", translation: "icing/glaze", category: "Bäckerei & Konditorei (vertieft)" },
+  { word: "Konditor", article: "der", translation: "pastry chef", category: "Bäckerei & Konditorei (vertieft)" },
+
+  // Schulalltag & Prüfungen
+  { word: "Klassenarbeit", article: "die", translation: "class test", category: "Schulalltag & Prüfungen" },
+  { word: "Abschlussprüfung", article: "die", translation: "final exam", category: "Schulalltag & Prüfungen" },
+  { word: "Durchfallquote", article: "die", translation: "failure rate", category: "Schulalltag & Prüfungen" },
+  { word: "Schulpflicht", article: "die", translation: "compulsory education", category: "Schulalltag & Prüfungen" },
+  { word: "Klassenkamerad", article: "der", translation: "classmate", category: "Schulalltag & Prüfungen" },
+  { word: "Schulleiter", article: "der", translation: "school principal", category: "Schulalltag & Prüfungen" },
+
+  // Elternschaft & Familienpolitik
+  { word: "Elternzeit", article: "die", translation: "parental leave", category: "Elternschaft & Familienpolitik" },
+  { word: "Mutterschutz", article: "der", translation: "maternity protection", category: "Elternschaft & Familienpolitik" },
+  { word: "Kindergeld", article: "das", translation: "child benefit", category: "Elternschaft & Familienpolitik" },
+  { word: "Erziehungsurlaub", article: "der", translation: "childcare leave", category: "Elternschaft & Familienpolitik" },
+  { word: "Alleinerziehende", article: "der", translation: "single parent", category: "Elternschaft & Familienpolitik" },
+
+  // Meditation & Spiritualität
+  { word: "Meditation", article: "die", translation: "meditation", category: "Meditation & Spiritualität" },
+  { word: "Spiritualität", article: "die", translation: "spirituality", category: "Meditation & Spiritualität" },
+  { word: "Erleuchtung", article: "die", translation: "enlightenment", category: "Meditation & Spiritualität" },
+  { word: "Innere Ruhe", article: "die", translation: "inner peace", category: "Meditation & Spiritualität" },
+  { word: "Achtsamkeitsübung", article: "die", translation: "mindfulness exercise", category: "Meditation & Spiritualität" },
+
+  // Verpflegung unterwegs
+  { word: "Imbiss", article: "der", translation: "snack bar/fast food stand", category: "Verpflegung unterwegs" },
+  { word: "Kantine", article: "die", translation: "cafeteria", category: "Verpflegung unterwegs" },
+  { word: "Lieferservice", article: "der", translation: "delivery service (food)", category: "Verpflegung unterwegs" },
+  { word: "Selbstbedienung", article: "die", translation: "self-service", category: "Verpflegung unterwegs" },
+  { word: "Verzehr", article: "der", translation: "consumption (food)", category: "Verpflegung unterwegs" },
+  { word: "Speiseplan", article: "der", translation: "meal plan/menu", category: "Verpflegung unterwegs" },
+
+  // Verhandlungen & Geschäftsleben
+  { word: "Geschäftspartner", article: "der", translation: "business partner", category: "Verhandlungen & Geschäftsleben" },
+  { word: "Absprache", article: "die", translation: "arrangement (mutual)", category: "Verhandlungen & Geschäftsleben" },
+  { word: "Klausel", article: "die", translation: "clause", category: "Verhandlungen & Geschäftsleben" },
+  { word: "Unterzeichnung", article: "die", translation: "signing (of contract)", category: "Verhandlungen & Geschäftsleben" },
+  { word: "Geschäftsreise", article: "die", translation: "business trip", category: "Verhandlungen & Geschäftsleben" },
+  { word: "Delegation", article: "die", translation: "delegation (group)", category: "Verhandlungen & Geschäftsleben" },
+
+  // Bildschirmarbeit & Ergonomie
+  { word: "Bürostuhl", article: "der", translation: "office chair", category: "Bildschirmarbeit & Ergonomie" },
+  { word: "Haltung", article: "die", translation: "posture", category: "Bildschirmarbeit & Ergonomie" },
+  { word: "Augenbelastung", article: "die", translation: "eye strain", category: "Bildschirmarbeit & Ergonomie" },
+  { word: "Pausenraum", article: "der", translation: "break room", category: "Bildschirmarbeit & Ergonomie" },
+  { word: "Arbeitsplatzgestaltung", article: "die", translation: "workplace design", category: "Bildschirmarbeit & Ergonomie" },
+
+  // Freizeitparks & Attraktionen
+  { word: "Achterbahn", article: "die", translation: "roller coaster", category: "Freizeitparks & Attraktionen" },
+  { word: "Karussell", article: "das", translation: "carousel", category: "Freizeitparks & Attraktionen" },
+  { word: "Riesenrad", article: "das", translation: "ferris wheel", category: "Freizeitparks & Attraktionen" },
+  { word: "Warteschlange", article: "die", translation: "queue/line", category: "Freizeitparks & Attraktionen" },
+  { word: "Attraktion", article: "die", translation: "attraction", category: "Freizeitparks & Attraktionen" },
+
+  // Kochkurse & Küchentechniken
+  { word: "Kochkurs", article: "der", translation: "cooking class", category: "Kochkurse & Küchentechniken" },
+  { word: "Kochtechnik", article: "die", translation: "cooking technique", category: "Kochkurse & Küchentechniken" },
+  { word: "Marinade", article: "die", translation: "marinade", category: "Kochkurse & Küchentechniken" },
+  { word: "Garzeit", article: "die", translation: "cooking time", category: "Kochkurse & Küchentechniken" },
+  { word: "Kochbuch", article: "das", translation: "cookbook", category: "Kochkurse & Küchentechniken" },
+  { word: "Feinschmecker", article: "der", translation: "gourmet", category: "Kochkurse & Küchentechniken" },
+
+  // Sprachprüfungen & Zertifikate
+  { word: "Sprachzertifikat", article: "das", translation: "language certificate", category: "Sprachprüfungen & Zertifikate" },
+  { word: "Einstufungstest", article: "der", translation: "placement test", category: "Sprachprüfungen & Zertifikate" },
+  { word: "Hörverständnis", article: "das", translation: "listening comprehension", category: "Sprachprüfungen & Zertifikate" },
+  { word: "Leseverständnis", article: "das", translation: "reading comprehension", category: "Sprachprüfungen & Zertifikate" },
+  { word: "Sprachniveau", article: "das", translation: "language level", category: "Sprachprüfungen & Zertifikate" },
+
+  // Umgangsformen & Etikette
+  { word: "Höflichkeitsform", article: "die", translation: "polite form (address)", category: "Umgangsformen & Etikette" },
+  { word: "Anrede", article: "die", translation: "form of address/salutation", category: "Umgangsformen & Etikette" },
+  { word: "Benimmregel", article: "die", translation: "rule of etiquette", category: "Umgangsformen & Etikette" },
+  { word: "Taktgefühl", article: "das", translation: "tact", category: "Umgangsformen & Etikette" },
+  { word: "Fingerspitzengefühl", article: "das", translation: "sensitivity/finesse", category: "Umgangsformen & Etikette" },
+
+  // Verkehrsplanung & Nahverkehr
+  { word: "Nahverkehr", article: "der", translation: "local public transport", category: "Verkehrsplanung & Nahverkehr" },
+  { word: "Fahrgastzahl", article: "die", translation: "passenger numbers", category: "Verkehrsplanung & Nahverkehr" },
+  { word: "Streckennetz", article: "das", translation: "route network", category: "Verkehrsplanung & Nahverkehr" },
+  { word: "Haltestelle", article: "die", translation: "bus/tram stop", category: "Verkehrsplanung & Nahverkehr" },
+  { word: "Verkehrsstoß", article: "der", translation: "rush hour crush", category: "Verkehrsplanung & Nahverkehr" },
+  { word: "Radweg", article: "der", translation: "bike lane", category: "Verkehrsplanung & Nahverkehr" },
+
+  // Naturerlebnis & Outdoor
+  { word: "Naturerlebnis", article: "das", translation: "nature experience", category: "Naturerlebnis & Outdoor" },
+  { word: "Wanderweg", article: "der", translation: "hiking trail", category: "Naturerlebnis & Outdoor" },
+  { word: "Aussichtspunkt", article: "der", translation: "viewpoint", category: "Naturerlebnis & Outdoor" },
+  { word: "Rastplatz", article: "der", translation: "rest area", category: "Naturerlebnis & Outdoor" },
+  { word: "Lagerfeuer", article: "das", translation: "campfire", category: "Naturerlebnis & Outdoor" },
+  { word: "Rucksacktour", article: "die", translation: "backpacking trip", category: "Naturerlebnis & Outdoor" },
+
+  // Buchhaltung & Controlling
+  { word: "Buchhaltung", article: "die", translation: "accounting/bookkeeping", category: "Buchhaltung & Controlling" },
+  { word: "Bilanz", article: "die", translation: "balance sheet", category: "Buchhaltung & Controlling" },
+  { word: "Jahresabschluss", article: "der", translation: "annual financial statement", category: "Buchhaltung & Controlling" },
+  { word: "Ausgabe", article: "die", translation: "expense", category: "Buchhaltung & Controlling" },
+  { word: "Einnahme", article: "die", translation: "income/revenue", category: "Buchhaltung & Controlling" },
+  { word: "Kostenstelle", article: "die", translation: "cost center", category: "Buchhaltung & Controlling" },
+
+  // Verhaltensökonomie & Entscheidungen
+  { word: "Entscheidungsfindung", article: "die", translation: "decision-making", category: "Verhaltensökonomie & Entscheidungen" },
+  { word: "Kompromissbereitschaft", article: "die", translation: "willingness to compromise", category: "Verhaltensökonomie & Entscheidungen" },
+  { word: "Abwägung", article: "die", translation: "weighing/consideration", category: "Verhaltensökonomie & Entscheidungen" },
+  { word: "Konsequenz", article: "die", translation: "consequence", category: "Verhaltensökonomie & Entscheidungen" },
+  { word: "Alternative", article: "die", translation: "alternative", category: "Verhaltensökonomie & Entscheidungen" },
+
+  // Gesellschaftliche Institutionen
+  { word: "Institution", article: "die", translation: "institution", category: "Gesellschaftliche Institutionen" },
+  { word: "Stiftung", article: "die", translation: "foundation (organization)", category: "Gesellschaftliche Institutionen" },
+  { word: "Dachverband", article: "der", translation: "umbrella organization", category: "Gesellschaftliche Institutionen" },
+  { word: "Kammer", article: "die", translation: "chamber (institution)", category: "Gesellschaftliche Institutionen" },
+  { word: "Kommission", article: "die", translation: "commission", category: "Gesellschaftliche Institutionen" },
+
+  // Redaktionsalltag & Content
+  { word: "Inhalt", article: "der", translation: "content", category: "Redaktionsalltag & Content" },
+  { word: "Beitrag", article: "der", translation: "post/contribution", category: "Redaktionsalltag & Content" },
+  { word: "Veröffentlichung", article: "die", translation: "publication", category: "Redaktionsalltag & Content" },
+  { word: "Entwurf", article: "der", translation: "draft", category: "Redaktionsalltag & Content" },
+  { word: "Korrektur", article: "die", translation: "correction/proofreading", category: "Redaktionsalltag & Content" },
+  { word: "Redaktion", article: "die", translation: "editorial team", category: "Redaktionsalltag & Content" },
+
+  // Klimafreundliches Leben
+  { word: "CO2-Fußabdruck", article: "der", translation: "carbon footprint", category: "Klimafreundliches Leben" },
+  { word: "Klimaschutzmaßnahme", article: "die", translation: "climate protection measure", category: "Klimafreundliches Leben" },
+  { word: "Emissionshandel", article: "der", translation: "emissions trading", category: "Klimafreundliches Leben" },
+  { word: "Kompensation", article: "die", translation: "offsetting/compensation", category: "Klimafreundliches Leben" },
+  { word: "Verzicht", article: "der", translation: "renunciation/giving up", category: "Klimafreundliches Leben" },
+
+  // Wohnungssuche
+  { word: "Wohnungssuche", article: "die", translation: "apartment hunting", category: "Wohnungssuche" },
+  { word: "Besichtigung", article: "die", translation: "viewing (property)", category: "Wohnungssuche" },
+  { word: "Kaution", article: "die", translation: "security deposit", category: "Wohnungssuche" },
+  { word: "Mietvertrag", article: "der", translation: "rental agreement", category: "Wohnungssuche" },
+  { word: "Wohngemeinschaft", article: "die", translation: "shared apartment", category: "Wohnungssuche" },
+
+  // Kunsthandwerk
+  { word: "Kunsthandwerk", article: "das", translation: "arts and crafts", category: "Kunsthandwerk" },
+  { word: "Töpferei", article: "die", translation: "pottery", category: "Kunsthandwerk" },
+  { word: "Schmuckherstellung", article: "die", translation: "jewelry making", category: "Kunsthandwerk" },
+  { word: "Weberei", article: "die", translation: "weaving", category: "Kunsthandwerk" },
+  { word: "Schnitzerei", article: "die", translation: "carving", category: "Kunsthandwerk" },
+
+  // Verkauf & Kundenkontakt
+  { word: "Beschwerde", article: "die", translation: "complaint", category: "Verkauf & Kundenkontakt" },
+  { word: "Kundenservice", article: "der", translation: "customer service", category: "Verkauf & Kundenkontakt" },
+  { word: "Umtausch", article: "der", translation: "exchange (retail)", category: "Verkauf & Kundenkontakt" },
+  { word: "Garantie", article: "die", translation: "warranty", category: "Verkauf & Kundenkontakt" },
+  { word: "Kulanz", article: "die", translation: "goodwill gesture", category: "Verkauf & Kundenkontakt" },
+  { word: "Nachbesserung", article: "die", translation: "rectification/rework", category: "Verkauf & Kundenkontakt" },
+
+  // Naturschutzgebiete & Wildnis
+  { word: "Wildnis", article: "die", translation: "wilderness", category: "Naturschutzgebiete & Wildnis" },
+  { word: "Schutzgebiet", article: "das", translation: "protected area", category: "Naturschutzgebiete & Wildnis" },
+  { word: "Wildtier", article: "das", translation: "wild animal", category: "Naturschutzgebiete & Wildnis" },
+  { word: "Jäger", article: "der", translation: "hunter", category: "Naturschutzgebiete & Wildnis" },
+  { word: "Förster", article: "der", translation: "forester", category: "Naturschutzgebiete & Wildnis" },
+  { word: "Aufforstung", article: "die", translation: "reforestation", category: "Naturschutzgebiete & Wildnis" },
+
+  // Berufsorientierung
+  { word: "Berufswahl", article: "die", translation: "career choice", category: "Berufsorientierung" },
+  { word: "Eignungstest", article: "der", translation: "aptitude test", category: "Berufsorientierung" },
+  { word: "Berufsberatung", article: "die", translation: "career counseling", category: "Berufsorientierung" },
+  { word: "Quereinsteiger", article: "der", translation: "career changer", category: "Berufsorientierung" },
+  { word: "Zukunftsaussicht", article: "die", translation: "future prospect", category: "Berufsorientierung" },
+
+  // Diplomarbeit & Forschung (Studium)
+  { word: "Abschlussarbeit", article: "die", translation: "thesis", category: "Diplomarbeit & Forschung (Studium)" },
+  { word: "Literaturverzeichnis", article: "das", translation: "bibliography", category: "Diplomarbeit & Forschung (Studium)" },
+  { word: "Fußnote", article: "die", translation: "footnote", category: "Diplomarbeit & Forschung (Studium)" },
+  { word: "Plagiat", article: "das", translation: "plagiarism", category: "Diplomarbeit & Forschung (Studium)" },
+  { word: "Gutachten", article: "das", translation: "expert opinion/assessment", category: "Diplomarbeit & Forschung (Studium)" },
+  { word: "Betreuer", article: "der", translation: "advisor/supervisor", category: "Diplomarbeit & Forschung (Studium)" },
+
+  // Nachbarschaft & Zusammenleben
+  { word: "Mietshaus", article: "das", translation: "apartment building", category: "Nachbarschaft & Zusammenleben" },
+  { word: "Hausordnung", article: "die", translation: "house rules", category: "Nachbarschaft & Zusammenleben" },
+  { word: "Ruhestörung", article: "die", translation: "disturbance of the peace", category: "Nachbarschaft & Zusammenleben" },
+  { word: "Gemeinschaftsraum", article: "der", translation: "communal room", category: "Nachbarschaft & Zusammenleben" },
+  { word: "Hausmeister", article: "der", translation: "building superintendent", category: "Nachbarschaft & Zusammenleben" },
+  { word: "Zusammenleben", article: "das", translation: "living together/coexistence", category: "Nachbarschaft & Zusammenleben" },
+
+  // Wettbewerb & Auszeichnungen
+  { word: "Wettbewerb", article: "der", translation: "competition/contest", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Auszeichnung", article: "die", translation: "award/distinction", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Preisverleihung", article: "die", translation: "award ceremony", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Gewinner", article: "der", translation: "winner", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Teilnehmer", article: "der", translation: "participant", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Jury", article: "die", translation: "jury/panel of judges", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Pokal", article: "der", translation: "trophy/cup", category: "Wettbewerb & Auszeichnungen" },
+  { word: "Urkunde", article: "die", translation: "certificate", category: "Wettbewerb & Auszeichnungen" },
+
+  // Handel im Wandel
+  { word: "Ladenschluss", article: "der", translation: "store closing time", category: "Handel im Wandel" },
+  { word: "Innenstadt", article: "die", translation: "city center/downtown", category: "Handel im Wandel" },
+  { word: "Leerstand", article: "der", translation: "vacancy (retail space)", category: "Handel im Wandel" },
+  { word: "Einkaufszentrum", article: "das", translation: "shopping mall", category: "Handel im Wandel" },
+  { word: "Ladenkette", article: "die", translation: "retail chain", category: "Handel im Wandel" },
+  { word: "Nachfrageeinbruch", article: "der", translation: "demand slump", category: "Handel im Wandel" },
+  { word: "Wettbewerbsdruck", article: "der", translation: "competitive pressure", category: "Handel im Wandel" },
+
+  // Sonstiges (vertieft)
+  { word: "Ausnahme", article: "die", translation: "exception", category: "Sonstiges (vertieft)" },
+  { word: "Voraussetzung", article: "die", translation: "prerequisite", category: "Sonstiges (vertieft)" },
+  { word: "Rahmenbedingung", article: "die", translation: "framework condition", category: "Sonstiges (vertieft)" },
+  { word: "Grundlage", article: "die", translation: "basis/foundation (abstract)", category: "Sonstiges (vertieft)" },
+  { word: "Hintergrund", article: "der", translation: "background (context)", category: "Sonstiges (vertieft)" },
+  { word: "Ausblick", article: "der", translation: "outlook", category: "Sonstiges (vertieft)" },
+  { word: "Anlass", article: "der", translation: "occasion/reason", category: "Sonstiges (vertieft)" },
+  { word: "Auswirkung", article: "die", translation: "impact/effect", category: "Sonstiges (vertieft)" },
+];
+
 export const NOUNS_BY_LEVEL: Record<Level, GermanNoun[]> = {
   a1: a1Words.map((n, i) => ({ id: `a1-${i}`, ...n })),
   a2: [...a1Words, ...a2NewWords].map((n, i) => ({ id: `a2-${i}`, ...n })),
-  b1: [],
+  b1: [...a1Words, ...a2NewWords, ...b1NewWords].map((n, i) => ({ id: `b1-${i}`, ...n })),
   b2: [],
   c1: [],
   c2: [],

@@ -30,7 +30,7 @@ export function LevelSelect({ onSelect }: Props) {
               {available ? (
                 <Text style={styles.wordCount}>{NOUNS_BY_LEVEL[level].length} Wörter</Text>
               ) : (
-                <Text style={styles.comingSoon}>bald</Text>
+                <Text style={styles.comingSoon}>bald verfügbar</Text>
               )}
             </Pressable>
           );
