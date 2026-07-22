@@ -1,6 +1,6 @@
 import { fetchUserAttributes, signInWithRedirect, signOut } from "aws-amplify/auth";
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { isAmplifyConfigured } from "../logic/amplifyConfig";
 import { useAuthUser } from "../logic/useAuthUser";
 import { colors } from "../theme";
@@ -48,18 +48,29 @@ export function SignInButton() {
   }
 
   return (
-    <Pressable
-      onPress={() => signInWithRedirect({ provider: "Google" })}
-      style={styles.link}
-      accessibilityRole="button"
-      accessibilityLabel="Mit Google anmelden"
-    >
-      <Text style={styles.linkText}>Mit Google anmelden</Text>
-    </Pressable>
+    <View style={styles.signedOut}>
+      <Text style={styles.prompt}>Fortschritt speichern? Melde dich mit Google an!</Text>
+      <Pressable
+        onPress={() => signInWithRedirect({ provider: "Google" })}
+        style={styles.link}
+        accessibilityRole="button"
+        accessibilityLabel="Mit Google anmelden"
+      >
+        <Text style={styles.linkText}>Mit Google anmelden</Text>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  signedOut: {
+    alignItems: "center",
+    gap: 2,
+  },
+  prompt: {
+    fontSize: 12,
+    color: colors.textMuted,
+  },
   link: {
     paddingVertical: 4,
     paddingHorizontal: 4,
