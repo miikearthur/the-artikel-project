@@ -173,7 +173,7 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Artikel</Text>
+        <Text style={styles.title}>The Artikel Project</Text>
         <Text style={styles.subtitle}>der · die · das</Text>
         <SignInButton />
 
