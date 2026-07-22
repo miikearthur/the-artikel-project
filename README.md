@@ -60,7 +60,7 @@ Every push to `main` redeploys automatically, same as the main site.
 
 ## To-do
 
-- [ ] option to disable sound
+- [x] option to disable sound
 - [ ] fill in B2-C2 word lists (A2 done — 1000 words; B1 done — 2000 words)
 - [ ] spaced-repetition quiz mode (prioritize words that aren't mastered yet)
 - [ ] daily streak / stats page

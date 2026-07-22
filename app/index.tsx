@@ -14,6 +14,7 @@ import { MAX_LIVES, useInfiniteQuiz } from "../src/logic/useInfiniteQuiz";
 import { useLeaderboard } from "../src/logic/useLeaderboard";
 import { QUESTIONS_PER_ROUND, useQuiz } from "../src/logic/useQuiz";
 import { QuizMode } from "../src/logic/quizMode";
+import { useSoundPreference } from "../src/logic/useSoundPreference";
 import { useWordProgressSync } from "../src/logic/useWordProgressSync";
 import { colors } from "../src/theme";
 
@@ -25,10 +26,14 @@ function ClassicQuiz({
   nouns,
   onBack,
   recordAnswer,
+  isMuted,
+  onToggleMute,
 }: {
   nouns: GermanNoun[];
   onBack: () => void;
   recordAnswer: (wordId: string, correct: boolean) => void;
+  isMuted: boolean;
+  onToggleMute: () => void;
 }) {
   const quiz = useQuiz(nouns);
 
@@ -57,6 +62,8 @@ function ClassicQuiz({
           onSelect={handleSelect}
           onNext={quiz.advance}
           nextLabel={quiz.questionNumber >= QUESTIONS_PER_ROUND ? "Ergebnis" : "Weiter"}
+          isMuted={isMuted}
+          onToggleMute={onToggleMute}
         />
       )}
     </>
@@ -72,6 +79,8 @@ function InfiniteQuizScreen({
   leaderboard,
   nicknamePromptDismissed,
   onDismissNicknamePrompt,
+  isMuted,
+  onToggleMute,
 }: {
   nouns: GermanNoun[];
   level: Level;
@@ -81,6 +90,8 @@ function InfiniteQuizScreen({
   leaderboard: ReturnType<typeof useLeaderboard>;
   nicknamePromptDismissed: boolean;
   onDismissNicknamePrompt: () => void;
+  isMuted: boolean;
+  onToggleMute: () => void;
 }) {
   const quiz = useInfiniteQuiz(nouns);
   const [isNewRecord, setIsNewRecord] = useState(false);
@@ -141,6 +152,8 @@ function InfiniteQuizScreen({
           onSelect={handleSelect}
           onNext={quiz.advance}
           nextLabel={quiz.lives <= 0 ? "Ergebnis" : "Weiter"}
+          isMuted={isMuted}
+          onToggleMute={onToggleMute}
         />
       )}
     </>
@@ -155,6 +168,7 @@ export default function Index() {
   const { recordAnswer, masteredIds } = useWordProgressSync();
   const { bestStreaks, recordStreak } = useBestStreaks();
   const leaderboard = useLeaderboard();
+  const { isMuted, toggleMuted } = useSoundPreference();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -176,7 +190,13 @@ export default function Index() {
             onStartSelected={(categories, mode) => setSession({ pool: nounsForCategories(level, categories), mode })}
           />
         ) : session.mode === "classic" ? (
-          <ClassicQuiz nouns={session.pool} onBack={() => setSession(null)} recordAnswer={recordAnswer} />
+          <ClassicQuiz
+            nouns={session.pool}
+            onBack={() => setSession(null)}
+            recordAnswer={recordAnswer}
+            isMuted={isMuted}
+            onToggleMute={toggleMuted}
+          />
         ) : (
           <InfiniteQuizScreen
             nouns={session.pool}
@@ -187,6 +207,8 @@ export default function Index() {
             leaderboard={leaderboard}
             nicknamePromptDismissed={nicknamePromptDismissed}
             onDismissNicknamePrompt={() => setNicknamePromptDismissed(true)}
+            isMuted={isMuted}
+            onToggleMute={toggleMuted}
           />
         )}
       </View>

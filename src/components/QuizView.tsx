@@ -23,6 +23,8 @@ interface Props {
   onSelect: (article: Article) => void;
   onNext: () => void;
   nextLabel: string;
+  isMuted: boolean;
+  onToggleMute: () => void;
 }
 
 export function QuizView({
@@ -36,6 +38,8 @@ export function QuizView({
   onSelect,
   onNext,
   nextLabel,
+  isMuted,
+  onToggleMute,
 }: Props) {
   const buttonState = (article: Article): "idle" | "correct" | "incorrect" | "neutral" => {
     if (!isAnswered) return "idle";
@@ -66,10 +70,16 @@ export function QuizView({
     Speech.speak(`, ${word}`, { language: "de-DE" });
   };
 
+  // Auto-speak only happens when unmuted — muted by default, see
+  // useSoundPreference. The speaker button below always works regardless,
+  // so a muted player can still listen to a specific word on demand.
+  // isMuted is a dependency so unmuting mid-question immediately speaks
+  // the word that's already on screen, instead of waiting for the next one.
   useEffect(() => {
+    if (isMuted) return;
     speakWord();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [word]);
+  }, [word, isMuted]);
 
   // Only stop speech when leaving the quiz screen entirely — calling
   // stop() before every speak() (e.g. in the effect above) causes an
@@ -84,6 +94,11 @@ export function QuizView({
     <View style={styles.container}>
       <View style={styles.progressRow}>
         <Text style={styles.progressText}>{progressLeft}</Text>
+        {speechSupported && (
+          <Pressable onPress={onToggleMute} style={styles.muteToggle} hitSlop={8}>
+            <Text style={styles.muteToggleText}>{isMuted ? "🔇 Ton aus" : "🔊 Ton an"}</Text>
+          </Pressable>
+        )}
         <Text style={styles.progressText}>{progressRight}</Text>
       </View>
 
@@ -134,11 +149,23 @@ const styles = StyleSheet.create({
   progressRow: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   progressText: {
     color: colors.textMuted,
     fontSize: 14,
     fontWeight: "600",
+  },
+  muteToggle: {
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+  },
+  muteToggleText: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: colors.textMuted,
   },
   card: {
     backgroundColor: colors.surface,
