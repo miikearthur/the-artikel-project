@@ -70,7 +70,7 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] different question types (type the word, match translation to word)
 - [ ] fix top/bottom white bar on mobile
 - [ ] language selector: German only, or English & German
-- [ ] infinite mode (no 10-question limit)
+- [x] infinite mode (no 10-question limit)
 - [ ] progress bar during the round (not just the "1/10" text)
 - [x] show word count on level select (e.g. "A1 · 500 Wörter")
 - [ ] remember last-picked categories locally
@@ -80,4 +80,4 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] loading indicator while progress syncs after sign-in
 - [ ] perfect-round celebration (animation/confetti on 10/10)
 - [ ] a way to check overall progress — mastered words/categories section
-- [ ] check difficulty of vocab to make sure it's appropriate to the different levels
+- [x] check difficulty of vocab to make sure it's appropriate to the different levels

@@ -4,7 +4,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Article } from "../data/germanNouns";
 import { isSpeechSupported } from "../logic/speechSupport";
 import { useKeepAudioWarm } from "../logic/useKeepAudioWarm";
-import { QUESTIONS_PER_ROUND } from "../logic/useQuiz";
 import { colors } from "../theme";
 import { ArticleButton } from "./ArticleButton";
 
@@ -14,24 +13,29 @@ interface Props {
   word: string;
   translation: string;
   correctArticle: Article;
-  questionNumber: number;
-  score: number;
+  // Left/right of the progress row above the card — classic mode passes
+  // "N / 10" and "Punkte: N", infinite mode passes a lives display and
+  // "Serie: N". Kept as pre-formatted strings so this view stays mode-agnostic.
+  progressLeft: string;
+  progressRight: string;
   isAnswered: boolean;
   selectedArticle: Article | null;
   onSelect: (article: Article) => void;
   onNext: () => void;
+  nextLabel: string;
 }
 
 export function QuizView({
   word,
   translation,
   correctArticle,
-  questionNumber,
-  score,
+  progressLeft,
+  progressRight,
   isAnswered,
   selectedArticle,
   onSelect,
   onNext,
+  nextLabel,
 }: Props) {
   const buttonState = (article: Article): "idle" | "correct" | "incorrect" | "neutral" => {
     if (!isAnswered) return "idle";
@@ -79,10 +83,8 @@ export function QuizView({
   return (
     <View style={styles.container}>
       <View style={styles.progressRow}>
-        <Text style={styles.progressText}>
-          {questionNumber} / {QUESTIONS_PER_ROUND}
-        </Text>
-        <Text style={styles.progressText}>Punkte: {score}</Text>
+        <Text style={styles.progressText}>{progressLeft}</Text>
+        <Text style={styles.progressText}>{progressRight}</Text>
       </View>
 
       <View style={styles.card}>
@@ -115,9 +117,7 @@ export function QuizView({
             {wasCorrect ? "Richtig!" : `Falsch! Richtig ist: ${correctArticle} ${word}`}
           </Text>
           <Pressable style={styles.nextButton} onPress={onNext}>
-            <Text style={styles.nextButtonText}>
-              {questionNumber >= QUESTIONS_PER_ROUND ? "Ergebnis" : "Weiter"}
-            </Text>
+            <Text style={styles.nextButtonText}>{nextLabel}</Text>
           </Pressable>
         </View>
       )}

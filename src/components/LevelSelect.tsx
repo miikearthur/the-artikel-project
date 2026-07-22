@@ -4,9 +4,10 @@ import { colors } from "../theme";
 
 interface Props {
   onSelect: (level: Level) => void;
+  onShowRankings: () => void;
 }
 
-export function LevelSelect({ onSelect }: Props) {
+export function LevelSelect({ onSelect, onShowRankings }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.prompt}>Wähle dein Level</Text>
@@ -36,6 +37,10 @@ export function LevelSelect({ onSelect }: Props) {
           );
         })}
       </View>
+
+      <Pressable style={styles.rankingsButton} onPress={onShowRankings}>
+        <Text style={styles.rankingsButtonText}>🏆 Rangliste</Text>
+      </Pressable>
     </View>
   );
 }
@@ -90,5 +95,16 @@ const styles = StyleSheet.create({
   wordCount: {
     fontSize: 11,
     color: colors.textMuted,
+  },
+  rankingsButton: {
+    marginTop: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  rankingsButtonText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: colors.textMuted,
+    textDecorationLine: "underline",
   },
 });

@@ -131,7 +131,7 @@ const a1Words: Omit<GermanNoun, "id">[] = [
   { word: "Melone", article: "die", translation: "melon", category: "Obst" },
   { word: "Ananas", article: "die", translation: "pineapple", category: "Obst" },
   { word: "Mango", article: "die", translation: "mango", category: "Obst" },
-  { word: "Zitrusfrucht", article: "die", translation: "citrus fruit", category: "Obst" },
+  { word: "Kokosnuss", article: "die", translation: "coconut", category: "Obst" },
 
   // Gemüse
   { word: "Gemüse", article: "das", translation: "vegetable", category: "Gemüse" },
@@ -1121,10 +1121,10 @@ const a2NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Aufregung", article: "die", translation: "excitement", category: "Emotionen im Detail" },
   { word: "Nervosität", article: "die", translation: "nervousness", category: "Emotionen im Detail" },
   { word: "Gelassenheit", article: "die", translation: "calmness", category: "Emotionen im Detail" },
-  { word: "Verzweiflung", article: "die", translation: "despair", category: "Emotionen im Detail" },
+  { word: "Traurigkeit", article: "die", translation: "sadness", category: "Emotionen im Detail" },
   { word: "Dankbarkeit", article: "die", translation: "gratitude", category: "Emotionen im Detail" },
   { word: "Hoffnung", article: "die", translation: "hope", category: "Emotionen im Detail" },
-  { word: "Sehnsucht", article: "die", translation: "longing", category: "Emotionen im Detail" },
+  { word: "Wut", article: "die", translation: "anger", category: "Emotionen im Detail" },
   { word: "Zufriedenheit", article: "die", translation: "contentment", category: "Emotionen im Detail" },
 
   // Konflikte & Lösungen
@@ -1302,7 +1302,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Instinkt", article: "der", translation: "instinct", category: "Psychologie & Verhalten" },
   { word: "Verhalten", article: "das", translation: "behavior", category: "Psychologie & Verhalten" },
   { word: "Gewohnheit", article: "die", translation: "habit", category: "Psychologie & Verhalten" },
-  { word: "Persönlichkeitsstörung", article: "die", translation: "personality disorder", category: "Psychologie & Verhalten" },
+  { word: "Rücksicht", article: "die", translation: "consideration (for others)", category: "Psychologie & Verhalten" },
   { word: "Stimmung", article: "die", translation: "mood", category: "Psychologie & Verhalten" },
   { word: "Beratung", article: "die", translation: "counseling", category: "Psychologie & Verhalten" },
 
@@ -1454,7 +1454,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Weiterbildung", article: "die", translation: "continuing education", category: "Bildung (vertieft)" },
 
   // Philosophie & Ethik
-  { word: "Existenz", article: "die", translation: "existence", category: "Philosophie & Ethik" },
+  { word: "Lebensweise", article: "die", translation: "way of life", category: "Philosophie & Ethik" },
   { word: "Sinn", article: "der", translation: "meaning/purpose", category: "Philosophie & Ethik" },
   { word: "Wert", article: "der", translation: "value", category: "Philosophie & Ethik" },
   { word: "Moral", article: "die", translation: "morality", category: "Philosophie & Ethik" },
@@ -1463,10 +1463,10 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Gleichheit", article: "die", translation: "equality", category: "Philosophie & Ethik" },
   { word: "Wahrheit", article: "die", translation: "truth", category: "Philosophie & Ethik" },
   { word: "Realität", article: "die", translation: "reality", category: "Philosophie & Ethik" },
-  { word: "Illusion", article: "die", translation: "illusion", category: "Philosophie & Ethik" },
+  { word: "Selbstzweifel", article: "der", translation: "self-doubt", category: "Philosophie & Ethik" },
   { word: "Identität", article: "die", translation: "identity", category: "Philosophie & Ethik" },
-  { word: "Individuum", article: "das", translation: "individual", category: "Philosophie & Ethik" },
-  { word: "Verantwortungsbewusstsein", article: "das", translation: "sense of responsibility", category: "Philosophie & Ethik" },
+  { word: "Charakterzug", article: "der", translation: "character trait", category: "Philosophie & Ethik" },
+  { word: "Fairness", article: "die", translation: "fairness", category: "Philosophie & Ethik" },
 
   // Kunst & Literatur (vertieft)
   { word: "Stil", article: "der", translation: "style", category: "Kunst & Literatur (vertieft)" },
@@ -1559,7 +1559,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Streik", article: "der", translation: "strike (labor)", category: "Karriere & Arbeitsleben (vertieft)" },
 
   // Kommunikation & Rhetorik
-  { word: "Rhetorik", article: "die", translation: "rhetoric", category: "Kommunikation & Rhetorik" },
+  { word: "Wortwahl", article: "die", translation: "choice of words", category: "Kommunikation & Rhetorik" },
   { word: "Debatte", article: "die", translation: "debate", category: "Kommunikation & Rhetorik" },
   { word: "Argument", article: "das", translation: "argument", category: "Kommunikation & Rhetorik" },
   { word: "Gegenargument", article: "das", translation: "counterargument", category: "Kommunikation & Rhetorik" },
@@ -1645,7 +1645,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
 
   // Tourismus (vertieft)
   { word: "Massentourismus", article: "der", translation: "mass tourism", category: "Tourismus (vertieft)" },
-  { word: "Nachhaltiger Tourismus", article: "der", translation: "sustainable tourism", category: "Tourismus (vertieft)" },
+  { word: "Ökotourismus", article: "der", translation: "ecotourism", category: "Tourismus (vertieft)" },
   { word: "Unterkunft", article: "die", translation: "accommodation", category: "Tourismus (vertieft)" },
   { word: "Reiseveranstalter", article: "der", translation: "tour operator", category: "Tourismus (vertieft)" },
   { word: "Reiseziel", article: "das", translation: "destination", category: "Tourismus (vertieft)" },
@@ -1664,7 +1664,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Adoption", article: "die", translation: "adoption", category: "Familie & Erziehung (vertieft)" },
 
   // Persönliche Entwicklung
-  { word: "Selbstverwirklichung", article: "die", translation: "self-actualization", category: "Persönliche Entwicklung" },
+  { word: "Lebensziel", article: "das", translation: "life goal", category: "Persönliche Entwicklung" },
   { word: "Selbstvertrauen", article: "das", translation: "self-confidence", category: "Persönliche Entwicklung" },
   { word: "Ziel", article: "das", translation: "goal", category: "Persönliche Entwicklung" },
   { word: "Erfolg", article: "der", translation: "success", category: "Persönliche Entwicklung" },
@@ -1719,11 +1719,11 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Astronaut", article: "der", translation: "astronaut", category: "Astronomie & Weltall" },
 
   // Geologie & Erde
-  { word: "Erdkruste", article: "die", translation: "earth's crust", category: "Geologie & Erde" },
-  { word: "Kontinentalplatte", article: "die", translation: "tectonic plate", category: "Geologie & Erde" },
+  { word: "Flussbett", article: "das", translation: "riverbed", category: "Geologie & Erde" },
+  { word: "Klippe", article: "die", translation: "cliff", category: "Geologie & Erde" },
   { word: "Mineral", article: "das", translation: "mineral", category: "Geologie & Erde" },
   { word: "Fossil", article: "das", translation: "fossil", category: "Geologie & Erde" },
-  { word: "Sediment", article: "das", translation: "sediment", category: "Geologie & Erde" },
+  { word: "Kies", article: "der", translation: "gravel", category: "Geologie & Erde" },
   { word: "Magma", article: "das", translation: "magma", category: "Geologie & Erde" },
   { word: "Erosion", article: "die", translation: "erosion", category: "Geologie & Erde" },
   { word: "Gestein", article: "das", translation: "rock (geology)", category: "Geologie & Erde" },
@@ -1857,11 +1857,11 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Großhandel", article: "der", translation: "wholesale", category: "Wirtschaftssektoren" },
 
   // Arbeitswelt der Zukunft
-  { word: "Fachkräftemangel", article: "der", translation: "skilled labor shortage", category: "Arbeitswelt der Zukunft" },
+  { word: "Berufserfahrung", article: "die", translation: "professional experience", category: "Arbeitswelt der Zukunft" },
   { word: "Flexibilität", article: "die", translation: "flexibility", category: "Arbeitswelt der Zukunft" },
   { word: "Umschulung", article: "die", translation: "retraining", category: "Arbeitswelt der Zukunft" },
-  { word: "Digitalkompetenz", article: "die", translation: "digital literacy", category: "Arbeitswelt der Zukunft" },
-  { word: "Automatisierungsgrad", article: "der", translation: "degree of automation", category: "Arbeitswelt der Zukunft" },
+  { word: "Zeitmanagement", article: "das", translation: "time management", category: "Arbeitswelt der Zukunft" },
+  { word: "Arbeitsbedingung", article: "die", translation: "working condition", category: "Arbeitswelt der Zukunft" },
   { word: "Nebenjob", article: "der", translation: "side job", category: "Arbeitswelt der Zukunft" },
 
   // Konflikte & Diplomatie
@@ -1905,7 +1905,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Vertrieb", article: "der", translation: "sales/distribution", category: "Vertrieb & Verkauf" },
   { word: "Verkaufsleiter", article: "der", translation: "sales manager", category: "Vertrieb & Verkauf" },
   { word: "Provision", article: "die", translation: "commission", category: "Vertrieb & Verkauf" },
-  { word: "Verhandlungsgeschick", article: "das", translation: "negotiation skill", category: "Vertrieb & Verkauf" },
+  { word: "Teamfähigkeit", article: "die", translation: "ability to work in a team", category: "Vertrieb & Verkauf" },
   { word: "Kundenstamm", article: "der", translation: "customer base", category: "Vertrieb & Verkauf" },
   { word: "Absatz", article: "der", translation: "sales volume", category: "Vertrieb & Verkauf" },
   { word: "Verkaufsstrategie", article: "die", translation: "sales strategy", category: "Vertrieb & Verkauf" },
@@ -2292,7 +2292,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
   { word: "Meditation", article: "die", translation: "meditation", category: "Meditation & Spiritualität" },
   { word: "Spiritualität", article: "die", translation: "spirituality", category: "Meditation & Spiritualität" },
   { word: "Erleuchtung", article: "die", translation: "enlightenment", category: "Meditation & Spiritualität" },
-  { word: "Innere Ruhe", article: "die", translation: "inner peace", category: "Meditation & Spiritualität" },
+  { word: "Stille", article: "die", translation: "silence/stillness", category: "Meditation & Spiritualität" },
   { word: "Achtsamkeitsübung", article: "die", translation: "mindfulness exercise", category: "Meditation & Spiritualität" },
 
   // Verpflegung unterwegs
@@ -2373,7 +2373,7 @@ const b1NewWords: Omit<GermanNoun, "id">[] = [
 
   // Verhaltensökonomie & Entscheidungen
   { word: "Entscheidungsfindung", article: "die", translation: "decision-making", category: "Verhaltensökonomie & Entscheidungen" },
-  { word: "Kompromissbereitschaft", article: "die", translation: "willingness to compromise", category: "Verhaltensökonomie & Entscheidungen" },
+  { word: "Vernunft", article: "die", translation: "reason/rationality", category: "Verhaltensökonomie & Entscheidungen" },
   { word: "Abwägung", article: "die", translation: "weighing/consideration", category: "Verhaltensökonomie & Entscheidungen" },
   { word: "Konsequenz", article: "die", translation: "consequence", category: "Verhaltensökonomie & Entscheidungen" },
   { word: "Alternative", article: "die", translation: "alternative", category: "Verhaltensökonomie & Entscheidungen" },

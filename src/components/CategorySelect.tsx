@@ -1,19 +1,21 @@
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { categoriesForLevel, Level, NOUNS_BY_LEVEL } from "../data/germanNouns";
+import { QuizMode } from "../logic/quizMode";
 import { colors } from "../theme";
 
 interface Props {
   level: Level;
   masteredIds?: Set<string>;
   onBack: () => void;
-  onStartAll: () => void;
-  onStartSelected: (categories: string[]) => void;
+  onStartAll: (mode: QuizMode) => void;
+  onStartSelected: (categories: string[], mode: QuizMode) => void;
 }
 
 export function CategorySelect({ level, masteredIds, onBack, onStartAll, onStartSelected }: Props) {
   const categories = categoriesForLevel(level);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [mode, setMode] = useState<QuizMode>("classic");
 
   // Only bother computing/showing per-category counts once there's
   // something worth showing — most players aren't signed in, and an
@@ -48,7 +50,24 @@ export function CategorySelect({ level, masteredIds, onBack, onStartAll, onStart
         <Text style={styles.backButtonText}>‹ Zurück</Text>
       </Pressable>
 
-      <Pressable style={styles.allButton} onPress={onStartAll}>
+      <View style={styles.modeRow}>
+        <Pressable
+          onPress={() => setMode("classic")}
+          style={[styles.modeButton, mode === "classic" && styles.modeButtonActive]}
+        >
+          <Text style={[styles.modeButtonText, mode === "classic" && styles.modeButtonTextActive]}>Klassisch</Text>
+          <Text style={styles.modeButtonHint}>10 Fragen</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => setMode("infinite")}
+          style={[styles.modeButton, mode === "infinite" && styles.modeButtonActive]}
+        >
+          <Text style={[styles.modeButtonText, mode === "infinite" && styles.modeButtonTextActive]}>Unendlich</Text>
+          <Text style={styles.modeButtonHint}>3 Leben</Text>
+        </Pressable>
+      </View>
+
+      <Pressable style={styles.allButton} onPress={() => onStartAll(mode)}>
         <Text style={styles.allButtonText}>Alle Kategorien</Text>
       </Pressable>
 
@@ -98,7 +117,7 @@ export function CategorySelect({ level, masteredIds, onBack, onStartAll, onStart
       <Pressable
         style={[styles.startButton, !hasSelection && styles.startButtonDisabled]}
         disabled={!hasSelection}
-        onPress={() => onStartSelected(Array.from(selected))}
+        onPress={() => onStartSelected(Array.from(selected), mode)}
       >
         <Text style={[styles.startButtonText, !hasSelection && styles.startButtonTextDisabled]}>
           Start ({selected.size} gewählt)
@@ -123,6 +142,37 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 13,
     fontWeight: "700",
+    color: colors.textMuted,
+  },
+  modeRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  modeButton: {
+    borderWidth: 2,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
+    borderRadius: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    opacity: 0.6,
+  },
+  modeButtonActive: {
+    borderColor: colors.das,
+    backgroundColor: colors.surfaceAlt,
+    opacity: 1,
+  },
+  modeButtonText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: colors.textMuted,
+  },
+  modeButtonTextActive: {
+    color: colors.text,
+  },
+  modeButtonHint: {
+    fontSize: 11,
     color: colors.textMuted,
   },
   allButton: {

@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { CategorySelect } from "../src/components/CategorySelect";
+import { InfiniteResultsView } from "../src/components/InfiniteResultsView";
 import { LevelSelect } from "../src/components/LevelSelect";
+import { NicknamePrompt } from "../src/components/NicknamePrompt";
 import { QuizView } from "../src/components/QuizView";
+import { RankingsView } from "../src/components/RankingsView";
 import { ResultsView } from "../src/components/ResultsView";
 import { SignInButton } from "../src/components/SignInButton";
 import { Article, GermanNoun, Level, NOUNS_BY_LEVEL, nounsForCategories } from "../src/data/germanNouns";
-import { useQuiz } from "../src/logic/useQuiz";
+import { useBestStreaks } from "../src/logic/useBestStreaks";
+import { MAX_LIVES, useInfiniteQuiz } from "../src/logic/useInfiniteQuiz";
+import { useLeaderboard } from "../src/logic/useLeaderboard";
+import { QUESTIONS_PER_ROUND, useQuiz } from "../src/logic/useQuiz";
+import { QuizMode } from "../src/logic/quizMode";
 import { useWordProgressSync } from "../src/logic/useWordProgressSync";
 import { colors } from "../src/theme";
 
-function Quiz({
+function livesDisplay(lives: number): string {
+  return "❤️".repeat(Math.max(lives, 0)) + "🖤".repeat(Math.max(MAX_LIVES - lives, 0));
+}
+
+function ClassicQuiz({
   nouns,
   onBack,
   recordAnswer,
@@ -39,12 +50,97 @@ function Quiz({
           word={quiz.currentNoun.word}
           translation={quiz.currentNoun.translation}
           correctArticle={quiz.currentNoun.article}
-          questionNumber={quiz.questionNumber}
-          score={quiz.score}
+          progressLeft={`${quiz.questionNumber} / ${QUESTIONS_PER_ROUND}`}
+          progressRight={`Punkte: ${quiz.score}`}
           isAnswered={quiz.isAnswered}
           selectedArticle={quiz.selectedArticle}
           onSelect={handleSelect}
           onNext={quiz.advance}
+          nextLabel={quiz.questionNumber >= QUESTIONS_PER_ROUND ? "Ergebnis" : "Weiter"}
+        />
+      )}
+    </>
+  );
+}
+
+function InfiniteQuizScreen({
+  nouns,
+  level,
+  onBack,
+  recordAnswer,
+  recordStreak,
+  leaderboard,
+  nicknamePromptDismissed,
+  onDismissNicknamePrompt,
+}: {
+  nouns: GermanNoun[];
+  level: Level;
+  onBack: () => void;
+  recordAnswer: (wordId: string, correct: boolean) => void;
+  recordStreak: (level: Level, streak: number) => boolean;
+  leaderboard: ReturnType<typeof useLeaderboard>;
+  nicknamePromptDismissed: boolean;
+  onDismissNicknamePrompt: () => void;
+}) {
+  const quiz = useInfiniteQuiz(nouns);
+  const [isNewRecord, setIsNewRecord] = useState(false);
+  const [globalSubmitted, setGlobalSubmitted] = useState(false);
+  const recordedRef = useRef(false);
+
+  useEffect(() => {
+    if (quiz.isGameOver && !recordedRef.current) {
+      recordedRef.current = true;
+      setIsNewRecord(recordStreak(level, quiz.streak));
+    }
+  }, [quiz.isGameOver, quiz.streak, level, recordStreak]);
+
+  useEffect(() => {
+    // Fires once a nickname is available (either already set, or just saved
+    // via the prompt below) — a no-op if signed out or skipped, matching
+    // useLeaderboard's own silent-no-op-when-signed-out behavior.
+    if (quiz.isGameOver && leaderboard.nickname && !globalSubmitted) {
+      setGlobalSubmitted(true);
+      leaderboard.submitScore(level, quiz.streak);
+    }
+  }, [quiz.isGameOver, quiz.streak, level, leaderboard, globalSubmitted]);
+
+  const handleSelect = (article: Article) => {
+    recordAnswer(quiz.currentNoun.id, article === quiz.currentNoun.article);
+    quiz.submitAnswer(article);
+  };
+
+  const handleRestart = () => {
+    recordedRef.current = false;
+    setIsNewRecord(false);
+    setGlobalSubmitted(false);
+    quiz.restart();
+  };
+
+  const showNicknamePrompt =
+    quiz.isGameOver && leaderboard.needsNickname && !nicknamePromptDismissed;
+
+  return (
+    <>
+      <Pressable onPress={onBack}>
+        <Text style={styles.changeLevel}>‹ Zurück</Text>
+      </Pressable>
+
+      {showNicknamePrompt ? (
+        <NicknamePrompt onSave={leaderboard.setNickname} onSkip={onDismissNicknamePrompt} />
+      ) : quiz.isGameOver ? (
+        <InfiniteResultsView streak={quiz.streak} isNewRecord={isNewRecord} onRestart={handleRestart} />
+      ) : (
+        <QuizView
+          word={quiz.currentNoun.word}
+          translation={quiz.currentNoun.translation}
+          correctArticle={quiz.currentNoun.article}
+          progressLeft={livesDisplay(quiz.lives)}
+          progressRight={`Serie: ${quiz.streak}`}
+          isAnswered={quiz.isAnswered}
+          selectedArticle={quiz.selectedArticle}
+          onSelect={handleSelect}
+          onNext={quiz.advance}
+          nextLabel={quiz.lives <= 0 ? "Ergebnis" : "Weiter"}
         />
       )}
     </>
@@ -53,8 +149,12 @@ function Quiz({
 
 export default function Index() {
   const [level, setLevel] = useState<Level | null>(null);
-  const [pool, setPool] = useState<GermanNoun[] | null>(null);
+  const [showRankings, setShowRankings] = useState(false);
+  const [session, setSession] = useState<{ pool: GermanNoun[]; mode: QuizMode } | null>(null);
+  const [nicknamePromptDismissed, setNicknamePromptDismissed] = useState(false);
   const { recordAnswer, masteredIds } = useWordProgressSync();
+  const { bestStreaks, recordStreak } = useBestStreaks();
+  const leaderboard = useLeaderboard();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -63,18 +163,31 @@ export default function Index() {
         <Text style={styles.subtitle}>der · die · das</Text>
         <SignInButton />
 
-        {level === null ? (
-          <LevelSelect onSelect={setLevel} />
-        ) : pool === null ? (
+        {showRankings ? (
+          <RankingsView bestStreaks={bestStreaks} fetchTop={leaderboard.fetchTop} onBack={() => setShowRankings(false)} />
+        ) : level === null ? (
+          <LevelSelect onSelect={setLevel} onShowRankings={() => setShowRankings(true)} />
+        ) : session === null ? (
           <CategorySelect
             level={level}
             masteredIds={masteredIds}
             onBack={() => setLevel(null)}
-            onStartAll={() => setPool(NOUNS_BY_LEVEL[level])}
-            onStartSelected={(categories) => setPool(nounsForCategories(level, categories))}
+            onStartAll={(mode) => setSession({ pool: NOUNS_BY_LEVEL[level], mode })}
+            onStartSelected={(categories, mode) => setSession({ pool: nounsForCategories(level, categories), mode })}
           />
+        ) : session.mode === "classic" ? (
+          <ClassicQuiz nouns={session.pool} onBack={() => setSession(null)} recordAnswer={recordAnswer} />
         ) : (
-          <Quiz nouns={pool} onBack={() => setPool(null)} recordAnswer={recordAnswer} />
+          <InfiniteQuizScreen
+            nouns={session.pool}
+            level={level}
+            onBack={() => setSession(null)}
+            recordAnswer={recordAnswer}
+            recordStreak={recordStreak}
+            leaderboard={leaderboard}
+            nicknamePromptDismissed={nicknamePromptDismissed}
+            onDismissNicknamePrompt={() => setNicknamePromptDismissed(true)}
+          />
         )}
       </View>
     </SafeAreaView>
