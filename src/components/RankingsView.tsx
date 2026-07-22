@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { LEVELS, Level, NOUNS_BY_LEVEL } from "../data/germanNouns";
 import { LeaderboardRow } from "../logic/useLeaderboard";
-import { colors } from "../theme";
+import { colors, shadows } from "../theme";
 
 interface Props {
   bestStreaks: Partial<Record<Level, number>>;
@@ -23,11 +23,16 @@ export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.backButton} onPress={onBack}>
+      <Pressable
+        style={styles.backButton}
+        onPress={onBack}
+        accessibilityRole="button"
+        accessibilityLabel="Zurück"
+      >
         <Text style={styles.backButtonText}>‹ Zurück</Text>
       </Pressable>
 
-      <Text style={styles.title}>🏆 Rangliste</Text>
+      <Text style={styles.title} accessibilityRole="header">🏆 Rangliste</Text>
       <Text style={styles.subtitle}>Beste Serie im Unendlich-Modus</Text>
 
       <View style={styles.list}>
@@ -113,6 +118,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 20,
     gap: 10,
+    ...shadows.soft,
   },
   row: {
     flexDirection: "row",

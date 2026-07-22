@@ -1,11 +1,12 @@
 import * as Speech from "expo-speech";
 import { useEffect } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Article } from "../data/germanNouns";
 import { isSpeechSupported } from "../logic/speechSupport";
 import { useKeepAudioWarm } from "../logic/useKeepAudioWarm";
-import { colors } from "../theme";
+import { colors, shadows } from "../theme";
 import { ArticleButton } from "./ArticleButton";
+import { PressableScale } from "./PressableScale";
 
 const ARTICLES: Article[] = ["der", "die", "das"];
 
@@ -95,9 +96,15 @@ export function QuizView({
       <View style={styles.progressRow}>
         <Text style={styles.progressText}>{progressLeft}</Text>
         {speechSupported && (
-          <Pressable onPress={onToggleMute} style={styles.muteToggle} hitSlop={8}>
+          <PressableScale
+            onPress={onToggleMute}
+            style={styles.muteToggle}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel={isMuted ? "Ton einschalten" : "Ton ausschalten"}
+          >
             <Text style={styles.muteToggleText}>{isMuted ? "🔇 Ton aus" : "🔊 Ton an"}</Text>
-          </Pressable>
+          </PressableScale>
         )}
         <Text style={styles.progressText}>{progressRight}</Text>
       </View>
@@ -106,9 +113,15 @@ export function QuizView({
         <View style={styles.wordRow}>
           <Text style={styles.word}>{word}</Text>
           {speechSupported && (
-            <Pressable onPress={speakWord} style={styles.speakerButton} hitSlop={8}>
+            <PressableScale
+              onPress={speakWord}
+              style={styles.speakerButton}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel="Wort vorlesen"
+            >
               <Text style={styles.speakerIcon}>🔊</Text>
-            </Pressable>
+            </PressableScale>
           )}
         </View>
         {isAnswered && <Text style={styles.translation}>{translation}</Text>}
@@ -131,9 +144,9 @@ export function QuizView({
           <Text style={[styles.feedbackText, { color: wasCorrect ? colors.correct : colors.incorrect }]}>
             {wasCorrect ? "Richtig!" : `Falsch! Richtig ist: ${correctArticle} ${word}`}
           </Text>
-          <Pressable style={styles.nextButton} onPress={onNext}>
+          <PressableScale style={styles.nextButton} onPress={onNext} accessibilityRole="button">
             <Text style={styles.nextButtonText}>{nextLabel}</Text>
-          </Pressable>
+          </PressableScale>
         </View>
       )}
     </View>
@@ -161,6 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 6,
     paddingHorizontal: 12,
+    ...shadows.soft,
   },
   muteToggleText: {
     fontSize: 12,
@@ -174,6 +188,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     alignItems: "center",
     gap: 8,
+    ...shadows.card,
   },
   wordRow: {
     flexDirection: "row",
@@ -193,6 +208,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceAlt,
     alignItems: "center",
     justifyContent: "center",
+    ...shadows.soft,
   },
   speakerIcon: {
     fontSize: 16,
@@ -219,6 +235,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 32,
+    ...shadows.soft,
   },
   nextButtonText: {
     color: colors.text,

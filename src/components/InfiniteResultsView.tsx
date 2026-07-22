@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../theme";
+import { StyleSheet, Text, View } from "react-native";
+import { colors, glow } from "../theme";
+import { PressableScale } from "./PressableScale";
 
 interface Props {
   streak: number;
@@ -22,9 +23,9 @@ export function InfiniteResultsView({ streak, isNewRecord, onRestart }: Props) {
       <Text style={styles.score}>{streak}</Text>
       <Text style={styles.scoreLabel}>Serie</Text>
       <Text style={styles.message}>{message(streak)}</Text>
-      <Pressable style={styles.button} onPress={onRestart}>
+      <PressableScale style={styles.button} onPress={onRestart} accessibilityRole="button">
         <Text style={styles.buttonText}>Nochmal spielen</Text>
-      </Pressable>
+      </PressableScale>
     </View>
   );
 }
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 40,
     marginTop: 12,
+    ...glow(colors.der),
   },
   buttonText: {
     color: "#0b0b1e",

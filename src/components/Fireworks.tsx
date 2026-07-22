@@ -54,7 +54,7 @@ export function Fireworks() {
   }, [particles]);
 
   return (
-    <View style={styles.container} pointerEvents="none">
+    <View style={styles.container} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
       {particles.map((p, i) => (
         <Animated.View
           key={i}

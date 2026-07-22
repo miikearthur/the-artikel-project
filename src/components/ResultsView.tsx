@@ -1,7 +1,8 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { QUESTIONS_PER_ROUND } from "../logic/useQuiz";
-import { colors } from "../theme";
+import { colors, glow } from "../theme";
 import { Fireworks } from "./Fireworks";
+import { PressableScale } from "./PressableScale";
 
 interface Props {
   score: number;
@@ -26,9 +27,9 @@ export function ResultsView({ score, onRestart }: Props) {
         {score} / {QUESTIONS_PER_ROUND}
       </Text>
       <Text style={styles.message}>{message(score)}</Text>
-      <Pressable style={styles.button} onPress={onRestart}>
+      <PressableScale style={styles.button} onPress={onRestart} accessibilityRole="button">
         <Text style={styles.buttonText}>Nochmal spielen</Text>
-      </Pressable>
+      </PressableScale>
     </View>
   );
 }
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 40,
     marginTop: 12,
+    ...glow(colors.der),
   },
   buttonText: {
     color: "#0b0b1e",

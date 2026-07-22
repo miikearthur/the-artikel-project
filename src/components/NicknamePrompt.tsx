@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { colors } from "../theme";
+import { colors, glow, shadows } from "../theme";
+import { PressableScale } from "./PressableScale";
 
 interface Props {
   onSave: (nickname: string) => void;
@@ -23,11 +24,18 @@ export function NicknamePrompt({ onSave, onSkip }: Props) {
         placeholderTextColor={colors.textMuted}
         maxLength={20}
         autoFocus
+        accessibilityLabel="Spitzname"
       />
-      <Pressable style={[styles.button, !canSave && styles.buttonDisabled]} disabled={!canSave} onPress={() => onSave(name)}>
+      <PressableScale
+        style={[styles.button, !canSave && styles.buttonDisabled]}
+        disabled={!canSave}
+        onPress={() => onSave(name)}
+        accessibilityRole="button"
+        accessibilityState={{ disabled: !canSave }}
+      >
         <Text style={styles.buttonText}>Speichern</Text>
-      </Pressable>
-      <Pressable onPress={onSkip} style={styles.skipLink}>
+      </PressableScale>
+      <Pressable onPress={onSkip} style={styles.skipLink} accessibilityRole="button">
         <Text style={styles.skipLinkText}>Überspringen</Text>
       </Pressable>
     </View>
@@ -62,6 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.text,
     textAlign: "center",
+    ...shadows.soft,
   },
   button: {
     backgroundColor: colors.der,
@@ -69,9 +78,11 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 40,
     marginTop: 4,
+    ...glow(colors.der),
   },
   buttonDisabled: {
     opacity: 0.4,
+    boxShadow: "none",
   },
   buttonText: {
     color: "#0b0b1e",

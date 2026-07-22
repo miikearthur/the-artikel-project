@@ -1,6 +1,7 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Article } from "../data/germanNouns";
-import { articleColors, colors } from "../theme";
+import { articleColors, colors, glow } from "../theme";
+import { PressableScale } from "./PressableScale";
 
 interface Props {
   article: Article;
@@ -16,17 +17,33 @@ export function ArticleButton({ article, onPress, disabled, state }: Props) {
     state === "correct" ? colors.correct : state === "incorrect" ? colors.incorrect : colors.surface;
   const borderColor = state === "idle" ? accent : background;
 
+  // A colored glow that tracks the button's current meaning: the der/die/das
+  // accent while idle, then a stronger correct/incorrect pop once answered.
+  // The one remaining "neutral" button (answered, not selected, not correct)
+  // stays flat so attention lands on the correct/incorrect pair instead.
+  const stateGlow =
+    state === "idle"
+      ? glow(accent, 0.35)
+      : state === "correct"
+        ? glow(colors.correct, 0.5)
+        : state === "incorrect"
+          ? glow(colors.incorrect, 0.5)
+          : { boxShadow: "none" };
+
+  const label =
+    state === "correct" ? `${article}, richtig` : state === "incorrect" ? `${article}, falsch` : article;
+
   return (
-    <Pressable
+    <PressableScale
       onPress={onPress}
       disabled={disabled}
-      style={({ pressed }) => [
-        styles.button,
-        { borderColor, backgroundColor: background, opacity: pressed && !disabled ? 0.85 : 1 },
-      ]}
+      style={[styles.button, { borderColor, backgroundColor: background }, stateGlow]}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityState={{ disabled }}
     >
       <Text style={[styles.text, state === "idle" && { color: accent }]}>{article}</Text>
-    </Pressable>
+    </PressableScale>
   );
 }
 
