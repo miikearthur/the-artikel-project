@@ -15,6 +15,18 @@ import { colors } from "../src/theme";
 // keeps real content clear of it; env() evaluates to 0px on devices/
 // browsers that don't have this concept (older iPhones, desktop, Android),
 // so it adds no unwanted spacing there.
+//
+// That padding alone wasn't enough, though: Expo's own reset stylesheet
+// pins html/body/#root to height:100%, which on iOS Safari resolves against
+// the *largest* possible viewport (toolbar collapsed) — so while the
+// toolbar is actually showing, content sized to that inflated height
+// extends underneath it regardless of padding. This is the well-known
+// "100vh on mobile Safari" bug. 100dvh (dynamic viewport height) tracks the
+// real, currently-visible viewport as the toolbar shows/hides, so it
+// replaces the fixed height for browsers that support it (iOS Safari
+// 15.4+); the plain 100vh line above it is the fallback for ones that
+// don't. !important is needed to win over Expo's own #expo-reset rule,
+// which has identical specificity.
 export default function Root({ children }: PropsWithChildren) {
   return (
     <html lang="en">
@@ -37,6 +49,10 @@ export default function Root({ children }: PropsWithChildren) {
 const backgroundStyle = `
 html, body, #root {
   background-color: ${colors.background};
+}
+html, body, #root {
+  height: 100vh !important;
+  height: 100dvh !important;
 }
 #root {
   padding-top: env(safe-area-inset-top);
