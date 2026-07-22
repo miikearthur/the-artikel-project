@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(10, 10, 24, 0.75)",
   },
   card: {
     width: "100%",

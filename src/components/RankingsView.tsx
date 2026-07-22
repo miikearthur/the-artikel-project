@@ -11,14 +11,25 @@ interface Props {
 }
 
 export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
-  const [globalTop, setGlobalTop] = useState<Partial<Record<Level, LeaderboardRow[]>>>({});
+  // Resolved all at once (rather than updating state as each level's fetch
+  // lands) so the "🌍 Weltweit" sections across all cards fill in together —
+  // one settle instead of each card popping open at its own network-timed
+  // moment. null = still loading, so a "Lädt…" line reserves the same
+  // single-line height the eventual placeholder/content will occupy.
+  const [globalTop, setGlobalTop] = useState<Partial<Record<Level, LeaderboardRow[]>> | null>(null);
 
   useEffect(() => {
-    LEVELS.filter((level) => NOUNS_BY_LEVEL[level].length > 0).forEach((level) => {
-      fetchTop(level, 5).then((rows) => {
-        setGlobalTop((prev) => ({ ...prev, [level]: rows }));
-      });
-    });
+    let cancelled = false;
+    const levels = LEVELS.filter((level) => NOUNS_BY_LEVEL[level].length > 0);
+    Promise.all(levels.map((level) => fetchTop(level, 5).then((rows) => [level, rows] as const))).then(
+      (entries) => {
+        if (cancelled) return;
+        setGlobalTop(Object.fromEntries(entries));
+      }
+    );
+    return () => {
+      cancelled = true;
+    };
   }, [fetchTop]);
 
   return (
@@ -39,7 +50,7 @@ export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
         {LEVELS.map((level) => {
           const available = NOUNS_BY_LEVEL[level].length > 0;
           const best = bestStreaks[level];
-          const top = globalTop[level];
+          const top = globalTop?.[level];
           return (
             <View key={level} style={styles.card}>
               <View style={styles.row}>
@@ -56,7 +67,9 @@ export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
               {available && (
                 <View style={styles.globalList}>
                   <Text style={styles.globalHeading}>🌍 Weltweit</Text>
-                  {!top ? null : top.length === 0 ? (
+                  {globalTop === null ? (
+                    <Text style={styles.placeholder}>Lädt…</Text>
+                  ) : !top || top.length === 0 ? (
                     <Text style={styles.placeholder}>Sei die/der Erste!</Text>
                   ) : (
                     top.map((entry, i) => (
