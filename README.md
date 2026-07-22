@@ -78,6 +78,6 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] custom app icon/favicon (still using Expo's default)
 - [ ] show which category you're playing during the quiz
 - [ ] loading indicator while progress syncs after sign-in
-- [ ] perfect-round celebration (animation/confetti on 10/10)
+- [x] perfect-round celebration (animation/confetti on 10/10)
 - [ ] a way to check overall progress — mastered words/categories section
 - [x] check difficulty of vocab to make sure it's appropriate to the different levels

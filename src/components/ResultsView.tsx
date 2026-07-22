@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { QUESTIONS_PER_ROUND } from "../logic/useQuiz";
 import { colors } from "../theme";
+import { Fireworks } from "./Fireworks";
 
 interface Props {
   score: number;
@@ -16,8 +17,11 @@ function message(score: number): string {
 }
 
 export function ResultsView({ score, onRestart }: Props) {
+  const isPerfect = score === QUESTIONS_PER_ROUND;
+
   return (
     <View style={styles.container}>
+      {isPerfect && <Fireworks />}
       <Text style={styles.score}>
         {score} / {QUESTIONS_PER_ROUND}
       </Text>
