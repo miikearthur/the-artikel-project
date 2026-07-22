@@ -68,7 +68,7 @@ Every push to `main` redeploys automatically, same as the main site.
 - [ ] actually publish the native app
 - [ ] light/dark theme toggle
 - [ ] different question types (type the word, match translation to word)
-- [ ] fix top/bottom white bar on mobile
+- [x] fix top/bottom white bar on mobile
 - [ ] language selector: German only, or English & German
 - [x] infinite mode (no 10-question limit)
 - [ ] progress bar during the round (not just the "1/10" text)

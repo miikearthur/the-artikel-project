@@ -1,0 +1,32 @@
+import { ScrollViewStyleReset } from "expo-router/html";
+import { type PropsWithChildren } from "react";
+import { colors } from "../src/theme";
+
+// Expo Router's default HTML shell doesn't set viewport-fit=cover or a
+// background-color on the document itself — on iOS Safari that leaves the
+// safe-area strips (behind the notch/status bar and the home-indicator bar)
+// showing the browser's default white instead of the app's background,
+// since nothing tells the page it's allowed to draw into those areas at all.
+export default function Root({ children }: PropsWithChildren) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+        />
+        <meta name="theme-color" content={colors.background} />
+        <ScrollViewStyleReset />
+        <style dangerouslySetInnerHTML={{ __html: backgroundStyle }} />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+const backgroundStyle = `
+html, body, #root {
+  background-color: ${colors.background};
+}`;
