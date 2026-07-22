@@ -114,19 +114,26 @@ export function useLeaderboard() {
     [user, nickname]
   );
 
-  const fetchTop = useCallback(async (level: Level, limit = 5): Promise<LeaderboardRow[]> => {
-    const c = getClient();
-    if (!c) return [];
-    try {
-      const { data } = await c.models.LeaderboardEntry.listLeaderboardEntryByLevel(
-        { level },
-        { sortDirection: "DESC", limit }
-      );
-      return data.map((entry) => ({ nickname: entry.nickname, streak: entry.streak }));
-    } catch {
-      return [];
-    }
-  }, []);
+  const fetchTop = useCallback(
+    async (level: Level, limit = 5): Promise<LeaderboardRow[]> => {
+      const c = getClient();
+      if (!c) return [];
+      try {
+        // The client's default auth mode is userPool, which anonymous
+        // visitors have no session for — public reads need the identityPool
+        // (guest IAM role) mode explicitly. Signed-in visitors keep the
+        // default userPool mode, matching the allow.authenticated() rule.
+        const { data } = await c.models.LeaderboardEntry.listLeaderboardEntryByLevel(
+          { level },
+          { sortDirection: "DESC", limit, authMode: user ? "userPool" : "identityPool" }
+        );
+        return data.map((entry) => ({ nickname: entry.nickname, streak: entry.streak }));
+      } catch {
+        return [];
+      }
+    },
+    [user]
+  );
 
   return {
     nickname,
