@@ -39,7 +39,7 @@ export function LevelSelect({ onSelect, onShowRankings }: Props) {
       </View>
 
       <Pressable style={styles.rankingsButton} onPress={onShowRankings}>
-        <Text style={styles.rankingsButtonText}>🏆 Rangliste</Text>
+        <Text style={styles.rankingsButtonText}>🏆 Rangliste (Unendlich-Modus)</Text>
       </Pressable>
     </View>
   );
