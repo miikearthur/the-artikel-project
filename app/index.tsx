@@ -248,7 +248,12 @@ export default function Index() {
 
         {showRankings ? (
           <FadeIn style={styles.screen}>
-            <RankingsView bestStreaks={bestStreaks} fetchTop={leaderboard.fetchTop} onBack={() => setShowRankings(false)} />
+            <RankingsView
+              bestStreaks={bestStreaks}
+              fetchTop={leaderboard.fetchTop}
+              fetchMyBest={leaderboard.fetchMyBest}
+              onBack={() => setShowRankings(false)}
+            />
           </FadeIn>
         ) : mode === null ? (
           <FadeIn style={styles.screen}>

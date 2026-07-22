@@ -114,6 +114,24 @@ export function useLeaderboard() {
     [user, nickname]
   );
 
+  // The signed-in user's own best streak for a level, straight from their
+  // LeaderboardEntry — the source of truth across devices, unlike
+  // useBestStreaks' AsyncStorage record which is only ever as current as
+  // whatever this one device has seen.
+  const fetchMyBest = useCallback(
+    async (level: Level): Promise<number | null> => {
+      const c = getClient();
+      if (!c || !user) return null;
+      try {
+        const { data } = await c.models.LeaderboardEntry.get({ id: `${user.userId}_${level}` });
+        return data?.streak ?? null;
+      } catch {
+        return null;
+      }
+    },
+    [user]
+  );
+
   const fetchTop = useCallback(
     async (level: Level, limit = 5): Promise<LeaderboardRow[]> => {
       const c = getClient();
@@ -140,6 +158,7 @@ export function useLeaderboard() {
     setNickname,
     submitScore,
     fetchTop,
+    fetchMyBest,
     isSignedIn: !!user,
     needsNickname: !!user && profileChecked && nickname === null,
   };

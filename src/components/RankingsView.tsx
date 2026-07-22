@@ -7,16 +7,21 @@ import { colors, shadows } from "../theme";
 interface Props {
   bestStreaks: Partial<Record<Level, number>>;
   fetchTop: (level: Level, limit?: number) => Promise<LeaderboardRow[]>;
+  fetchMyBest: (level: Level) => Promise<number | null>;
   onBack: () => void;
 }
 
-export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
+export function RankingsView({ bestStreaks, fetchTop, fetchMyBest, onBack }: Props) {
   // Resolved all at once (rather than updating state as each level's fetch
   // lands) so the "🌍 Weltweit" sections across all cards fill in together —
   // one settle instead of each card popping open at its own network-timed
   // moment. null = still loading, so a "Lädt…" line reserves the same
   // single-line height the eventual placeholder/content will occupy.
   const [globalTop, setGlobalTop] = useState<Partial<Record<Level, LeaderboardRow[]>> | null>(null);
+  // The account's synced best per level, when signed in — bestStreaks alone
+  // is only this device's local record, which goes stale the moment a
+  // record is set on a different device.
+  const [syncedBest, setSyncedBest] = useState<Partial<Record<Level, number>>>({});
 
   useEffect(() => {
     let cancelled = false;
@@ -27,10 +32,16 @@ export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
         setGlobalTop(Object.fromEntries(entries));
       }
     );
+    Promise.all(levels.map((level) => fetchMyBest(level).then((streak) => [level, streak] as const))).then(
+      (entries) => {
+        if (cancelled) return;
+        setSyncedBest(Object.fromEntries(entries.filter((entry): entry is [Level, number] => entry[1] !== null)));
+      }
+    );
     return () => {
       cancelled = true;
     };
-  }, [fetchTop]);
+  }, [fetchTop, fetchMyBest]);
 
   return (
     <View style={styles.container}>
@@ -49,7 +60,7 @@ export function RankingsView({ bestStreaks, fetchTop, onBack }: Props) {
       <View style={styles.list}>
         {LEVELS.map((level) => {
           const available = NOUNS_BY_LEVEL[level].length > 0;
-          const best = bestStreaks[level];
+          const best = Math.max(bestStreaks[level] ?? 0, syncedBest[level] ?? 0) || undefined;
           const top = globalTop?.[level];
           return (
             <View key={level} style={styles.card}>
