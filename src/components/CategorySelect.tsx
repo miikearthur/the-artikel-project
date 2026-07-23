@@ -1,10 +1,18 @@
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { CATEGORY_GROUP_ORDER, groupForCategory } from "../data/categoryGroups";
+import { CATEGORY_GROUP_ORDER, FALLBACK_GROUP, groupForCategory } from "../data/categoryGroups";
 import { categoriesForLevel, Level, NOUNS_BY_LEVEL } from "../data/germanNouns";
 import { QuizMode } from "../logic/quizMode";
 import { colors, glow, shadows } from "../theme";
 import { PressableScale } from "./PressableScale";
+
+// A group with only one or two categories in it (common at low levels, e.g.
+// A1's "Sport" group holding just the category "Sport") adds a whole extra
+// row to scan and tap without meaningfully narrowing anything down. Below
+// this size, a group's categories get folded into the fallback bucket
+// instead of getting their own row — this is what actually keeps A1's ~45
+// categories down to a handful of groups instead of ~17.
+const MIN_GROUP_SIZE = 3;
 
 interface Props {
   level: Level;
@@ -61,9 +69,19 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
       if (list) list.push(category);
       else byGroup.set(group, [category]);
     }
-    return CATEGORY_GROUP_ORDER.map((group) => ({ group, items: byGroup.get(group) ?? [] })).filter(
-      (entry) => entry.items.length > 0
-    );
+
+    const merged: string[] = [];
+    const kept: { group: string; items: string[] }[] = [];
+    for (const group of CATEGORY_GROUP_ORDER) {
+      if (group === FALLBACK_GROUP) continue;
+      const items = byGroup.get(group) ?? [];
+      if (items.length === 0) continue;
+      if (items.length < MIN_GROUP_SIZE) merged.push(...items);
+      else kept.push({ group, items });
+    }
+    merged.push(...(byGroup.get(FALLBACK_GROUP) ?? []));
+    if (merged.length > 0) kept.push({ group: FALLBACK_GROUP, items: merged });
+    return kept;
   }, [categories]);
 
   const toggle = (category: string) => {
