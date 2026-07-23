@@ -1,5 +1,5 @@
 import { defineBackend } from '@aws-amplify/backend';
-import { CfnUserPoolDomain } from 'aws-cdk-lib/aws-cognito';
+import { UserPoolDomain } from 'aws-cdk-lib/aws-cognito';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 
@@ -27,13 +27,22 @@ const backend = defineBackend({
 // AWS::Cognito::UserPoolDomain" from the Cognito API itself. The domain
 // removal already shipped and deployed successfully on its own first (so
 // the stack currently has no domain at all); this adds the new one back.
+//
+// It has to be the L2 `UserPoolDomain` construct specifically, not a raw L1
+// CfnUserPoolDomain — a first attempt at this used the L1 directly and CDK
+// synthesis failed with "Could not find UserPoolDomain resource in the
+// stack.." before ever reaching AWS. That's Amplify's own internal output
+// builder (auth-construct's construct.js, building amplify_outputs.json's
+// oauth_cognito_domain field) doing `tryFindChild('UserPoolDomain')` then
+// `instanceof UserPoolDomain` — an L1-only resource fails that instanceof
+// check even though it's a functionally equivalent CloudFormation resource.
 const removed = backend.auth.resources.userPool.node.tryRemoveChild('UserPoolDomain');
 if (!removed) {
   throw new Error(
     'amplify/backend.ts: could not find the UserPoolDomain construct to remove — the internal Amplify/CDK construct ID may have changed.'
   );
 }
-new CfnUserPoolDomain(backend.auth.resources.userPool, 'UserPoolDomain', {
-  domain: 'artikel-miguelserrano',
-  userPoolId: backend.auth.resources.userPool.userPoolId,
+new UserPoolDomain(backend.auth.resources.userPool, 'UserPoolDomain', {
+  userPool: backend.auth.resources.userPool,
+  cognitoDomain: { domainPrefix: 'artikel-miguelserrano' },
 });
