@@ -57,6 +57,10 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
 
   const hasSelection = selected.size > 0;
   const allSelected = selected.size === categories.length;
+  // Selecting every category by hand is equivalent to selecting none, so
+  // the button collapses back to "Alle Kategorien" in both cases — "Start"
+  // only shows for a genuine partial selection.
+  const isPartialSelection = hasSelection && !allSelected;
 
   return (
     <View style={styles.container}>
@@ -77,11 +81,11 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
 
       <PressableScale
         style={styles.allButton}
-        onPress={() => (hasSelection ? onStartSelected(Array.from(selected)) : onStartAll())}
+        onPress={() => (isPartialSelection ? onStartSelected(Array.from(selected)) : onStartAll())}
         accessibilityRole="button"
-        accessibilityLabel={hasSelection ? `Start, ${selected.size} Kategorien gewählt` : "Alle Kategorien"}
+        accessibilityLabel={isPartialSelection ? `Start, ${selected.size} Kategorien gewählt` : "Alle Kategorien"}
       >
-        <Text style={styles.allButtonText}>{hasSelection ? "Start" : "Alle Kategorien"}</Text>
+        <Text style={styles.allButtonText}>{isPartialSelection ? "Start" : "Alle Kategorien"}</Text>
       </PressableScale>
 
       <Text style={styles.hint}>...oder wähle Kategorien</Text>
