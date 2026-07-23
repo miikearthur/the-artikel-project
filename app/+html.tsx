@@ -8,6 +8,16 @@ import { colors, gradientColors } from "../src/theme";
 // showing the browser's default white instead of the app's background,
 // since nothing tells the page it's allowed to draw into those areas at all.
 //
+// When the site is added to the home screen and opened as a standalone
+// "web app", the status bar area (clock/battery, top of the screen) stops
+// being part of the page at all — it becomes real native iOS chrome, drawn
+// by the OS, and its color is controlled *only* by
+// apple-mobile-web-app-status-bar-style, never by any CSS on the page.
+// Without apple-mobile-web-app-capable turning standalone mode on in the
+// first place, iOS also ignores that style tag and just shows its default
+// white bar. black-translucent makes that native bar fully see-through, so
+// the app's own gradient shows underneath it, matching regular Safari.
+//
 // viewport-fit=cover also means content can now render *underneath*
 // Safari's floating toolbar (the bar with the URL and tab button) — without
 // reserving space for it, buttons near the bottom of a screen end up
@@ -51,6 +61,8 @@ export default function Root({ children }: PropsWithChildren) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
         <meta name="theme-color" content={colors.background} />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <ScrollViewStyleReset />
         <style dangerouslySetInnerHTML={{ __html: backgroundStyle }} />
       </head>
