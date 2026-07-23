@@ -238,6 +238,11 @@ export default function Index() {
     <SafeAreaView style={styles.safeArea}>
       <LinearGradient colors={gradientColors} style={StyleSheet.absoluteFill} pointerEvents="none" />
       <ScrollView
+        // Targeted by a CSS rule in app/+html.tsx: once page content is
+        // taller than the screen, this ScrollView's own div (not html/body)
+        // is what iOS Safari rubber-bands, and needs its own matching
+        // background so that bounce doesn't reveal plain white.
+        id="page-scroll"
         style={styles.scrollRoot}
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"

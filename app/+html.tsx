@@ -1,6 +1,6 @@
 import { ScrollViewStyleReset } from "expo-router/html";
 import { type PropsWithChildren } from "react";
-import { colors } from "../src/theme";
+import { colors, gradientColors } from "../src/theme";
 
 // Expo Router's default HTML shell doesn't set viewport-fit=cover or a
 // background-color on the document itself — on iOS Safari that leaves the
@@ -27,6 +27,19 @@ import { colors } from "../src/theme";
 // 15.4+); the plain 100vh line above it is the fallback for ones that
 // don't. !important is needed to win over Expo's own #expo-reset rule,
 // which has identical specificity.
+//
+// The background is a gradient (matching the one the app renders at
+// runtime via expo-linear-gradient) rather than a flat color, so whatever
+// iOS Safari reveals when rubber-band bouncing past the top/bottom of the
+// page — or when its toolbar collapses/expands — is seamless instead of a
+// mismatched solid band.
+//
+// #page-scroll below targets the app's own root ScrollView (app/index.tsx)
+// specifically: once page content is taller than the screen, *that*
+// element becomes the thing Safari actually bounces, and react-native-web
+// has no gradient style prop to set directly in React — Safari paints an
+// overscrolled element's own background in the reveal area, not whatever
+// is visually behind it, so without this rule that reveal is plain white.
 export default function Root({ children }: PropsWithChildren) {
   return (
     <html lang="en">
@@ -46,9 +59,11 @@ export default function Root({ children }: PropsWithChildren) {
   );
 }
 
+const gradient = `linear-gradient(180deg, ${gradientColors[0]} 0%, ${gradientColors[1]} 100%)`;
+
 const backgroundStyle = `
-html, body, #root {
-  background-color: ${colors.background};
+html, body, #root, #page-scroll {
+  background: ${gradient};
 }
 html, body, #root {
   height: 100vh !important;
