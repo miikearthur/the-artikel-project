@@ -75,8 +75,13 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
         </View>
       </View>
 
-      <PressableScale style={styles.allButton} onPress={onStartAll} accessibilityRole="button">
-        <Text style={styles.allButtonText}>Alle Kategorien</Text>
+      <PressableScale
+        style={styles.allButton}
+        onPress={() => (hasSelection ? onStartSelected(Array.from(selected)) : onStartAll())}
+        accessibilityRole="button"
+        accessibilityLabel={hasSelection ? `Start, ${selected.size} Kategorien gewählt` : "Alle Kategorien"}
+      >
+        <Text style={styles.allButtonText}>{hasSelection ? "Start" : "Alle Kategorien"}</Text>
       </PressableScale>
 
       <Text style={styles.hint}>...oder wähle Kategorien</Text>
@@ -147,19 +152,6 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
           })}
         </View>
       )}
-
-      <PressableScale
-        style={[styles.startButton, !hasSelection && styles.startButtonDisabled]}
-        disabled={!hasSelection}
-        onPress={() => onStartSelected(Array.from(selected))}
-        accessibilityRole="button"
-        accessibilityLabel={`Start, ${selected.size} Kategorien gewählt`}
-        accessibilityState={{ disabled: !hasSelection }}
-      >
-        <Text style={[styles.startButtonText, !hasSelection && styles.startButtonTextDisabled]}>
-          Start ({selected.size} gewählt)
-        </Text>
-      </PressableScale>
     </View>
   );
 }
@@ -299,25 +291,5 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "700",
     color: colors.das,
-  },
-  startButton: {
-    backgroundColor: colors.das,
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 40,
-    marginTop: 8,
-    ...glow(colors.das),
-  },
-  startButtonDisabled: {
-    backgroundColor: colors.surfaceAlt,
-    boxShadow: "none",
-  },
-  startButtonText: {
-    color: "#0b0b1e",
-    fontSize: 16,
-    fontWeight: "800",
-  },
-  startButtonTextDisabled: {
-    color: colors.textMuted,
   },
 });

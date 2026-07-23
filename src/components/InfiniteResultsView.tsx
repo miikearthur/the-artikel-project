@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { colors, glow } from "../theme";
+import { colors, glow, shadows } from "../theme";
 import { PressableScale } from "./PressableScale";
 
 interface Props {
   streak: number;
   isNewRecord: boolean;
   onRestart: () => void;
+  onShowRankings: () => void;
 }
 
 function message(streak: number): string {
@@ -15,7 +16,7 @@ function message(streak: number): string {
   return "Kein Problem, versuch es noch einmal!";
 }
 
-export function InfiniteResultsView({ streak, isNewRecord, onRestart }: Props) {
+export function InfiniteResultsView({ streak, isNewRecord, onRestart, onShowRankings }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.gameOver}>Spiel vorbei</Text>
@@ -25,6 +26,9 @@ export function InfiniteResultsView({ streak, isNewRecord, onRestart }: Props) {
       <Text style={styles.message}>{message(streak)}</Text>
       <PressableScale style={styles.button} onPress={onRestart} accessibilityRole="button">
         <Text style={styles.buttonText}>Nochmal spielen</Text>
+      </PressableScale>
+      <PressableScale style={styles.rankingsButton} onPress={onShowRankings} accessibilityRole="button">
+        <Text style={styles.rankingsButtonText}>🏆 Rangliste ansehen</Text>
       </PressableScale>
     </View>
   );
@@ -76,5 +80,17 @@ const styles = StyleSheet.create({
     color: "#0b0b1e",
     fontSize: 16,
     fontWeight: "800",
+  },
+  rankingsButton: {
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    ...shadows.soft,
+  },
+  rankingsButtonText: {
+    color: colors.text,
+    fontSize: 14,
+    fontWeight: "700",
   },
 });

@@ -106,6 +106,7 @@ function ClassicQuiz({
 function InfiniteQuizScreen({
   nouns,
   level,
+  bestStreaks,
   onBack,
   recordAnswer,
   recordStreak,
@@ -117,6 +118,7 @@ function InfiniteQuizScreen({
 }: {
   nouns: GermanNoun[];
   level: Level;
+  bestStreaks: Partial<Record<Level, number>>;
   onBack: () => void;
   recordAnswer: (wordId: string, correct: boolean) => void;
   recordStreak: (level: Level, streak: number) => boolean;
@@ -130,6 +132,7 @@ function InfiniteQuizScreen({
   const [isNewRecord, setIsNewRecord] = useState(false);
   const [globalSubmitted, setGlobalSubmitted] = useState(false);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [showRankings, setShowRankings] = useState(false);
   const recordedRef = useRef(false);
 
   useEffect(() => {
@@ -176,20 +179,36 @@ function InfiniteQuizScreen({
 
   return (
     <>
-      <View style={styles.topRow}>
-        <Pressable onPress={handleBackPress} accessibilityRole="button" accessibilityLabel="Zurück">
-          <Text style={styles.changeLevel}>‹ Zurück</Text>
-        </Pressable>
-        <Text style={styles.levelBadge}>{level.toUpperCase()}</Text>
-      </View>
+      {!showRankings && (
+        <View style={styles.topRow}>
+          <Pressable onPress={handleBackPress} accessibilityRole="button" accessibilityLabel="Zurück">
+            <Text style={styles.changeLevel}>‹ Zurück</Text>
+          </Pressable>
+          <Text style={styles.levelBadge}>{level.toUpperCase()}</Text>
+        </View>
+      )}
 
-      {showNicknamePrompt ? (
+      {showRankings ? (
+        <FadeIn style={styles.screen}>
+          <RankingsView
+            bestStreaks={bestStreaks}
+            fetchTop={leaderboard.fetchTop}
+            fetchMyBest={leaderboard.fetchMyBest}
+            onBack={() => setShowRankings(false)}
+          />
+        </FadeIn>
+      ) : showNicknamePrompt ? (
         <FadeIn style={styles.screen}>
           <NicknamePrompt onSave={leaderboard.setNickname} onSkip={onDismissNicknamePrompt} />
         </FadeIn>
       ) : quiz.isGameOver ? (
         <FadeIn style={styles.screen}>
-          <InfiniteResultsView streak={quiz.streak} isNewRecord={isNewRecord} onRestart={handleRestart} />
+          <InfiniteResultsView
+            streak={quiz.streak}
+            isNewRecord={isNewRecord}
+            onRestart={handleRestart}
+            onShowRankings={() => setShowRankings(true)}
+          />
         </FadeIn>
       ) : (
         <FadeIn style={styles.screen}>
@@ -296,6 +315,7 @@ export default function Index() {
             <InfiniteQuizScreen
               nouns={pool}
               level={level}
+              bestStreaks={bestStreaks}
               onBack={() => setPool(null)}
               recordAnswer={recordAnswer}
               recordStreak={recordStreak}
