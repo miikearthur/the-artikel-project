@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { CATEGORY_GROUP_ORDER, groupForCategory } from "../data/categoryGroups";
 import { categoriesForLevel, Level, NOUNS_BY_LEVEL } from "../data/germanNouns";
 import { QuizMode } from "../logic/quizMode";
 import { colors, glow, shadows } from "../theme";
@@ -27,6 +28,7 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
   const categories = categoriesForLevel(level);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [search, setSearch] = useState("");
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
   const masteredCounts = useMemo(() => {
     if (!showMastery) return null;
@@ -46,11 +48,49 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
     return categories.filter((category) => category.toLowerCase().includes(query));
   }, [categories, search]);
 
+  // A search is a "I know what I want" action, so it always shows a flat
+  // matched list — grouping only exists to make browsing without a specific
+  // target tractable.
+  const showFlatList = search.trim().length > 0;
+
+  const groupedCategories = useMemo(() => {
+    const byGroup = new Map<string, string[]>();
+    for (const category of categories) {
+      const group = groupForCategory(category);
+      const list = byGroup.get(group);
+      if (list) list.push(category);
+      else byGroup.set(group, [category]);
+    }
+    return CATEGORY_GROUP_ORDER.map((group) => ({ group, items: byGroup.get(group) ?? [] })).filter(
+      (entry) => entry.items.length > 0
+    );
+  }, [categories]);
+
   const toggle = (category: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
       if (next.has(category)) next.delete(category);
       else next.add(category);
+      return next;
+    });
+  };
+
+  const toggleGroupExpanded = (group: string) => {
+    setExpandedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(group)) next.delete(group);
+      else next.add(group);
+      return next;
+    });
+  };
+
+  const setGroupSelection = (items: string[], select: boolean) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      for (const item of items) {
+        if (select) next.add(item);
+        else next.delete(item);
+      }
       return next;
     });
   };
@@ -61,6 +101,30 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
   // the button collapses back to "Alle Kategorien" in both cases — "Start"
   // only shows for a genuine partial selection.
   const isPartialSelection = hasSelection && !allSelected;
+
+  const renderChip = (category: string) => {
+    const isSelected = selected.has(category);
+    const counts = masteredCounts?.get(category);
+    return (
+      <PressableScale
+        key={category}
+        onPress={() => toggle(category)}
+        style={[styles.chip, isSelected ? styles.chipSelected : styles.chipUnselected]}
+        accessibilityRole="checkbox"
+        accessibilityLabel={category}
+        accessibilityState={{ checked: isSelected }}
+      >
+        <Text style={[styles.chipText, isSelected ? styles.chipTextSelected : styles.chipTextUnselected]}>
+          {category}
+        </Text>
+        {counts && (
+          <Text style={styles.chipBadge}>
+            {counts.mastered}/{counts.total} gelernt
+          </Text>
+        )}
+      </PressableScale>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -127,31 +191,57 @@ export function CategorySelect({ level, mode, masteredIds, showMastery, onBack, 
         </Pressable>
       </View>
 
-      {visibleCategories.length === 0 ? (
-        <Text style={styles.noResults}>Keine Kategorien gefunden.</Text>
+      {showFlatList ? (
+        visibleCategories.length === 0 ? (
+          <Text style={styles.noResults}>Keine Kategorien gefunden.</Text>
+        ) : (
+          <View style={styles.grid}>{visibleCategories.map(renderChip)}</View>
+        )
       ) : (
-        <View style={styles.grid}>
-          {visibleCategories.map((category) => {
-            const isSelected = selected.has(category);
-            const counts = masteredCounts?.get(category);
+        <View style={styles.groupList}>
+          {groupedCategories.map(({ group, items }) => {
+            const isExpanded = expandedGroups.has(group);
+            const selectedInGroup = items.reduce((n, c) => (selected.has(c) ? n + 1 : n), 0);
             return (
-              <PressableScale
-                key={category}
-                onPress={() => toggle(category)}
-                style={[styles.chip, isSelected ? styles.chipSelected : styles.chipUnselected]}
-                accessibilityRole="checkbox"
-                accessibilityLabel={category}
-                accessibilityState={{ checked: isSelected }}
-              >
-                <Text style={[styles.chipText, isSelected ? styles.chipTextSelected : styles.chipTextUnselected]}>
-                  {category}
-                </Text>
-                {counts && (
-                  <Text style={styles.chipBadge}>
-                    {counts.mastered}/{counts.total} gelernt
+              <View key={group} style={styles.groupBlock}>
+                <Pressable
+                  onPress={() => toggleGroupExpanded(group)}
+                  style={styles.groupHeader}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${group}, ${items.length} Kategorien, ${isExpanded ? "eingeklappt" : "ausgeklappt"}`}
+                >
+                  <Text style={styles.groupHeaderText} numberOfLines={1}>
+                    {isExpanded ? "▾" : "▸"} {group}
                   </Text>
+                  <Text style={styles.groupHeaderCount}>
+                    {selectedInGroup > 0 ? `${selectedInGroup}/${items.length}` : items.length}
+                  </Text>
+                </Pressable>
+                {isExpanded && (
+                  <>
+                    <View style={styles.selectRow}>
+                      <Pressable
+                        onPress={() => setGroupSelection(items, true)}
+                        style={styles.selectLink}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Alle in ${group} auswählen`}
+                      >
+                        <Text style={styles.selectLinkText}>Gruppe auswählen</Text>
+                      </Pressable>
+                      <Text style={styles.selectDivider}>·</Text>
+                      <Pressable
+                        onPress={() => setGroupSelection(items, false)}
+                        style={styles.selectLink}
+                        accessibilityRole="button"
+                        accessibilityLabel={`Alle in ${group} abwählen`}
+                      >
+                        <Text style={styles.selectLinkText}>Gruppe abwählen</Text>
+                      </Pressable>
+                    </View>
+                    <View style={styles.grid}>{items.map(renderChip)}</View>
+                  </>
                 )}
-              </PressableScale>
+              </View>
             );
           })}
         </View>
@@ -295,5 +385,36 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "700",
     color: colors.das,
+  },
+  groupList: {
+    width: "100%",
+    gap: 8,
+  },
+  groupBlock: {
+    width: "100%",
+    borderWidth: 2,
+    borderColor: colors.border,
+    borderRadius: 14,
+    backgroundColor: colors.surface,
+    overflow: "hidden",
+  },
+  groupHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+  },
+  groupHeaderText: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: "700",
+    color: colors.text,
+  },
+  groupHeaderCount: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: colors.textMuted,
+    marginLeft: 8,
   },
 });
