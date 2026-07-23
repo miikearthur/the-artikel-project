@@ -91,6 +91,13 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="color-scheme" content="dark" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        {/* Without this, iOS Safari has no icon to use for "Add to Home
+            Screen" and falls back to synthesizing one from the page title's
+            first letter — this is the actual fix for that, not a cosmetic
+            addition. 180x180 is Apple's current single recommended size;
+            iOS downscales it itself for smaller contexts (Settings,
+            Spotlight). */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <ScrollViewStyleReset />
         <style dangerouslySetInnerHTML={{ __html: backgroundStyle }} />
       </head>
