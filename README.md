@@ -61,7 +61,7 @@ Every push to `main` redeploys automatically, same as the main site.
 ## To-do
 
 - [x] option to disable sound
-- [ ] fill in C1-C2 word lists (A2 done — 1000 words; B1 done — 2000 words; B2 done — 4000 words)
+- [ ] fill in C2 word list (A2 done — 1000 words; B1 done — 2000 words; B2 done — 4000 words; C1 done — 8000 words)
 - [ ] spaced-repetition quiz mode (prioritize words that aren't mastered yet)
 - [ ] daily streak / stats page
 - [ ] PWA install support (add to home screen)
