@@ -50,6 +50,11 @@ import { colors, gradientColors } from "../src/theme";
 // has no gradient style prop to set directly in React — Safari paints an
 // overscrolled element's own background in the reveal area, not whatever
 // is visually behind it, so without this rule that reveal is plain white.
+//
+// color-scheme: dark tells the browser itself (not just the page) that
+// this is a dark-only page — without it, Safari has no signal that it
+// shouldn't fall back to its own default light styling for browser-level
+// chrome around the page, on top of whatever theme-color says.
 export default function Root({ children }: PropsWithChildren) {
   return (
     <html lang="en">
@@ -61,6 +66,7 @@ export default function Root({ children }: PropsWithChildren) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
         />
         <meta name="theme-color" content={colors.background} />
+        <meta name="color-scheme" content="dark" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <ScrollViewStyleReset />
@@ -74,6 +80,9 @@ export default function Root({ children }: PropsWithChildren) {
 const gradient = `linear-gradient(180deg, ${gradientColors[0]} 0%, ${gradientColors[1]} 100%)`;
 
 const backgroundStyle = `
+html {
+  color-scheme: dark;
+}
 html, body, #root, #page-scroll {
   background: ${gradient};
 }
